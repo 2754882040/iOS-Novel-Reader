@@ -13,6 +13,7 @@
 		6E0308AF26A7D9350030753C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E0308AE26A7D9350030753C /* Preview Assets.xcassets */; };
 		6E0308BA26A7D9360030753C /* LibbrisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0308B926A7D9360030753C /* LibbrisTests.swift */; };
 		6E0308C526A7D9360030753C /* LibbrisUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0308C426A7D9360030753C /* LibbrisUITests.swift */; };
+		6E0308D326A7DD520030753C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E0308D226A7DD520030753C /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		6E0308C026A7D9360030753C /* LibbrisUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LibbrisUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E0308C426A7D9360030753C /* LibbrisUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibbrisUITests.swift; sourceTree = "<group>"; };
 		6E0308C626A7D9360030753C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E0308D226A7DD520030753C /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				6E0308AB26A7D9350030753C /* Assets.xcassets */,
 				6E0308B026A7D9350030753C /* Info.plist */,
 				6E0308AD26A7D9350030753C /* Preview Content */,
+				6E0308D226A7DD520030753C /* Launch Screen.storyboard */,
 			);
 			path = Libbris;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E0308D326A7DD520030753C /* Launch Screen.storyboard in Resources */,
 				6E0308AF26A7D9350030753C /* Preview Assets.xcassets in Resources */,
 				6E0308AC26A7D9350030753C /* Assets.xcassets in Resources */,
 			);
@@ -430,7 +434,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.panda.SampleApp.Libbris;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -452,7 +456,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.panda.SampleApp.Libbris;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
