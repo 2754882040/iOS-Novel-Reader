@@ -1,0 +1,585 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6E0308A826A7D9350030753C /* LibbrisApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0308A726A7D9350030753C /* LibbrisApp.swift */; };
+		6E0308AA26A7D9350030753C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0308A926A7D9350030753C /* ContentView.swift */; };
+		6E0308AC26A7D9350030753C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E0308AB26A7D9350030753C /* Assets.xcassets */; };
+		6E0308AF26A7D9350030753C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E0308AE26A7D9350030753C /* Preview Assets.xcassets */; };
+		6E0308BA26A7D9360030753C /* LibbrisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0308B926A7D9360030753C /* LibbrisTests.swift */; };
+		6E0308C526A7D9360030753C /* LibbrisUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0308C426A7D9360030753C /* LibbrisUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6E0308B626A7D9360030753C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E03089C26A7D9350030753C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E0308A326A7D9350030753C;
+			remoteInfo = Libbris;
+		};
+		6E0308C126A7D9360030753C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E03089C26A7D9350030753C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E0308A326A7D9350030753C;
+			remoteInfo = Libbris;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6E0308A426A7D9350030753C /* Libbris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Libbris.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E0308A726A7D9350030753C /* LibbrisApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibbrisApp.swift; sourceTree = "<group>"; };
+		6E0308A926A7D9350030753C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		6E0308AB26A7D9350030753C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6E0308AE26A7D9350030753C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6E0308B026A7D9350030753C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E0308B526A7D9360030753C /* LibbrisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LibbrisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E0308B926A7D9360030753C /* LibbrisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibbrisTests.swift; sourceTree = "<group>"; };
+		6E0308BB26A7D9360030753C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E0308C026A7D9360030753C /* LibbrisUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LibbrisUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E0308C426A7D9360030753C /* LibbrisUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibbrisUITests.swift; sourceTree = "<group>"; };
+		6E0308C626A7D9360030753C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6E0308A126A7D9350030753C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E0308B226A7D9360030753C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E0308BD26A7D9360030753C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6E03089B26A7D9350030753C = {
+			isa = PBXGroup;
+			children = (
+				6E0308A626A7D9350030753C /* Libbris */,
+				6E0308B826A7D9360030753C /* LibbrisTests */,
+				6E0308C326A7D9360030753C /* LibbrisUITests */,
+				6E0308A526A7D9350030753C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6E0308A526A7D9350030753C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6E0308A426A7D9350030753C /* Libbris.app */,
+				6E0308B526A7D9360030753C /* LibbrisTests.xctest */,
+				6E0308C026A7D9360030753C /* LibbrisUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6E0308A626A7D9350030753C /* Libbris */ = {
+			isa = PBXGroup;
+			children = (
+				6E0308A726A7D9350030753C /* LibbrisApp.swift */,
+				6E0308A926A7D9350030753C /* ContentView.swift */,
+				6E0308AB26A7D9350030753C /* Assets.xcassets */,
+				6E0308B026A7D9350030753C /* Info.plist */,
+				6E0308AD26A7D9350030753C /* Preview Content */,
+			);
+			path = Libbris;
+			sourceTree = "<group>";
+		};
+		6E0308AD26A7D9350030753C /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				6E0308AE26A7D9350030753C /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6E0308B826A7D9360030753C /* LibbrisTests */ = {
+			isa = PBXGroup;
+			children = (
+				6E0308B926A7D9360030753C /* LibbrisTests.swift */,
+				6E0308BB26A7D9360030753C /* Info.plist */,
+			);
+			path = LibbrisTests;
+			sourceTree = "<group>";
+		};
+		6E0308C326A7D9360030753C /* LibbrisUITests */ = {
+			isa = PBXGroup;
+			children = (
+				6E0308C426A7D9360030753C /* LibbrisUITests.swift */,
+				6E0308C626A7D9360030753C /* Info.plist */,
+			);
+			path = LibbrisUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6E0308A326A7D9350030753C /* Libbris */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E0308C926A7D9360030753C /* Build configuration list for PBXNativeTarget "Libbris" */;
+			buildPhases = (
+				6E0308A026A7D9350030753C /* Sources */,
+				6E0308A126A7D9350030753C /* Frameworks */,
+				6E0308A226A7D9350030753C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Libbris;
+			productName = Libbris;
+			productReference = 6E0308A426A7D9350030753C /* Libbris.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6E0308B426A7D9360030753C /* LibbrisTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E0308CC26A7D9360030753C /* Build configuration list for PBXNativeTarget "LibbrisTests" */;
+			buildPhases = (
+				6E0308B126A7D9360030753C /* Sources */,
+				6E0308B226A7D9360030753C /* Frameworks */,
+				6E0308B326A7D9360030753C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6E0308B726A7D9360030753C /* PBXTargetDependency */,
+			);
+			name = LibbrisTests;
+			productName = LibbrisTests;
+			productReference = 6E0308B526A7D9360030753C /* LibbrisTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		6E0308BF26A7D9360030753C /* LibbrisUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E0308CF26A7D9360030753C /* Build configuration list for PBXNativeTarget "LibbrisUITests" */;
+			buildPhases = (
+				6E0308BC26A7D9360030753C /* Sources */,
+				6E0308BD26A7D9360030753C /* Frameworks */,
+				6E0308BE26A7D9360030753C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6E0308C226A7D9360030753C /* PBXTargetDependency */,
+			);
+			name = LibbrisUITests;
+			productName = LibbrisUITests;
+			productReference = 6E0308C026A7D9360030753C /* LibbrisUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6E03089C26A7D9350030753C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					6E0308A326A7D9350030753C = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
+					6E0308B426A7D9360030753C = {
+						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = 6E0308A326A7D9350030753C;
+					};
+					6E0308BF26A7D9360030753C = {
+						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = 6E0308A326A7D9350030753C;
+					};
+				};
+			};
+			buildConfigurationList = 6E03089F26A7D9350030753C /* Build configuration list for PBXProject "Libbris" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6E03089B26A7D9350030753C;
+			productRefGroup = 6E0308A526A7D9350030753C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6E0308A326A7D9350030753C /* Libbris */,
+				6E0308B426A7D9360030753C /* LibbrisTests */,
+				6E0308BF26A7D9360030753C /* LibbrisUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6E0308A226A7D9350030753C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E0308AF26A7D9350030753C /* Preview Assets.xcassets in Resources */,
+				6E0308AC26A7D9350030753C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E0308B326A7D9360030753C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E0308BE26A7D9360030753C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6E0308A026A7D9350030753C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E0308AA26A7D9350030753C /* ContentView.swift in Sources */,
+				6E0308A826A7D9350030753C /* LibbrisApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E0308B126A7D9360030753C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E0308BA26A7D9360030753C /* LibbrisTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E0308BC26A7D9360030753C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E0308C526A7D9360030753C /* LibbrisUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6E0308B726A7D9360030753C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E0308A326A7D9350030753C /* Libbris */;
+			targetProxy = 6E0308B626A7D9360030753C /* PBXContainerItemProxy */;
+		};
+		6E0308C226A7D9360030753C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E0308A326A7D9350030753C /* Libbris */;
+			targetProxy = 6E0308C126A7D9360030753C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		6E0308C726A7D9360030753C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6E0308C826A7D9360030753C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6E0308CA26A7D9360030753C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Libbris/Preview Content\"";
+				DEVELOPMENT_TEAM = TJ6JN796CP;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Libbris/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.panda.SampleApp.Libbris;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6E0308CB26A7D9360030753C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Libbris/Preview Content\"";
+				DEVELOPMENT_TEAM = TJ6JN796CP;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Libbris/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.panda.SampleApp.Libbris;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		6E0308CD26A7D9360030753C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TJ6JN796CP;
+				INFOPLIST_FILE = LibbrisTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.panda.SampleApp.LibbrisTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Libbris.app/Libbris";
+			};
+			name = Debug;
+		};
+		6E0308CE26A7D9360030753C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TJ6JN796CP;
+				INFOPLIST_FILE = LibbrisTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.panda.SampleApp.LibbrisTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Libbris.app/Libbris";
+			};
+			name = Release;
+		};
+		6E0308D026A7D9360030753C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TJ6JN796CP;
+				INFOPLIST_FILE = LibbrisUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.panda.SampleApp.LibbrisUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Libbris;
+			};
+			name = Debug;
+		};
+		6E0308D126A7D9360030753C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TJ6JN796CP;
+				INFOPLIST_FILE = LibbrisUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.panda.SampleApp.LibbrisUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Libbris;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6E03089F26A7D9350030753C /* Build configuration list for PBXProject "Libbris" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E0308C726A7D9360030753C /* Debug */,
+				6E0308C826A7D9360030753C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E0308C926A7D9360030753C /* Build configuration list for PBXNativeTarget "Libbris" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E0308CA26A7D9360030753C /* Debug */,
+				6E0308CB26A7D9360030753C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E0308CC26A7D9360030753C /* Build configuration list for PBXNativeTarget "LibbrisTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E0308CD26A7D9360030753C /* Debug */,
+				6E0308CE26A7D9360030753C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E0308CF26A7D9360030753C /* Build configuration list for PBXNativeTarget "LibbrisUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E0308D026A7D9360030753C /* Debug */,
+				6E0308D126A7D9360030753C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6E03089C26A7D9350030753C /* Project object */;
+}
