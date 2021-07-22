@@ -17,7 +17,7 @@ build_project:
     - xcodebuild clean -project Libbris.xcodeproj -scheme Libbris | xcpretty
     - xcodebuild test -project Libbris.xcodeproj -scheme LibbrisTests -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.3' | xcpretty -s
   tags:
-    - 498s-runner
+    - 498s-tag
 
 
 archive_project:
@@ -32,5 +32,5 @@ archive_project:
     paths:
       - build/Libbris.ipa
   tags:
-    - 498s-runner
+    - 498s-tag
 
