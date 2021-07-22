@@ -14,14 +14,14 @@ stages:
 build_project:
   stage: build
   script:
-    - xcodebuild clean -project Libbris.xcodeproj -scheme Libbris | xcpretty
-    - xcodebuild test -project Libbris.xcodeproj -scheme LibbrisTests -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.3' | xcpretty -s
+    xcodebuild clean -project Libbris.xcodeproj -scheme Libbris | xcpretty
+    xcodebuild test -project Libbris.xcodeproj -scheme LibbrisTests -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.3' | xcpretty -s
 
 archive_project:
   stage: archive
   script:
-    - xcodebuild clean archive -archivePath build/Libbris -scheme Libbris
-    - xcodebuild -exportArchive -exportFormat ipa -archivePath "build/Libbris.xcarchive" -exportPath "build/Libbris.ipa" -exportProvisioningProfile "ProvisioningProfileName"
+    xcodebuild clean archive -archivePath build/Libbris -scheme Libbris
+    xcodebuild -exportArchive -exportFormat ipa -archivePath "build/Libbris.xcarchive" -exportPath "build/Libbris.ipa" -exportProvisioningProfile "ProvisioningProfileName"
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   artifacts:
