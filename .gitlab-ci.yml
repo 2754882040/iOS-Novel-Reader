@@ -16,6 +16,7 @@ build_project:
   script:
     - xcodebuild clean -project Libbris.xcodeproj -scheme Libbris | xcpretty
     - xcodebuild test -project Libbris.xcodeproj -scheme LibbrisTests -destination 'platform=iOS Simulator,name=iPhone 12,OS=14.5' -enableCodeCoverage YES | xcpretty -s
+    - slather coverage -s
   tags:
     - 498s-tag
 
