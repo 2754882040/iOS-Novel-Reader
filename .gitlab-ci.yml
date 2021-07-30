@@ -27,6 +27,8 @@ archive_project:
   script:
     - xcodebuild clean archive -archivePath build/Libbris -scheme Libbris
     - xcodebuild -exportArchive -exportOptionsPlist Libbris/Info.plist -archivePath "build/Libbris.xcarchive" -exportPath "build/Libbris.ipa"
+    - bundle
+    - bundle exec slather coverage -s --scheme Libbris Libbris.xcodeproj
 
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
