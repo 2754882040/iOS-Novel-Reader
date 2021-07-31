@@ -1,0 +1,41 @@
+{
+  "configurations" : [
+    {
+      "id" : "F605E3AE-7824-4F5F-B9F4-BDD3F330FC77",
+      "name" : "Configuration 1",
+      "options" : {
+        "language" : "en",
+        "locationScenario" : {
+          "identifier" : "San Francisco, CA, USA",
+          "referenceType" : "built-in"
+        },
+        "region" : "US"
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Libbris.xcodeproj",
+      "identifier" : "6E0308A326A7D9350030753C",
+      "name" : "Libbris"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Libbris.xcodeproj",
+        "identifier" : "6E0308B426A7D9360030753C",
+        "name" : "LibbrisTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Libbris.xcodeproj",
+        "identifier" : "6E0308BF26A7D9360030753C",
+        "name" : "LibbrisUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
