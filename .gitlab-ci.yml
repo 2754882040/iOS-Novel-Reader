@@ -1,0 +1,40 @@
+# To contribute improvements to CI/CD templates, please follow the Development guide at:
+# https://docs.gitlab.com/ee/development/cicd/templates.html
+# This specific template is located at:
+# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Swift.gitlab-ci.yml
+
+# Lifted from: https://about.gitlab.com/2016/03/10/setting-up-gitlab-ci-for-ios-projects/
+# This file assumes an own GitLab CI runner, setup on a macOS system.
+stages:
+  - build
+  - test
+  - archive
+  - deploy
+
+build_project:
+  stage: build
+  script:
+    - xcodebuild clean -project Libbris.xcodeproj -scheme Libbris | xcpretty
+    - xcodebuild test -project Libbris.xcodeproj -scheme Libbris -destination 'platform=iOS Simulator,name=iPhone 12,OS=14.5' -enableCodeCoverage YES | xcpretty -s
+    - bundle
+    - bundle exec slather coverage -s --scheme Libbris Libbris.xcodeproj
+    - coverage=$(echo $(bundle exec slather coverage -s --scheme Libbris Libbris.xcodeproj | grep 'Test Coverage') | tr -dc '0-9')
+    - acceptance=6000
+    - if (($coverage>$acceptance));then echo "code coverage greater than acceptance criteria";else error; fi;
+  tags:
+    - 498s-tag
+
+
+archive_project:
+  stage: archive
+  script:
+    - xcodebuild clean archive -archivePath build/Libbris -scheme Libbris
+    - xcodebuild -exportArchive -exportOptionsPlist Libbris/Info.plist -archivePath "build/Libbris.xcarchive" -exportPath "build/Libbris.ipa"
+
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  artifacts:
+    paths:
+      - build/Libbris.ipa
+  tags:
+    - 498s-tag
