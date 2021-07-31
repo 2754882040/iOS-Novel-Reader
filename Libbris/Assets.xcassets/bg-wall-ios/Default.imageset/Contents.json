@@ -13,18 +13,6 @@
     {
       "idiom" : "iphone",
       "scale" : "3x"
-    },
-    {
-      "filename" : "Default-736h.png",
-      "idiom" : "universal",
-      "scale" : "1x",
-      "subtype" : "736h"
-    },
-    {
-      "filename" : "Default-667h.png",
-      "idiom" : "universal",
-      "scale" : "1x",
-      "subtype" : "667h"
     }
   ],
   "info" : {

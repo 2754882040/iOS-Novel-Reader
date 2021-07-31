@@ -6,19 +6,31 @@
 //
 
 import SwiftUI
-
 struct ContentView: View {
+    @State private var show:Bool=false
     var body: some View {
-        ZStack{
-            Image("bg-wall-ios/Default-568h").resizable(resizingMode: .stretch).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-            Text("Hello, world!").padding()
+        NavigationView{
+            BlankView()
         }
-        //Text("Hello, world!").padding()
+        
     }
+    
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+struct BlankView: View {
+    var body: some View {
+        VStack{
+            ZStack{
+                Image("bg-wall-ios/Default-568h").resizable(resizingMode: .stretch).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                Text("Hello, world!")
+            }
+        }
     }
 }

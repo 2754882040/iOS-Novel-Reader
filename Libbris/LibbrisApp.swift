@@ -7,11 +7,71 @@
 
 import SwiftUI
 
+/*class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        print("log-didFinishLaunching")
+        return true
+    }
+    func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
+        print("log-DidReceiveMemoryWarning")
+    }
+}*/
+
 @main
 struct LibbrisApp: App {
+    //@UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @Environment(\.scenePhase) var scenePhase
+    @State var isNavigationBarHidden :Bool = true
+    @State var showSplashScreen:Bool=false
+    @State var backgroundTime: Date?
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView{
+                ZStack{
+                    ContentView().onChange(of: scenePhase) { newScenePhase in
+                        switch newScenePhase {
+                        case .active:
+                            print("APP active")
+                            splashScreenControl()
+                        case .inactive:
+                            print("App inactive")
+                        case .background:
+                            print("App background")
+                            setBackgroundRunTime()
+                        @unknown default:
+                            print("default")
+                        }
+                    }.navigationBarTitle("Hidden Title").navigationBarHidden(self.isNavigationBarHidden).onAppear {
+                        self.isNavigationBarHidden = true
+                    }
+                    if showSplashScreen{
+                        NavigationLink(destination: SplashScreen(showSplashScreen:$showSplashScreen,backgroundRuningTime:$backgroundTime),
+                                       isActive: $showSplashScreen) { EmptyView()}
+                    }
+                    
+                }
+                
+            }
+            
         }
+        
     }
+    
+    func setBackgroundRunTime(){
+        self.backgroundTime = Date()
+    }
+    
+    //calculate how long the app runs in background
+    //Determine whether to display splash screen
+    func splashScreenControl(){
+        let now = Date()
+        guard let background = backgroundTime else{return}
+        if abs(now.timeIntervalSinceReferenceDate - background.timeIntervalSinceReferenceDate) > 5 {
+            showSplashScreen = true
+            print("need to show splash screen")
+            backgroundTime = Date()
+        }
+        
+    }
+    
 }
