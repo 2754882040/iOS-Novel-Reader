@@ -54,4 +54,6 @@ Thumbs.db
 ._*.xcworkspace
 ._*.gitignore
 *.swp
+._gemfile
+
 
