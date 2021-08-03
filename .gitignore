@@ -48,3 +48,8 @@ Thumbs.db
 *.mov
 *.wmv
 
+#temporary files
+._*.xcodeproj
+._*.swift
+._*.xcworkspace
+._*.gitignore
