@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var show:Bool=false
     var body: some View {
+        //SplashScreen(show: $show)
         ZStack{
             Image("bg-wall-ios/Default-568h").resizable(resizingMode: .stretch).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             Text("Hello, world!").padding()

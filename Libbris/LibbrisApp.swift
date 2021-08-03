@@ -21,21 +21,59 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct LibbrisApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @Environment(\.scenePhase) var scenePhase
+    @State var showSplashScreen:Bool=false
+    @State var backgroundTime: Date = Date()
     var body: some Scene {
         WindowGroup {
-            ContentView()
-        }.onChange(of: scenePhase) { newScenePhase in
-            switch newScenePhase {
-            case .active:
-              print("APP active")
-            case .inactive:
-              print("App inactive")
-            case .background:
-              print("App background")
-                
-            @unknown default:
-              print("default")
+            if showSplashScreen
+            {
+                SplashScreen(show: $showSplashScreen)
+            }
+            else{
+                ContentView().onChange(of: scenePhase) { newScenePhase in
+                    switch newScenePhase {
+                    case .active:
+                        do{
+                            print("APP active")
+                            splashScreenShow()
+                        }
+                        
+                    case .inactive:
+                      print("App inactive")
+                    case .background:
+                        do {
+                            print("App background")
+                            setBackgroundRunTime()
+                        }
+                        
+                    @unknown default:
+                      print("default")
+                    }
+                }
             }
         }
+    }
+    
+    func setBackgroundRunTime()
+    {
+        self.backgroundTime = Date()
+        print(backgroundTime)
+    }
+    func splashScreenShow()
+    {
+        let now = Date()
+        print(now)
+        if abs(now.timeIntervalSinceReferenceDate - backgroundTime.timeIntervalSinceReferenceDate) > 5
+        {
+            showSplashScreen = true
+            print("need to show splash screen")
+            //SplashScreen(show: $showSplashScreen)
+            backgroundTime = Date()        }
+        else
+        {
+            return
+        }
+            
+        
     }
 }
