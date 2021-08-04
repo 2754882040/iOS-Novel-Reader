@@ -12,9 +12,11 @@ struct SplashScreen:View {
     @Binding var show:Bool
     var body:some View
     {
-        if(show){
+        //if(show){
+        
             Image("screens/Default-568h").resizable(resizingMode: .stretch).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/).onAppear(perform: countTime)
-        }
+        
+        //}
         
     }
     func countTime()
@@ -24,6 +26,7 @@ struct SplashScreen:View {
             if countDownNum == 0 {
                   // 销毁计时器
                 timer.invalidate()
+                //self.presentationMode.wrappedValue.dismiss()
                 show = false
                 // countDownNum = 5
                 print(">>> Timer has Stopped!")

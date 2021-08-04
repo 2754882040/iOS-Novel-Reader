@@ -25,32 +25,32 @@ struct LibbrisApp: App {
     @State var backgroundTime: Date = Date()
     var body: some Scene {
         WindowGroup {
-            if showSplashScreen
+            /*if showSplashScreen
             {
-                SplashScreen(show: $showSplashScreen)
+                SplashScreen(show:$showSplashScreen)
             }
-            else{
-                ContentView().onChange(of: scenePhase) { newScenePhase in
-                    switch newScenePhase {
-                    case .active:
-                        do{
-                            print("APP active")
-                            splashScreenShow()
-                        }
-                        
-                    case .inactive:
-                      print("App inactive")
-                    case .background:
-                        do {
-                            print("App background")
-                            setBackgroundRunTime()
-                        }
-                        
-                    @unknown default:
-                      print("default")
+            else{}*/
+            ContentView(showsplash: $showSplashScreen).onChange(of: scenePhase) { newScenePhase in
+                switch newScenePhase {
+                case .active:
+                    do{
+                        print("APP active")
+                        splashScreenShow()
                     }
+                    
+                case .inactive:
+                  print("App inactive")
+                case .background:
+                    do {
+                        print("App background")
+                        setBackgroundRunTime()
+                    }
+                    
+                @unknown default:
+                  print("default")
                 }
             }
+        
         }
     }
     
@@ -67,7 +67,7 @@ struct LibbrisApp: App {
         {
             showSplashScreen = true
             print("need to show splash screen")
-            //SplashScreen(show: $showSplashScreen)
+            
             backgroundTime = Date()        }
         else
         {
