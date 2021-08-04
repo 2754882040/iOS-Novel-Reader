@@ -21,6 +21,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct LibbrisApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @Environment(\.scenePhase) var scenePhase
+    @State var isNavigationBarHidden :Bool = true
     @State var showSplashScreen:Bool=false
     @State var backgroundTime: Date = Date()
     var body: some Scene {
@@ -29,31 +30,48 @@ struct LibbrisApp: App {
             {
                 SplashScreen(show:$showSplashScreen)
             }
-            else{}*/
-            ContentView(showsplash: $showSplashScreen).onChange(of: scenePhase) { newScenePhase in
-                switch newScenePhase {
-                case .active:
-                    do{
-                        print("APP active")
-                        splashScreenShow()
+             else{}*/
+            NavigationView{
+                ZStack{
+                ContentView().onChange(of: scenePhase) { newScenePhase in
+                    switch newScenePhase {
+                    case .active:
+                        do{
+                            print("APP active")
+                            splashScreenShow()
+                        }
+                        
+                    case .inactive:
+                      print("App inactive")
+                    case .background:
+                        do {
+                            print("App background")
+                            setBackgroundRunTime()
+                        }
+                        
+                    @unknown default:
+                      print("default")
                     }
-                    
-                case .inactive:
-                  print("App inactive")
-                case .background:
-                    do {
-                        print("App background")
-                        setBackgroundRunTime()
-                    }
-                    
-                @unknown default:
-                  print("default")
+                }.navigationBarTitle("Hidden Title")
+                .navigationBarHidden(self.isNavigationBarHidden)
+                .onAppear {
+                    self.isNavigationBarHidden = true
                 }
-            }
+                if showSplashScreen
+                {
+                    NavigationLink(destination: SplashScreen(show:$showSplashScreen), isActive: $showSplashScreen) { EmptyView() }
+                }
+                
+                }}
+                    
+             }
         
         }
-    }
     
+    func printStateVariable()
+    {
+        print(self.showSplashScreen)
+    }
     func setBackgroundRunTime()
     {
         self.backgroundTime = Date()

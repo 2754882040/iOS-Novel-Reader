@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct SplashScreen:View {
+    @Environment(\.presentationMode) var mode
     @Binding var show:Bool
     var body:some View
     {
@@ -21,13 +22,14 @@ struct SplashScreen:View {
     }
     func countTime()
     {
-        var countDownNum = 5
+        //print($show)
+        var countDownNum = 2
         let countdownTimer = Timer(timeInterval: 1.0, repeats: true) { timer in
             if countDownNum == 0 {
                   // 销毁计时器
                 timer.invalidate()
-                //self.presentationMode.wrappedValue.dismiss()
-                show = false
+                self.mode.wrappedValue.dismiss()
+                //show = false
                 // countDownNum = 5
                 print(">>> Timer has Stopped!")
             } else {
