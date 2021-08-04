@@ -15,7 +15,6 @@
 		6E0308C526A7D9360030753C /* LibbrisUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0308C426A7D9360030753C /* LibbrisUITests.swift */; };
 		6E0308D326A7DD520030753C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E0308D226A7DD520030753C /* Launch Screen.storyboard */; };
 		6ED7B49026B9AD92005DDB48 /* splashscreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED7B48F26B9AD92005DDB48 /* splashscreen.swift */; };
-		6ED7B49426BA29BC005DDB48 /* secondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED7B49326BA29BC005DDB48 /* secondView.swift */; };
 		866C1F2226B4E1E900D59699 /* gemfile in Resources */ = {isa = PBXBuildFile; fileRef = 866C1F2126B4E1E900D59699 /* gemfile */; };
 /* End PBXBuildFile section */
 
@@ -51,7 +50,6 @@
 		6E0308C626A7D9360030753C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E0308D226A7DD520030753C /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		6ED7B48F26B9AD92005DDB48 /* splashscreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = splashscreen.swift; sourceTree = "<group>"; };
-		6ED7B49326BA29BC005DDB48 /* secondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secondView.swift; sourceTree = "<group>"; };
 		866C1F2026B46A9800D59699 /* Libbris.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Libbris.xctestplan; sourceTree = "<group>"; };
 		866C1F2126B4E1E900D59699 /* gemfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = gemfile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,7 +106,6 @@
 				6E0308A726A7D9350030753C /* LibbrisApp.swift */,
 				6ED7B48F26B9AD92005DDB48 /* splashscreen.swift */,
 				6E0308A926A7D9350030753C /* ContentView.swift */,
-				6ED7B49326BA29BC005DDB48 /* secondView.swift */,
 				6E0308AB26A7D9350030753C /* Assets.xcassets */,
 				6E0308B026A7D9350030753C /* Info.plist */,
 				6E0308AD26A7D9350030753C /* Preview Content */,
@@ -277,7 +274,6 @@
 			files = (
 				6E0308AA26A7D9350030753C /* ContentView.swift in Sources */,
 				6E0308A826A7D9350030753C /* LibbrisApp.swift in Sources */,
-				6ED7B49426BA29BC005DDB48 /* secondView.swift in Sources */,
 				6ED7B49026B9AD92005DDB48 /* splashscreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -16,7 +16,7 @@ struct ContentView: View {
             VStack{
                 ZStack{
                     Image("bg-wall-ios/Default-568h").resizable(resizingMode: .stretch).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-                        ScrollView{
+                        /*ScrollView{
                             VStack{
                                 ForEach(0..<10) {
                                                 Text("Item \($0)")
@@ -27,10 +27,12 @@ struct ContentView: View {
                                         }
                             }.navigationTitle("Navigation")
                                 .navigationBarItems(trailing:NavigationLink(destination: secondView(),label:{Text("second View")}))
-                        }
+                        }*/
                         //NavigationLink(destination: SplashScreen(show:$showsplash), isActive: $showsplash) { EmptyView() }
                 }
-                NavigationLink(destination: secondView(),label:{Text("second View")})}
+                //NavigationLink(destination: secondView(),label:{Text("second View")})
+                
+            }
         }
     }
 }

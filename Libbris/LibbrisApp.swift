@@ -23,7 +23,7 @@ struct LibbrisApp: App {
     @Environment(\.scenePhase) var scenePhase
     @State var isNavigationBarHidden :Bool = true
     @State var showSplashScreen:Bool=false
-    @State var backgroundTime: Date = Date()
+    @State var backgroundTime: Date?
     var body: some Scene {
         WindowGroup {
             /*if showSplashScreen
@@ -57,9 +57,9 @@ struct LibbrisApp: App {
                 .onAppear {
                     self.isNavigationBarHidden = true
                 }
-                if showSplashScreen
+                if showSplashScreen 
                 {
-                    NavigationLink(destination: SplashScreen(show:$showSplashScreen), isActive: $showSplashScreen) { EmptyView() }
+                    NavigationLink(destination: SplashScreen(show:$showSplashScreen,time:$backgroundTime), isActive: $showSplashScreen) { EmptyView() }
                 }
                 
                 }}
@@ -68,20 +68,16 @@ struct LibbrisApp: App {
         
         }
     
-    func printStateVariable()
-    {
-        print(self.showSplashScreen)
-    }
+    
     func setBackgroundRunTime()
     {
         self.backgroundTime = Date()
-        print(backgroundTime)
     }
     func splashScreenShow()
     {
         let now = Date()
-        print(now)
-        if abs(now.timeIntervalSinceReferenceDate - backgroundTime.timeIntervalSinceReferenceDate) > 5
+        guard let background = backgroundTime else{return}
+        if abs(now.timeIntervalSinceReferenceDate - background.timeIntervalSinceReferenceDate) > 5
         {
             showSplashScreen = true
             print("need to show splash screen")
@@ -91,7 +87,5 @@ struct LibbrisApp: App {
         {
             return
         }
-            
-        
     }
 }
