@@ -16,6 +16,7 @@ struct ContentView: View {
             VStack{
                 ZStack{
                     Image("bg-wall-ios/Default-568h").resizable(resizingMode: .stretch).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                    Text("Hello, world!")
                         /*ScrollView{
                             VStack{
                                 ForEach(0..<10) {

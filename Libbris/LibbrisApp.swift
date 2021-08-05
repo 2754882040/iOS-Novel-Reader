@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class AppDelegate: NSObject, UIApplicationDelegate {
+/*class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         print("log-didFinishLaunching")
         return true
@@ -15,11 +15,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
         print("log-DidReceiveMemoryWarning")
     }
-}
+}*/
 
 @main
 struct LibbrisApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    //@UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @Environment(\.scenePhase) var scenePhase
     @State var isNavigationBarHidden :Bool = true
     @State var showSplashScreen:Bool=false
@@ -40,7 +40,6 @@ struct LibbrisApp: App {
                             print("APP active")
                             splashScreenShow()
                         }
-                        
                     case .inactive:
                       print("App inactive")
                     case .background:
@@ -48,7 +47,6 @@ struct LibbrisApp: App {
                             print("App background")
                             setBackgroundRunTime()
                         }
-                        
                     @unknown default:
                       print("default")
                     }
@@ -61,7 +59,6 @@ struct LibbrisApp: App {
                 {
                     NavigationLink(destination: SplashScreen(show:$showSplashScreen,time:$backgroundTime), isActive: $showSplashScreen) { EmptyView() }
                 }
-                
                 }}
                     
              }
