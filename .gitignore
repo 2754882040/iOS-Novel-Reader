@@ -58,3 +58,6 @@ Thumbs.db
 */*.xcuserstate
 *.lock
 ._*.plist
+*/UserInterfaceState.xcuserstate
+*xcuserdata/
+
