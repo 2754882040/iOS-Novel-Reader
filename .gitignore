@@ -50,10 +50,11 @@ Thumbs.db
 
 #temporary files
 ._*.xcodeproj
-._*.swift
-._*.xcworkspace
+*/._*.swift
+*/._*.xcworkspace
 ._*.gitignore
 *.swp
 ._gemfile
-
-
+*/*.xcuserstate
+*.lock
+._*.plist

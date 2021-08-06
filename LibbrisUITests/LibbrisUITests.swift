@@ -40,25 +40,15 @@ class LibbrisUITests: XCTestCase {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
-        XCUIDevice.shared.press(.home)
-        do
-        {
-            sleep(7)
-        }
+        XCUIDevice.shared.press(.home)//let app run in background
+        sleep(7) //wait for 7 seconds
         app.activate()
-        XCUIApplication().images["bg-wall-ios/Default-568h"].tap()
-        do
-        {
-            sleep(1)
-        }
+        sleep(1)
         let Image = app.images["screens/Default-568h"]
         XCTAssert(Image.exists)
-        do
-        {
-            sleep(2)
-        }
+        //wait for 2 sceond, splash screen will disappear
+        sleep(2)
         XCTAssert(!Image.exists)
-        
     }
 
     func testLaunchPerformance() throws {

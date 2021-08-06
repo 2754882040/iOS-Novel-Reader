@@ -26,63 +26,52 @@ struct LibbrisApp: App {
     @State var backgroundTime: Date?
     var body: some Scene {
         WindowGroup {
-            /*if showSplashScreen
-            {
-                SplashScreen(show:$showSplashScreen)
-            }
-             else{}*/
             NavigationView{
                 ZStack{
-                ContentView().onChange(of: scenePhase) { newScenePhase in
-                    switch newScenePhase {
-                    case .active:
-                        do{
+                    ContentView().onChange(of: scenePhase) { newScenePhase in
+                        switch newScenePhase {
+                        case .active:
                             print("APP active")
-                            splashScreenShow()
-                        }
-                    case .inactive:
-                      print("App inactive")
-                    case .background:
-                        do {
+                            splashScreenControl()
+                        case .inactive:
+                            print("App inactive")
+                        case .background:
                             print("App background")
                             setBackgroundRunTime()
+                        @unknown default:
+                            print("default")
                         }
-                    @unknown default:
-                      print("default")
+                    }.navigationBarTitle("Hidden Title").navigationBarHidden(self.isNavigationBarHidden).onAppear {
+                        self.isNavigationBarHidden = true
                     }
-                }.navigationBarTitle("Hidden Title")
-                .navigationBarHidden(self.isNavigationBarHidden)
-                .onAppear {
-                    self.isNavigationBarHidden = true
-                }
-                if showSplashScreen 
-                {
-                    NavigationLink(destination: SplashScreen(show:$showSplashScreen,time:$backgroundTime), isActive: $showSplashScreen) { EmptyView() }
-                }
-                }}
+                    if showSplashScreen{
+                        NavigationLink(destination: SplashScreen(showSplashScreen:$showSplashScreen,backgroundRuningTime:$backgroundTime),
+                                       isActive: $showSplashScreen) { EmptyView()}
+                    }
                     
-             }
-        
+                }
+                
+            }
+            
         }
+        
+    }
     
-    
-    func setBackgroundRunTime()
-    {
+    func setBackgroundRunTime(){
         self.backgroundTime = Date()
     }
-    func splashScreenShow()
-    {
+    
+    //calculate how long the app runs in background
+    //Determine whether to display splash screen
+    func splashScreenControl(){
         let now = Date()
         guard let background = backgroundTime else{return}
-        if abs(now.timeIntervalSinceReferenceDate - background.timeIntervalSinceReferenceDate) > 5
-        {
+        if abs(now.timeIntervalSinceReferenceDate - background.timeIntervalSinceReferenceDate) > 5 {
             showSplashScreen = true
             print("need to show splash screen")
-            
-            backgroundTime = Date()        }
-        else
-        {
-            return
+            backgroundTime = Date()
         }
+        
     }
+    
 }

@@ -10,16 +10,16 @@ import SwiftUI
 
 struct SplashScreen:View {
     @Environment(\.presentationMode) var mode
-    @Binding var show:Bool
-    @Binding var time:Date?
+    @Binding var showSplashScreen:Bool
+    @Binding var backgroundRuningTime:Date?
     var body:some View
     {
-        //if(show){
-        
-        Image("screens/Default-568h").resizable(resizingMode: .stretch).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/).onAppear(perform: countTime).navigationBarBackButtonHidden(true)
-        //}
-        
+        Image("screens/Default-568h").resizable(resizingMode: .stretch)
+            .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/).onAppear(perform: countTime).navigationBarBackButtonHidden(true)
     }
+    /*
+     create a timer, after finish count, pop current view and set binding variable 'time' to nil
+     */
     func countTime()
     {
         var countDownNum = 2
@@ -27,7 +27,7 @@ struct SplashScreen:View {
             if countDownNum == 0 {
                 timer.invalidate()
                 self.mode.wrappedValue.dismiss()
-                time = nil
+                backgroundRuningTime = nil
                 print(">>> Timer has Stopped!")
             } else {
                 print(">>> Countdown Number: \(countDownNum)")
