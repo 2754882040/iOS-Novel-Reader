@@ -14,6 +14,8 @@
 		6E0308BA26A7D9360030753C /* LibbrisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0308B926A7D9360030753C /* LibbrisTests.swift */; };
 		6E0308C526A7D9360030753C /* LibbrisUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0308C426A7D9360030753C /* LibbrisUITests.swift */; };
 		6E0308D326A7DD520030753C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E0308D226A7DD520030753C /* Launch Screen.storyboard */; };
+		6ED7B49026B9AD92005DDB48 /* splashscreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED7B48F26B9AD92005DDB48 /* splashscreen.swift */; };
+		866C1F2226B4E1E900D59699 /* gemfile in Resources */ = {isa = PBXBuildFile; fileRef = 866C1F2126B4E1E900D59699 /* gemfile */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,9 @@
 		6E0308C426A7D9360030753C /* LibbrisUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibbrisUITests.swift; sourceTree = "<group>"; };
 		6E0308C626A7D9360030753C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E0308D226A7DD520030753C /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		6ED7B48F26B9AD92005DDB48 /* splashscreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = splashscreen.swift; sourceTree = "<group>"; };
+		866C1F2026B46A9800D59699 /* Libbris.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Libbris.xctestplan; sourceTree = "<group>"; };
+		866C1F2126B4E1E900D59699 /* gemfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = gemfile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +82,7 @@
 		6E03089B26A7D9350030753C = {
 			isa = PBXGroup;
 			children = (
+				866C1F2126B4E1E900D59699 /* gemfile */,
 				6E0308A626A7D9350030753C /* Libbris */,
 				6E0308B826A7D9360030753C /* LibbrisTests */,
 				6E0308C326A7D9360030753C /* LibbrisUITests */,
@@ -98,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				6E0308A726A7D9350030753C /* LibbrisApp.swift */,
+				6ED7B48F26B9AD92005DDB48 /* splashscreen.swift */,
 				6E0308A926A7D9350030753C /* ContentView.swift */,
 				6E0308AB26A7D9350030753C /* Assets.xcassets */,
 				6E0308B026A7D9350030753C /* Info.plist */,
@@ -120,6 +127,7 @@
 			children = (
 				6E0308B926A7D9360030753C /* LibbrisTests.swift */,
 				6E0308BB26A7D9360030753C /* Info.plist */,
+				866C1F2026B46A9800D59699 /* Libbris.xctestplan */,
 			);
 			path = LibbrisTests;
 			sourceTree = "<group>";
@@ -236,6 +244,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				866C1F2226B4E1E900D59699 /* gemfile in Resources */,
 				6E0308D326A7DD520030753C /* Launch Screen.storyboard in Resources */,
 				6E0308AF26A7D9350030753C /* Preview Assets.xcassets in Resources */,
 				6E0308AC26A7D9350030753C /* Assets.xcassets in Resources */,
@@ -265,6 +274,7 @@
 			files = (
 				6E0308AA26A7D9350030753C /* ContentView.swift in Sources */,
 				6E0308A826A7D9350030753C /* LibbrisApp.swift in Sources */,
+				6ED7B49026B9AD92005DDB48 /* splashscreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,7 +436,7 @@
 				DEVELOPMENT_TEAM = TJ6JN796CP;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Libbris/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -448,7 +458,7 @@
 				DEVELOPMENT_TEAM = TJ6JN796CP;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Libbris/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -468,7 +478,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TJ6JN796CP;
 				INFOPLIST_FILE = LibbrisTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -490,7 +500,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TJ6JN796CP;
 				INFOPLIST_FILE = LibbrisTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
