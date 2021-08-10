@@ -36,19 +36,31 @@ class LibbrisUITests: XCTestCase {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
+    
+    func testFirstTimeSplashScreen() throws {
+        // UI tests must launch the application that they test.
+        let app = XCUIApplication()
+        app.launch()
+        sleep(2)
+        let Image = app.images["ADImage"]
+        XCTAssert(Image.exists)
+        //wait for 2 sceond, splash screen will disappear
+        
+    }
+    
     func testSplashScreen() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
+        sleep(5)
         XCUIDevice.shared.press(.home)//let app run in background
         sleep(7) //wait for 7 seconds
         app.activate()
-        sleep(1)
-        let Image = app.images["screens/Default-568h"]
+        sleep(2)
+        let Image = app.images["ADImage"]
         XCTAssert(Image.exists)
         //wait for 2 sceond, splash screen will disappear
-        sleep(2)
-        XCTAssert(!Image.exists)
+        
     }
 
     func testLaunchPerformance() throws {
