@@ -15,7 +15,7 @@ struct SplashScreen:View {
     var body:some View
     {
         Image("screens/Default-568h").resizable(resizingMode: .stretch)
-            .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/).onAppear(perform: countTime).navigationBarBackButtonHidden(true)
+            .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/).onAppear(perform: countTime).navigationBarBackButtonHidden(true).navigationBarHidden(true)
     }
     /*
      create a timer, after finish count, pop current view and set binding variable 'time' to nil
