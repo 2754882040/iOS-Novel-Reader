@@ -19,11 +19,17 @@ import SwiftUI
 
 @main
 struct LibbrisApp: App {
+    init() {
+        _loader = StateObject(wrappedValue: Loader(url:"https://media.idownloadblog.com/wp-content/uploads/2018/08/iPhone-XS-marketing-wallpaper-768x1663.jpg"))
+    }
+    
     //@UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @Environment(\.scenePhase) var scenePhase
     @State var isNavigationBarHidden :Bool = true
-    @State var showSplashScreen:Bool=false
+    @State var showSplashScreen:Bool=true
     @State var backgroundTime: Date?
+    @StateObject public var loader: Loader
+    var lastUpdateDate = Date()
     var body: some Scene {
         WindowGroup {
             NavigationView{
@@ -56,6 +62,8 @@ struct LibbrisApp: App {
         }
         
     }
+    
+    
     
     func setBackgroundRunTime(){
         self.backgroundTime = Date()

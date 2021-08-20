@@ -26,31 +26,71 @@ class LibbrisUITests: XCTestCase {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
+        sleep(2)
+        XCUIApplication()/*@START_MENU_TOKEN@*/.buttons["skipButton"]/*[[".buttons[\"skip\"]",".buttons[\"skipButton\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        let image_bg = app.images["wall"]
+        XCTAssert(image_bg.exists)
         
-        let Text = app.staticTexts["Hello, world!"]
-        XCTAssert(Text.exists)
+        let image_libbris = app.images["logo_libbris_white"]
+        XCTAssert(image_libbris.exists)
         
-        let Image = app.images["bg-wall-ios/Default-568h"]
-        XCTAssert(Image.exists)
-
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let image_library = app.buttons["icon_library_nor"]
+        XCTAssert(image_library.exists)
+        
+        let image_setting = app.buttons["icon_settings_nor"]
+        XCTAssert(image_setting.exists)
+                                
     }
+    
+    func testFirstTimeSplashScreen() throws {
+        // UI tests must launch the application that they test.
+        let app = XCUIApplication()
+        app.launch()
+        sleep(2)
+        let Image = app.images["ADImage"]
+        XCTAssert(Image.exists)
+        //wait for 2 sceond, splash screen will disappear
+        
+    }
+    
     func testSplashScreen() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
+        sleep(6)
         XCUIDevice.shared.press(.home)//let app run in background
-        sleep(7) //wait for 7 seconds
+        sleep(7)
         app.activate()
-        sleep(1)
-        let Image = app.images["screens/Default-568h"]
-        XCTAssert(Image.exists)
-        //wait for 2 sceond, splash screen will disappear
         sleep(2)
-        XCTAssert(!Image.exists)
+        let Image = app.images["ADImage"]
+        XCTAssert(Image.exists)
     }
+    
+    /*
+    func testBookshelfView() throws{
+        let app = XCUIApplication()
+        app.launch()
+        
+        // Test OnReading Horizontal ScrollView
+        let onreading_elements_query = app.scrollViews.otherElements.containing(.staticText, identifier:"ON READING")
+        onreading_elements_query.children(matching: .image).matching(identifier: "label_reading").element(boundBy: 6).swipeLeft()
+        onreading_elements_query.children(matching: .image).matching(identifier: "label_hot").element(boundBy: 6).swipeLeft()
+        onreading_elements_query.children(matching: .image).matching(identifier: "default_cover").element(boundBy: 2).swipeLeft()
+        onreading_elements_query.children(matching: .image).matching(identifier: "blank_book_shadow").element(boundBy: 6).swipeLeft()
+        onreading_elements_query.children(matching: .image).matching(identifier:"bookshelf")
 
+
+                                
+        // Test ToRead Vertical ScrollView
+        let toread_elements_query = app.scrollViews.otherElements.containing(.staticText, identifier:"TO READ")
+        toread_elements_query.children(matching: .image).matching(identifier: "label_reading").firstMatch.swipeUp()
+        toread_elements_query.children(matching: .image).matching(identifier: "label_hot").firstMatch.swipeUp()
+        toread_elements_query.children(matching: .image).matching(identifier: "default_cover").element(boundBy: 3).swipeUp()
+        toread_elements_query.children(matching: .image).matching(identifier: "blank_book_shadow").element(boundBy: 3).swipeUp()
+        toread_elements_query.children(matching: .image).matching(identifier:"bookshelf")
+        
+    }*/
+    /*
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
             // This measures how long it takes to launch your application.
@@ -58,5 +98,5 @@ class LibbrisUITests: XCTestCase {
                 XCUIApplication().launch()
             }
         }
-    }
+    }*/
 }
