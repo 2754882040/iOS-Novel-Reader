@@ -26,15 +26,19 @@ class LibbrisUITests: XCTestCase {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
-        
-        let Text = app.staticTexts["Hello, world!"]
-        XCTAssert(Text.exists)
-        
-        let Image = app.images["bg-wall-ios/Default-568h"]
-        XCTAssert(Image.exists)
 
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let image_bg = app.images["bg-wall-ios/Default-568h"]
+        XCTAssert(image_bg.exists)
+        
+        let image_libbris = app.navigationBars.images["logo_libbris_white"]
+        XCTAssert(image_libbris.exists)
+        
+        let image_library = app.navigationBars.images["icon_library_nor"]
+        XCTAssert(image_library.exists)
+        
+        let image_setting = app.navigationBars.images["icon_settings_nor"]
+        XCTAssert(image_setting.exists)
+                                
     }
     
     func testFirstTimeSplashScreen() throws {
@@ -54,12 +58,33 @@ class LibbrisUITests: XCTestCase {
         app.launch()
         sleep(5)
         XCUIDevice.shared.press(.home)//let app run in background
-        sleep(7) //wait for 7 seconds
         app.activate()
         sleep(2)
         let Image = app.images["ADImage"]
         XCTAssert(Image.exists)
-        //wait for 2 sceond, splash screen will disappear
+    }
+    
+    func testBookshelfView() throws{
+        let app = XCUIApplication()
+        app.launch()
+        
+        // Test OnReading Horizontal ScrollView
+        let onreading_elements_query = app.scrollViews.otherElements.containing(.staticText, identifier:"ON READING")
+        onreading_elements_query.children(matching: .image).matching(identifier: "label_reading").element(boundBy: 6).swipeLeft()
+        onreading_elements_query.children(matching: .image).matching(identifier: "label_hot").element(boundBy: 6).swipeLeft()
+        onreading_elements_query.children(matching: .image).matching(identifier: "default_cover").element(boundBy: 2).swipeLeft()
+        onreading_elements_query.children(matching: .image).matching(identifier: "blank_book_shadow").element(boundBy: 6).swipeLeft()
+        onreading_elements_query.children(matching: .image).matching(identifier:"bookshelf")
+
+
+                                
+        // Test ToRead Vertical ScrollView
+        let toread_elements_query = app.scrollViews.otherElements.containing(.staticText, identifier:"TO READ")
+        toread_elements_query.children(matching: .image).matching(identifier: "label_reading").firstMatch.swipeUp()
+        toread_elements_query.children(matching: .image).matching(identifier: "label_hot").firstMatch.swipeUp()
+        toread_elements_query.children(matching: .image).matching(identifier: "default_cover").element(boundBy: 3).swipeUp()
+        toread_elements_query.children(matching: .image).matching(identifier: "blank_book_shadow").element(boundBy: 3).swipeUp()
+        toread_elements_query.children(matching: .image).matching(identifier:"bookshelf")
         
     }
 

@@ -49,15 +49,13 @@ Thumbs.db
 *.wmv
 
 #temporary files
-._*.xcodeproj
-*/._*.swift
-*/._*.xcworkspace
-._*.gitignore
 *.swp
 ._gemfile
 */*.xcuserstate
 *.lock
-._*.plist
 */UserInterfaceState.xcuserstate
 *xcuserdata/
+._gemfile
+*/._*.*
+._*.*
 *._*.*
