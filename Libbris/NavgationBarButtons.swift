@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NavgationBarButtons: View {
     var body: some View {
-        HStack{Button(action: {print("Edit button pressed...")}) {Image("icon_library_nor").imageScale(.large)};
+        HStack{Button(action: {print("Edit button pressed...")}) {Image("icon_library_nor").imageScale(.large).accessibilityIdentifier("icon_library_nor_button")};
             Button(action: {
                 print("Edit button pressed...")
             }) {

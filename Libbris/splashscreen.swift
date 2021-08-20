@@ -32,7 +32,7 @@ struct SplashScreen:View {
                         Text("skip").foregroundColor(.white)
                         
                     }.cornerRadius(20)
-                }.position(x: 330, y: 30.0);
+            }.position(x: 330, y: 30.0).accessibilityIdentifier("skipButton");
             }
         }
     }

@@ -10,7 +10,7 @@ import SwiftUI
 struct MainView: View {
     init() {
         UINavigationBar.appearance().backgroundColor =
-            UIColor.blue
+            #colorLiteral(red: 0.1607843137, green: 0.2745098039, blue: 0.5529411765, alpha: 1)
         UINavigationBar.appearance().barTintColor = .blue
     }
     var body: some View {

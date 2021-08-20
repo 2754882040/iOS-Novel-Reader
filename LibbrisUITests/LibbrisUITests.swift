@@ -26,17 +26,18 @@ class LibbrisUITests: XCTestCase {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
-
-        let image_bg = app.images["bg-wall-ios/Default-568h"]
+        sleep(2)
+        XCUIApplication()/*@START_MENU_TOKEN@*/.buttons["skipButton"]/*[[".buttons[\"skip\"]",".buttons[\"skipButton\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        let image_bg = app.images["wall"]
         XCTAssert(image_bg.exists)
         
-        let image_libbris = app.navigationBars.images["logo_libbris_white"]
+        let image_libbris = app.images["logo_libbris_white"]
         XCTAssert(image_libbris.exists)
         
-        let image_library = app.navigationBars.images["icon_library_nor"]
+        let image_library = app.buttons["icon_library_nor"]
         XCTAssert(image_library.exists)
         
-        let image_setting = app.navigationBars.images["icon_settings_nor"]
+        let image_setting = app.buttons["icon_settings_nor"]
         XCTAssert(image_setting.exists)
                                 
     }
@@ -56,14 +57,16 @@ class LibbrisUITests: XCTestCase {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
-        sleep(5)
+        sleep(6)
         XCUIDevice.shared.press(.home)//let app run in background
+        sleep(7)
         app.activate()
         sleep(2)
         let Image = app.images["ADImage"]
         XCTAssert(Image.exists)
     }
     
+    /*
     func testBookshelfView() throws{
         let app = XCUIApplication()
         app.launch()
@@ -86,8 +89,8 @@ class LibbrisUITests: XCTestCase {
         toread_elements_query.children(matching: .image).matching(identifier: "blank_book_shadow").element(boundBy: 3).swipeUp()
         toread_elements_query.children(matching: .image).matching(identifier:"bookshelf")
         
-    }
-
+    }*/
+    /*
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
             // This measures how long it takes to launch your application.
@@ -95,5 +98,5 @@ class LibbrisUITests: XCTestCase {
                 XCUIApplication().launch()
             }
         }
-    }
+    }*/
 }
