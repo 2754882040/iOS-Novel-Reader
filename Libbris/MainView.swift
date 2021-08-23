@@ -11,7 +11,8 @@ struct MainView: View {
     init() {
         UINavigationBar.appearance().backgroundColor =
             #colorLiteral(red: 0.1607843137, green: 0.2745098039, blue: 0.5529411765, alpha: 1)
-        UINavigationBar.appearance().barTintColor = .blue
+        UINavigationBar.appearance().barTintColor =
+            #colorLiteral(red: 0.1607843137, green: 0.2745098039, blue: 0.5529411765, alpha: 1)
     }
     var body: some View {
         ZStack{
