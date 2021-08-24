@@ -9,8 +9,8 @@ import SwiftUI
 
 struct BookListHorizontal: View {
     var body: some View {
-        
-        Text("ON READING").padding(.leading)
+        let text = NSLocalizedString("ON READING", comment: "")
+        Text(text).padding(.leading)
         ScrollView(.horizontal)
         {
             HStack(alignment:.top, spacing: 40) {

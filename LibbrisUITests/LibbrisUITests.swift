@@ -66,6 +66,51 @@ class LibbrisUITests: XCTestCase {
         XCTAssert(Image.exists)
     }
     
+    func testConfigPage() throws {
+        
+        let app = XCUIApplication()
+        app.launch()
+        sleep(2)
+        XCUIApplication()/*@START_MENU_TOKEN@*/.buttons["skipButton"]/*[[".buttons[\"skip\"]",".buttons[\"skipButton\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        
+        let settingButton = app.buttons["icon_settings_nor"]
+        XCTAssertTrue(settingButton.exists)
+        settingButton.tap()
+        let languageButton = app.buttons["languageSetting"]
+        let InfoButton = app.buttons["AppInfo"]
+        XCTAssertTrue(languageButton.exists)
+        XCTAssertTrue(InfoButton.exists)
+    }
+    
+    
+    func testLanguagePage() throws {
+        XCTAssertTrue(true)
+    }
+    
+    func testAPI() throws {
+        XCTAssertTrue(true)
+    }
+    
+    func testInfoPage() throws {
+        
+        let app = XCUIApplication()
+        app.launch()
+        sleep(2)
+        XCUIApplication()/*@START_MENU_TOKEN@*/.buttons["skipButton"]/*[[".buttons[\"skip\"]",".buttons[\"skipButton\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        
+        let settingButton = app.buttons["icon_settings_nor"]
+        XCTAssertTrue(settingButton.exists)
+        settingButton.tap()
+        let InfoButton = app.buttons["AppInfo"]
+        XCTAssertTrue(InfoButton.exists)
+        InfoButton.tap()
+        
+        let textsInfo = app.staticTexts["teamInfo"]
+        XCTAssertTrue(textsInfo.exists)
+        let icon = app.images["iconImage"]
+        XCTAssertTrue(icon.exists)
+    }
+    
     /*
     func testBookshelfView() throws{
         let app = XCUIApplication()

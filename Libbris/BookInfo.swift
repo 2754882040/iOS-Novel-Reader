@@ -14,8 +14,24 @@ struct BookInfo:Codable{
     var cover: String
     var bookUrlName: String
     var lastChapterTitle: String
-    var lastUpdatedDate: String
+    var lastUpdatedDate:Int64
 }
 struct BookInfos:Codable{
     var resulk :[BookInfo]
 }
+/*
+ if let url = URL(string: "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/20") {
+    URLSession.shared.dataTask(with: url) { data, response, error in
+     if let data = data {
+     let jsonDecoder = JSONDecoder()
+     do {
+     let parsedJSON = try jsonDecoder.decode(BookInfo.self, from: data)
+         print(parsedJSON.cover)
+             } catch {
+     print(error)
+             }
+            }
+        }.resume()
+ }
+
+ */

@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  Libbris
+
+  Created by 郝育宽 on 2021-08-23.
+  
+*/
+"skip" = "跳过";
+"ON READING" = "正在阅读";
+"TO READ" = "阅读";

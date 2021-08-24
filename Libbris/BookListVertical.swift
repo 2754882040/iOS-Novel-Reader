@@ -9,7 +9,8 @@ import SwiftUI
 
 struct BookListVertical: View {
     var body: some View {
-        Text("TO READ").padding(.leading)
+        let text = NSLocalizedString("TO READ", comment: "")
+        Text(text).padding(.leading)
         ScrollView(.vertical){
             VStack(alignment:.leading, spacing: 50){
                 ForEach(0..<7) {_ in
