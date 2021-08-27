@@ -17,7 +17,14 @@ struct BookInfo:Codable{
     var lastUpdatedDate:Int64
 }
 struct BookInfos:Codable{
-    var resulk :[BookInfo]
+    var result :[BookInfo]
+}
+struct BookChapter: Codable{
+    var id:Int
+    var title:String
+}
+struct BookChapters:Codable{
+    var result:[BookChapter]
 }
 /*
  if let url = URL(string: "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/20") {

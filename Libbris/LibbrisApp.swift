@@ -21,6 +21,7 @@ import SwiftUI
 struct LibbrisApp: App {
     init() {
         _loader = StateObject(wrappedValue: Loader(url:"https://media.idownloadblog.com/wp-content/uploads/2018/08/iPhone-XS-marketing-wallpaper-768x1663.jpg"))
+        _datas = StateObject(wrappedValue: DownloadJson(url:"http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/1/chapters"))
     }
     
     //@UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
@@ -29,6 +30,7 @@ struct LibbrisApp: App {
     @State var showSplashScreen:Bool=true
     @State var backgroundTime: Date?
     @StateObject public var loader: Loader
+    @StateObject public var datas: DownloadJson
     var lastUpdateDate = Date()
     var body: some Scene {
         WindowGroup {

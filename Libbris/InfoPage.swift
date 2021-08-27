@@ -17,6 +17,7 @@ struct InfoPage: View {
                 .resizable(resizingMode: .stretch)
                 .frame(width: 100.0, height: 100.0)
                 .accessibilityIdentifier("iconImage")
+                .padding(/*@START_MENU_TOKEN@*/.all, 30.0/*@END_MENU_TOKEN@*/)
             List{
                 Text("Version: \(Bundle.main.appVersionShort!)")
                 Text("""

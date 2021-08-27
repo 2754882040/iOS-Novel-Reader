@@ -9,15 +9,35 @@ import Foundation
 import SwiftUI
 
 public class DownloadJson: ObservableObject {
-    var data = Data()
+    var jsonData:[BookInfo] = []
     
     //var state = LoadState.loading
 
     init(url: String) {
-        downloadImage(URLString: url)
-        backgroundCheckImageUpdate(DATE: Date(),URLString: url)
-        
+        tempData(URLString: url)
         }
+    
+    func tempData(URLString:String){
+        guard let parsedURL = URL(string: URLString) else {
+            fatalError("Invalid URL: \(URLString)")
+        }
+            
+        URLSession.shared.dataTask(with: parsedURL) { data, response, error in
+            if let data = data {
+            let jsonDecoder = JSONDecoder()
+            do {
+            let parsedJSON = try jsonDecoder.decode([BookChapter].self, from: data)
+                print("balabala")
+                print(parsedJSON)
+                    } catch {
+            print(error)
+                    }
+                   }
+               }.resume()
+            
+            
+        
+    }
     func backgroundCheckImageUpdate(DATE:Date,URLString: String){
         var tempTimeVar = DATE
         DispatchQueue.global(qos: .background).async {
