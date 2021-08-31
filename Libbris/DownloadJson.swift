@@ -15,6 +15,7 @@ public class DownloadJson: ObservableObject {
 
     init(url: String) {
         tempData(URLString: url)
+        
         }
     
     func tempData(URLString:String){
@@ -24,6 +25,7 @@ public class DownloadJson: ObservableObject {
             
         URLSession.shared.dataTask(with: parsedURL) { data, response, error in
             if let data = data {
+                self.saveData(data: data)
             let jsonDecoder = JSONDecoder()
             do {
             let parsedJSON = try jsonDecoder.decode([BookChapter].self, from: data)
@@ -34,9 +36,6 @@ public class DownloadJson: ObservableObject {
                     }
                    }
                }.resume()
-            
-            
-        
     }
     func backgroundCheckImageUpdate(DATE:Date,URLString: String){
         var tempTimeVar = DATE
@@ -91,13 +90,46 @@ public class DownloadJson: ObservableObject {
     }
 
     func lastModified() -> Date? {
-        let fileDir =  NSHomeDirectory().appending("/Documents/123")
+        let fileDir =  NSHomeDirectory().appending("/Documents/data.json")
         do {
             let attr = try FileManager.default.attributesOfItem(atPath: fileDir)
             return attr[FileAttributeKey.modificationDate] as? Date
         } catch let error as NSError {
             print("\(#function) Error: \(error)")
             return nil
+        }
+    }
+    
+    func saveData(data:Data){
+        if let documentDirectory = FileManager.default.urls(for: .documentDirectory,in: .userDomainMask).first {
+            let pathWithFilename = documentDirectory.appendingPathComponent("myJsonString.json")
+            do {
+                try data.write(to: pathWithFilename)
+                print("success")
+                print(pathWithFilename)
+            } catch {
+                // Handle error
+            }
+        }
+        readData()
+    }
+    
+    func readData(){
+        if let documentDirectory = FileManager.default.urls(for: .documentDirectory,in: .userDomainMask).first {
+            let pathWithFilename = documentDirectory.appendingPathComponent("myJsonString.json")
+            URLSession.shared.dataTask(with: pathWithFilename) { data, response, error in
+                if let data = data {
+                let jsonDecoder = JSONDecoder()
+                do {
+                let parsedJSON = try jsonDecoder.decode([BookChapter].self, from: data)
+                    print("1231451")
+                    print(parsedJSON)
+                        } catch {
+                print(error)
+                        }
+                       }
+                   }.resume()
+            
         }
     }
     
