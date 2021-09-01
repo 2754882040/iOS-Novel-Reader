@@ -8,7 +8,6 @@
 import Foundation
 
 func localizedString(text:String)->String{
-    //UserDefaults.standard.set(nil, forKey: "AppleLanguages")
 let name = UserDefaults.standard.string(forKey: "language")
     print(name ?? "nil")
     if(name == nil){
@@ -16,12 +15,12 @@ let name = UserDefaults.standard.string(forKey: "language")
     
         let languageBundlePath = Bundle.main.path(forResource: language, ofType: "lproj")
         let languageBundle = Bundle.init(path: languageBundlePath!)
-        print(NSLocalizedString(text, tableName: "Localizable", bundle: languageBundle!, value: "?", comment: ""))
+        //print(NSLocalizedString(text, tableName: "Localizable", bundle: languageBundle!, value: "?", comment: ""))
         return NSLocalizedString(text, tableName: "Localizable", bundle: languageBundle!, value: "?", comment: "")
     }else{
         let languageBundlePath = Bundle.main.path(forResource: name, ofType: "lproj")
         let languageBundle = Bundle.init(path: languageBundlePath!)
-        print(NSLocalizedString(text, tableName: "Localizable", bundle: languageBundle!, value: "?", comment: ""))
+        //print(NSLocalizedString(text, tableName: "Localizable", bundle: languageBundle!, value: "?", comment: ""))
         return NSLocalizedString(text, tableName: "Localizable", bundle: languageBundle!, value: "?", comment: "")
     }
 }
@@ -36,3 +35,6 @@ func changeLanguage(language:String){
     UserDefaults.standard.set(language, forKey: "language")
 }
 
+extension  Notification.Name {
+    static let switchLanguage = Notification.Name("switchLanguage")
+}

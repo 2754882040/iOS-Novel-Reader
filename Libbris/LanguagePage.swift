@@ -9,8 +9,34 @@ import SwiftUI
 
 struct LanguagePage: View {
     @Binding var shouldShowLanguagePage:Bool
+    @State var englishText = localizedString(text: strEnglish)
+    @State var chineseText = localizedString(text: strChinese)
+    @State var frenchText = localizedString(text: strFrench)
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List{
+            Button(action: {showLanguage()} ) {
+                Text("123")
+            }
+            Button(action: {changeLanguage(language: "en")
+                NotificationCenter.default.post(name: .switchLanguage, object: nil)
+            } ) {
+                Text(englishText)
+            }
+            Button(action: {changeLanguage(language: "fr")
+                NotificationCenter.default.post(name: .switchLanguage, object: nil)
+            } ) {
+                Text(frenchText)
+            }
+            Button(action: {changeLanguage(language: "zh-Hans")
+                NotificationCenter.default.post(name: .switchLanguage, object: nil)
+            } ) {
+                Text(chineseText)
+            }
+        }.onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
+            self.englishText = localizedString(text: strEnglish)
+            self.chineseText = localizedString(text: strChinese)
+            self.frenchText = localizedString(text: strFrench)
+        })
     }
 }
 

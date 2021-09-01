@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct BookListHorizontal: View {
+    @State var stringLiteral: String = localizedString(text: strOnReading);
+    
     var body: some View {
-        let text = NSLocalizedString("ON READING", comment: "")
-        Text(text).padding(.leading)
+        Text(stringLiteral).padding(.leading).onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
+            self.stringLiteral = localizedString(text: strOnReading)
+        })
+        
         ScrollView(.horizontal)
         {
             HStack(alignment:.top, spacing: 40) {
@@ -20,6 +24,7 @@ struct BookListHorizontal: View {
             }
         }.offset(x: 20, y: -10).background(Image("bookshelf").offset(x: /*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/, y: 100))
     }
+    
 }
 
 

@@ -42,7 +42,7 @@ struct LibbrisApp: App {
                     }
                     if showSplashScreen{
                         NavigationLink(destination: SplashScreen(showSplashScreen:$showSplashScreen,backgroundRuningTime:$backgroundTime),
-                                       isActive: $showSplashScreen) { EmptyView()}
+                                       isActive: $showSplashScreen,label:{})
                     }
                 }
             }

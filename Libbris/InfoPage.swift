@@ -8,8 +8,10 @@ import Foundation
 import SwiftUI
 
 struct InfoPage: View {
-    
     @Binding var shouldShowInfoPage:Bool
+    @State var teamText = localizedString(text: strTeam)
+    @State var versionText = localizedString(text: strVersion)
+    @State var mailText = localizedString(text: strMail)
     var body: some View {
         //Text("Hello, World!12312313")
         VStack(alignment: .center){
@@ -19,15 +21,15 @@ struct InfoPage: View {
                 .accessibilityIdentifier("iconImage")
                 .padding(/*@START_MENU_TOKEN@*/.all, 30.0/*@END_MENU_TOKEN@*/)
             List{
-                Text("Version: \(Bundle.main.appVersionShort!)")
+                Text("\(versionText): \(Bundle.main.appVersionShort!)")
                 Text("""
-                    Team
+                    \(teamText)
                     Liming Yang
                     Peiyang Wang
                     Rouwen Mao
                     Yukuan Hao
                     """).accessibilityIdentifier("teamInfo")
-                Text("mail: info.libbris.com")
+                Text("\(mailText): info.libbris.com")
             }
         }
         

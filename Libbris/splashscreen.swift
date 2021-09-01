@@ -29,7 +29,7 @@ struct SplashScreen:View {
                             }) {
                 ZStack{
                     Color.gray.frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, idealWidth: 70, maxWidth: 80, minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, idealHeight: 30, maxHeight: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    let skipmessage = NSLocalizedString("skip", comment: "")
+                    let skipmessage = localizedString(text: strSkip);
                     Text(skipmessage).foregroundColor(.white)
                         
                     }.cornerRadius(20)

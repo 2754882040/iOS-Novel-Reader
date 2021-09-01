@@ -31,7 +31,6 @@ public class DownloadJson: ObservableObject {
                 print(error)
             }
             }
-            
         }.resume()
     }
     
@@ -59,12 +58,11 @@ public class DownloadJson: ObservableObject {
                 let parsedJSON = try jsonDecoder.decode([BookChapter].self, from: data)
                     print("1231451")
                     print(parsedJSON)
-                        } catch {
-                print(error)
+                } catch {
+                            print(error)
                         }
-                       }
-                   }.resume()
-            
+                }
+            }.resume()
         }
     }
 }

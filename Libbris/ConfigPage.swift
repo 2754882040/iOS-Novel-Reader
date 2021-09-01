@@ -8,28 +8,50 @@
 import SwiftUI
 
 struct ConfigPage: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Binding var shouldShowConfigPage:Bool
     @State private var shouldShowInfoPage = false
     @State private var shouldShowLanguagePage = false
+    @State var languageSetting = localizedString(text: strLanguageSetting);
+    @State var infos = localizedString(text: strInfos);
+    @State var backText = localizedString(text: strBack);
+    var btnBack : some View { Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+            }) {
+                HStack {
+                    Text(backText)
+                }
+            }
+        }
     var body: some View {
         List{
             Button(action: {
                 GoToSetting()
             }) {
-                Text("change Language")
+                Text(languageSetting)
             }.accessibilityIdentifier("languageSetting")
             Button(action: {
                 shouldShowInfoPage = true
-                showLanguage()
             }) {
-                Text("Information")
+                Text(infos)
             }.accessibilityIdentifier("AppInfo")
+            Button(action: {
+                shouldShowLanguagePage = true
+            }) {
+                Text(languageSetting)
+            }.accessibilityIdentifier("languageSetting")
             
-        }
+        }.navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: btnBack)
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
+            self.languageSetting = localizedString(text: strLanguageSetting)
+            self.infos = localizedString(text: strInfos)
+            self.backText = localizedString(text: strBack)
+        })
         NavigationLink(destination: InfoPage(shouldShowInfoPage:$shouldShowInfoPage),
-                       isActive: $shouldShowInfoPage) { EmptyView()}
+                       isActive: $shouldShowInfoPage,label:{})
         NavigationLink(destination: LanguagePage(shouldShowLanguagePage:$shouldShowLanguagePage),
-                       isActive: $shouldShowLanguagePage) { EmptyView()}
+                       isActive: $shouldShowLanguagePage,label:{})
         
     }
     func showLanguage(){

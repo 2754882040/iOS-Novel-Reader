@@ -23,8 +23,7 @@ struct MainView: View {
             }
         }.navigationBarHidden(false)
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(leading:Image("logo_libbris_white").imageScale(.large),trailing: NavgationBarButtons()
-        )
+        .navigationBarItems(leading:Image("logo_libbris_white").imageScale(.large),trailing: NavgationBarButtons())
     }
 }
 
