@@ -66,6 +66,15 @@ class LibbrisUITests: XCTestCase {
         XCTAssert(Image.exists)
     }
     
+    func testConfigurationPage() throws{
+        let app = XCUIApplication()
+        app.launch()
+        sleep(6)
+        XCUIApplication().buttons["ConfigButton"].tap()
+        let InfoButton = app.buttons["InfoButton"]
+        XCTAssert(InfoButton.exists)
+    }
+    
     /*
     func testBookshelfView() throws{
         let app = XCUIApplication()
