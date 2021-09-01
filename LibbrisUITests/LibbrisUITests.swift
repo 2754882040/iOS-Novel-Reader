@@ -91,8 +91,17 @@ class LibbrisUITests: XCTestCase {
         XCTAssertTrue(true)
     }
     
-    func testInfoPage() throws {
+    func testConfigurationPage() throws{
+           let app = XCUIApplication()
+           app.launch()
+           sleep(6)
+           XCUIApplication().buttons["ConfigButton"].tap()
+           let languageButton = app.buttons["languageSetting"]
+           XCTAssert(languageButton.exists)
         
+    }
+    
+    func testInfoPage() throws {
         let app = XCUIApplication()
         app.launch()
         sleep(2)

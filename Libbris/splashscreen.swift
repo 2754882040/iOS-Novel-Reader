@@ -73,10 +73,7 @@ struct SplashScreen:View {
             if countDownNum == 0 {
                 timer.invalidate()
                 showAD = true
-                
-                //print(">>> Timer has Stopped!")
             } else {
-                //print(">>> Countdown Number: \(countDownNum)")
                 countDownNum -= 1
             }
         }

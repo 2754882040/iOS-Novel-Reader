@@ -12,11 +12,9 @@ struct ConfigPage: View {
     @State private var shouldShowInfoPage = false
     @State private var shouldShowLanguagePage = false
     var body: some View {
-
         List{
             Button(action: {
                 GoToSetting()
-
             }) {
                 Text("change Language")
             }.accessibilityIdentifier("languageSetting")

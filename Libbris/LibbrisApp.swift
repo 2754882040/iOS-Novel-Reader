@@ -7,24 +7,12 @@
 
 import SwiftUI
 
-/*class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        print("log-didFinishLaunching")
-        return true
-    }
-    func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
-        print("log-DidReceiveMemoryWarning")
-    }
-}*/
-
 @main
 struct LibbrisApp: App {
     init() {
         _loader = StateObject(wrappedValue: Loader(url:"https://media.idownloadblog.com/wp-content/uploads/2018/08/iPhone-XS-marketing-wallpaper-768x1663.jpg"))
         _datas = StateObject(wrappedValue: DownloadJson(url:"http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/1/chapters"))
     }
-    
-    //@UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @Environment(\.scenePhase) var scenePhase
     @State var isNavigationBarHidden :Bool = true
     @State var showSplashScreen:Bool=true
@@ -56,16 +44,10 @@ struct LibbrisApp: App {
                         NavigationLink(destination: SplashScreen(showSplashScreen:$showSplashScreen,backgroundRuningTime:$backgroundTime),
                                        isActive: $showSplashScreen) { EmptyView()}
                     }
-                    
                 }
-                
             }
-            
         }
-        
     }
-    
-    
     
     func setBackgroundRunTime(){
         self.backgroundTime = Date()
@@ -81,9 +63,7 @@ struct LibbrisApp: App {
             print("need to show splash screen")
             backgroundTime = Date()
         }
-        
     }
-    
 }
 
 

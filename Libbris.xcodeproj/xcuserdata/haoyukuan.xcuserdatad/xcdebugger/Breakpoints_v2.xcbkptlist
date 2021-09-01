@@ -33,8 +33,8 @@
             filePath = "LibbrisUITests/LibbrisUITests.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "testInfoPage()"
             landmarkType = "7">
          </BreakpointContent>
