@@ -37,6 +37,10 @@ struct NavgationBarButtons: View {
 }
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> development
 struct NavgationBarButtons_Previews: PreviewProvider {
     static var previews: some View {
         NavgationBarButtons()

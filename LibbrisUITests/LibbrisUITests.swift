@@ -118,7 +118,13 @@ class LibbrisUITests: XCTestCase {
         XCTAssertTrue(textsInfo.exists)
         let icon = app.images["iconImage"]
         XCTAssertTrue(icon.exists)
-    }
+    func testConfigurationPage() throws{
+        let app = XCUIApplication()
+        app.launch()
+        sleep(6)
+        XCUIApplication().buttons["ConfigButton"].tap()
+        let InfoButton = app.buttons["InfoButton"]
+        XCTAssert(InfoButton.exists)
     
     /*
     func testBookshelfView() throws{

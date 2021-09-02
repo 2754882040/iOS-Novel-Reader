@@ -18,7 +18,6 @@ struct HorizontalBookList: View {
                 BookButton();
             }
         }.background(Image("bookshelf").offset(x: /*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/, y: 110))
-        
     }
 }
 

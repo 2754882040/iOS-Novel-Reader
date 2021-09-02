@@ -16,7 +16,6 @@ public class Loader: ObservableObject {
     init(url: String) {
         downloadImage(URLString: url)
         backgroundCheckImageUpdate(DATE: Date(),URLString: url)
-        
         }
     func backgroundCheckImageUpdate(DATE:Date,URLString: String){
         var tempTimeVar = DATE
@@ -54,7 +53,6 @@ public class Loader: ObservableObject {
                 print("need download image")
                 getDataFromInternet(parsedURL:parsedURL)
             }
-        
     }
     func getDataFromInternet(parsedURL:URL){
         DispatchQueue.global(qos: .background).async {
@@ -86,10 +84,7 @@ public class Loader: ObservableObject {
                 let fullPath = NSHomeDirectory().appending("/Documents/").appending(imageName)
                 imageData.write(toFile: fullPath, atomically: true)
                 print("fullPath=\(fullPath)")
-            
             }
-        
     }
-    
 }
 
