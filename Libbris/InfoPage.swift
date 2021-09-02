@@ -8,7 +8,7 @@ import Foundation
 import SwiftUI
 
 struct InfoPage: View {
-    @Binding var shouldShowInfoPage:Bool
+    //@Binding var shouldShowInfoPage:Bool
     @State var teamText = localizedString(text: strTeam)
     @State var versionText = localizedString(text: strVersion)
     @State var mailText = localizedString(text: strMail)
@@ -32,15 +32,12 @@ struct InfoPage: View {
                 Text("\(mailText): info.libbris.com")
             }
         }
-        
-        
     }
-    
 }
 
 struct InfoPage_Previews: PreviewProvider {
     static var previews: some View {
-        InfoPage(shouldShowInfoPage:.constant(true))
+        InfoPage()//shouldShowInfoPage:.constant(true))
     }
 }
 

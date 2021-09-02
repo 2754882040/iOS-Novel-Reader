@@ -10,9 +10,7 @@ import SwiftUI
 
 public class Loader: ObservableObject {
     var data = Data()
-    
     //var state = LoadState.loading
-
     init(url: String) {
         downloadImage(URLString: url)
         backgroundCheckImageUpdate(DATE: Date(),URLString: url)

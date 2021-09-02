@@ -19,5 +19,17 @@ let strEnglish = "English"
 let strChinese = "Chinese(Simplified)"
 let strFrench = "French"
 let strBack = "<Back"
+let apiGetBookByCategory = "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/category/\(1)?start=\(1)&size=\(1)"
+let apiSearch = "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/searchByName?name=\(1)"
+let apiGetbook = "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/\(1)"
+let apiGetChapterContent = "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/\(1)/chapter/\(1)"
+let apiGetAllChapters = "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/\(1)/chapters"
+let apiFindCategoriesByLanguage = "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/category/findByLanguage?lang=\("en")"
+let apiAllGetFeaturedBookList = "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/featured/all/\("long")"
+let apiGetFeaturedBookList = "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/featured/\("long")/\("long")"
+let apiListAllLanguages = "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/language/list"
+let apiRankControllerSearch = "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/rank/\("rankTypeName")/\("categoryId")/\("cycle")/\("size")"
+
+
 
 

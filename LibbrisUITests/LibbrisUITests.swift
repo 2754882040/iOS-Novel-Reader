@@ -34,11 +34,6 @@ class LibbrisUITests: XCTestCase {
         let image_libbris = app.images["logo_libbris_white"]
         XCTAssert(image_libbris.exists)
         
-        let image_library = app.buttons["icon_library_nor"]
-        XCTAssert(image_library.exists)
-        
-        let image_setting = app.buttons["icon_settings_nor"]
-        XCTAssert(image_setting.exists)
                                 
     }
     
@@ -72,8 +67,7 @@ class LibbrisUITests: XCTestCase {
         app.launch()
         sleep(2)
         XCUIApplication()/*@START_MENU_TOKEN@*/.buttons["skipButton"]/*[[".buttons[\"skip\"]",".buttons[\"skipButton\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        
-        let settingButton = app.buttons["icon_settings_nor"]
+        let settingButton = app.tabBars["Tab Bar"].buttons["Setting"]
         XCTAssertTrue(settingButton.exists)
         settingButton.tap()
         let languageButton = app.buttons["languageSetting"]
@@ -81,21 +75,13 @@ class LibbrisUITests: XCTestCase {
         XCTAssertTrue(languageButton.exists)
         XCTAssertTrue(InfoButton.exists)
     }
-    
-    
-    func testLanguagePage() throws {
-        XCTAssertTrue(true)
-    }
-    
-    func testAPI() throws {
-        XCTAssertTrue(true)
-    }
+
     
     func testConfigurationPage() throws{
            let app = XCUIApplication()
            app.launch()
            sleep(6)
-           XCUIApplication().buttons["ConfigButton"].tap()
+           XCUIApplication().tabBars["Tab Bar"].buttons["Setting"].tap()
            let languageButton = app.buttons["languageSetting"]
            XCTAssert(languageButton.exists)
         
@@ -107,56 +93,53 @@ class LibbrisUITests: XCTestCase {
         sleep(2)
         XCUIApplication()/*@START_MENU_TOKEN@*/.buttons["skipButton"]/*[[".buttons[\"skip\"]",".buttons[\"skipButton\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         
-        let settingButton = app.buttons["icon_settings_nor"]
+        let settingButton = app.tabBars["Tab Bar"].buttons["Setting"]
         XCTAssertTrue(settingButton.exists)
         settingButton.tap()
         let InfoButton = app.buttons["AppInfo"]
         XCTAssertTrue(InfoButton.exists)
         InfoButton.tap()
-        
         let textsInfo = app.staticTexts["teamInfo"]
         XCTAssertTrue(textsInfo.exists)
         let icon = app.images["iconImage"]
         XCTAssertTrue(icon.exists)
-    func testConfigurationPage() throws{
+    }
+    func testChangeLanguage() throws{
         let app = XCUIApplication()
         app.launch()
-        sleep(6)
-        XCUIApplication().buttons["ConfigButton"].tap()
-        let InfoButton = app.buttons["InfoButton"]
-        XCTAssert(InfoButton.exists)
-    
-    /*
-    func testBookshelfView() throws{
-        let app = XCUIApplication()
-        app.launch()
+        sleep(2)
+        XCUIApplication()/*@START_MENU_TOKEN@*/.buttons["skipButton"]/*[[".buttons[\"skip\"]",".buttons[\"skipButton\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        let settingButton = app.tabBars["Tab Bar"].buttons["Setting"]
+        XCTAssertTrue(settingButton.exists)
+        settingButton.tap()
+        //UserDefaults.standard.set("zh-Hans", forKey: "language")
+        //NotificationCenter.default.post(name: .switchLanguage, object: nil)
+        //sleep(1)
+        let LanguageButton = app.buttons["languageSetting"]
+        LanguageButton.tap()
+        /*if(app.pickerWheels["picker"].exists){
+            app.pickerWheels["picker"].swipeUp()
+            sleep(1)
+            XCTAssertTrue(app.pickerWheels["Francais"].exists)
+        }*/
         
-        // Test OnReading Horizontal ScrollView
-        let onreading_elements_query = app.scrollViews.otherElements.containing(.staticText, identifier:"ON READING")
-        onreading_elements_query.children(matching: .image).matching(identifier: "label_reading").element(boundBy: 6).swipeLeft()
-        onreading_elements_query.children(matching: .image).matching(identifier: "label_hot").element(boundBy: 6).swipeLeft()
-        onreading_elements_query.children(matching: .image).matching(identifier: "default_cover").element(boundBy: 2).swipeLeft()
-        onreading_elements_query.children(matching: .image).matching(identifier: "blank_book_shadow").element(boundBy: 6).swipeLeft()
-        onreading_elements_query.children(matching: .image).matching(identifier:"bookshelf")
-
-
-                                
-        // Test ToRead Vertical ScrollView
-        let toread_elements_query = app.scrollViews.otherElements.containing(.staticText, identifier:"TO READ")
-        toread_elements_query.children(matching: .image).matching(identifier: "label_reading").firstMatch.swipeUp()
-        toread_elements_query.children(matching: .image).matching(identifier: "label_hot").firstMatch.swipeUp()
-        toread_elements_query.children(matching: .image).matching(identifier: "default_cover").element(boundBy: 3).swipeUp()
-        toread_elements_query.children(matching: .image).matching(identifier: "blank_book_shadow").element(boundBy: 3).swipeUp()
-        toread_elements_query.children(matching: .image).matching(identifier:"bookshelf")
-        
-    }*/
-    /*
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
+        if(app.pickerWheels["ZhongWen"].exists){
+            app.pickerWheels["ZhongWen"].swipeUp()
+            sleep(1)
+            XCTAssertTrue(app.pickerWheels["Francais"].exists)
         }
-    }*/
+        else if(app.pickerWheels["Francais"].exists){
+            app.pickerWheels["Francais"].swipeDown()
+            sleep(1)
+            XCTAssertTrue(app.pickerWheels["English"].exists)
+        }
+        else if(app.pickerWheels["English"].exists){
+            app.pickerWheels["English"].swipeUp()
+            sleep(1)
+            XCTAssertTrue(app.pickerWheels["Francais"].exists)
+        }
+       
+    }
 }
+
+

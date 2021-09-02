@@ -55,6 +55,7 @@ struct SplashScreen:View {
             if countDownNum == 0 {
                 timer.invalidate()
                 self.mode.wrappedValue.dismiss()
+                showSplashScreen = false
                 backgroundRuningTime = nil
                 print(">>> Timer has Stopped!")
             } else {
@@ -83,6 +84,7 @@ struct SplashScreen:View {
     }
     func goBackToPreviousView(){
         self.mode.wrappedValue.dismiss()
+        showSplashScreen = false
         backgroundRuningTime = nil
     }
 }

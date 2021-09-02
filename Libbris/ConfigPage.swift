@@ -9,72 +9,34 @@ import SwiftUI
 
 struct ConfigPage: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @Binding var shouldShowConfigPage:Bool
-    @State private var shouldShowInfoPage = false
-    @State private var shouldShowLanguagePage = false
+    @State var configText = localizedString(text: strConfig);
     @State var languageSetting = localizedString(text: strLanguageSetting);
     @State var infos = localizedString(text: strInfos);
-    @State var backText = localizedString(text: strBack);
-    var btnBack : some View { Button(action: {
-            self.presentationMode.wrappedValue.dismiss()
-            }) {
-                HStack {
-                    Text(backText)
-                }
-            }
-        }
     var body: some View {
+        NavigationView{
         List{
-            Button(action: {
-                GoToSetting()
-            }) {
-                Text(languageSetting)
-            }.accessibilityIdentifier("languageSetting")
-            Button(action: {
-                shouldShowInfoPage = true
-            }) {
-                Text(infos)
-            }.accessibilityIdentifier("AppInfo")
-            Button(action: {
-                shouldShowLanguagePage = true
-            }) {
-                Text(languageSetting)
-            }.accessibilityIdentifier("languageSetting")
+            NavigationLink(destination: InfoPage()){
+                Text(infos).accessibilityIdentifier("AppInfo")
+            };
             
-        }.navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: btnBack)
+            NavigationLink(destination: LanguagePage()){
+                Text(languageSetting).accessibilityIdentifier("languageSetting")
+            };
+            
+        }.navigationViewStyle(StackNavigationViewStyle()).navigationBarBackButtonHidden(true)
+        .navigationBarTitleDisplayMode(.inline).navigationTitle(configText)
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
             self.languageSetting = localizedString(text: strLanguageSetting)
             self.infos = localizedString(text: strInfos)
-            self.backText = localizedString(text: strBack)
+            self.configText = localizedString(text: strConfig)
         })
-        NavigationLink(destination: InfoPage(shouldShowInfoPage:$shouldShowInfoPage),
-                       isActive: $shouldShowInfoPage,label:{})
-        NavigationLink(destination: LanguagePage(shouldShowLanguagePage:$shouldShowLanguagePage),
-                       isActive: $shouldShowLanguagePage,label:{})
-        
-    }
-    func showLanguage(){
-        let languagePrefix = Locale.preferredLanguages[0]
-        print(languagePrefix)
-    }
-    func GoToSetting(){
-        guard let url = URL(string: UIApplication.openSettingsURLString) else {
-                return
-            }
             
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            } else {
-                UIApplication.shared.openURL(url)
-            }
-        //链接：https://juejin.cn/post/6844904132566843406
-       
+        }
     }
 }
 
 struct ConfigPage_Previews: PreviewProvider {
     static var previews: some View {
-        ConfigPage(shouldShowConfigPage:.constant(true))
+        ConfigPage()//shouldShowConfigPage:.constant(true))
     }
 }

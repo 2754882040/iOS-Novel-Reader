@@ -10,7 +10,8 @@ import SwiftUI
 struct BookListVertical: View {
     @State var stringLiteral: String = localizedString(text: strToRead);
     var body: some View {
-        Text(stringLiteral).padding(.leading).onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
+        Text(stringLiteral).padding(.leading)
+            .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
                                                             self.stringLiteral = localizedString(text: strToRead)})
         ScrollView(.vertical){
             VStack(alignment:.leading, spacing: 50){

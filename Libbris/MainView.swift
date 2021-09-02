@@ -15,6 +15,7 @@ struct MainView: View {
             #colorLiteral(red: 0.1607843137, green: 0.2745098039, blue: 0.5529411765, alpha: 1)
     }
     var body: some View {
+        NavigationView{
         ZStack{
             Image("wall").resizable(resizingMode: .stretch).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             VStack(alignment: .leading)
@@ -22,9 +23,10 @@ struct MainView: View {
                 BookListHorizontal()
                 BookListVertical()
             }
-        }.navigationBarHidden(false)
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(leading:Image("logo_libbris_white").imageScale(.large),trailing: NavgationBarButtons())
+        }.navigationBarTitleDisplayMode(.inline).navigationBarItems(leading:Image("logo_libbris_white").imageScale(.large))
+        .navigationViewStyle(StackNavigationViewStyle())
+            
+        }
     }
 }
 
