@@ -10,8 +10,16 @@ struct ContentView: View {
     @State private var show:Bool=false
     
     var body: some View {
-        NavigationView{
-            MainView()
+
+        TabView(selection: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Selection@*/.constant(1)/*@END_MENU_TOKEN@*/) {
+            MainView().tabItem {
+                //Image("icon_home_nor")
+                Text("Home")
+            }.tag(1)
+            ConfigPage().tabItem {
+                //Image("icon_setting_nor")
+                Text("Setting")
+            }.tag(2)
         }
     }
 }

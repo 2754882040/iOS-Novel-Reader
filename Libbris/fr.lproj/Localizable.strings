@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  Libbris
+
+  Created by 郝育宽 on 2021-08-23.
+  
+*/
+"Skip" = "Sauter";
+"ON READING" = "Lecture actuelle";
+"TO READ" = "A lire";
+"Language Setting" = "Multilingue";
+"Information" = "Information";
+"Configuration" = "Configuration";
+"Team" = "Equipe";
+"mail" = "Courrier électronique";
+"Version" = "Version";
+"English" = "Anglais";
+"Chinese(Simplified)" = "Chinois";
+"French" = "Francais";
+"<Back" = "Arrière";

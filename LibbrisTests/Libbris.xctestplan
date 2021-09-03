@@ -22,6 +22,9 @@
   },
   "testTargets" : [
     {
+      "skippedTests" : [
+        "LibbrisUITests"
+      ],
       "target" : {
         "containerPath" : "container:Libbris.xcodeproj",
         "identifier" : "6E0308B426A7D9360030753C",
