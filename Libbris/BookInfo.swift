@@ -14,8 +14,16 @@ struct BookInfo:Codable{
     var cover: String
     var bookUrlName: String
     var lastChapterTitle: String
-    var lastUpdatedDate: String
+    var lastUpdatedDate:Int64
 }
 struct BookInfos:Codable{
-    var resulk :[BookInfo]
+    var result :[BookInfo]
 }
+struct BookChapter: Codable{
+    var id:Int
+    var title:String
+}
+struct BookChapters:Codable{
+    var result:[BookChapter]
+}
+

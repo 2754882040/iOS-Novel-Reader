@@ -29,7 +29,8 @@ struct SplashScreen:View {
                             }) {
                 ZStack{
                     Color.gray.frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, idealWidth: 70, maxWidth: 80, minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, idealHeight: 30, maxHeight: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                        Text("skip").foregroundColor(.white)
+                    let skipmessage = localizedString(text: strSkip);
+                    Text(skipmessage).foregroundColor(.white)
                         
                     }.cornerRadius(20)
             }.position(x: 330, y: 30.0).accessibilityIdentifier("skipButton");
@@ -54,6 +55,7 @@ struct SplashScreen:View {
             if countDownNum == 0 {
                 timer.invalidate()
                 self.mode.wrappedValue.dismiss()
+                showSplashScreen = false
                 backgroundRuningTime = nil
                 print(">>> Timer has Stopped!")
             } else {
@@ -72,10 +74,7 @@ struct SplashScreen:View {
             if countDownNum == 0 {
                 timer.invalidate()
                 showAD = true
-                
-                //print(">>> Timer has Stopped!")
             } else {
-                //print(">>> Countdown Number: \(countDownNum)")
                 countDownNum -= 1
             }
         }
@@ -85,6 +84,7 @@ struct SplashScreen:View {
     }
     func goBackToPreviousView(){
         self.mode.wrappedValue.dismiss()
+        showSplashScreen = false
         backgroundRuningTime = nil
     }
 }

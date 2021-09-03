@@ -12,6 +12,7 @@ struct BookButton: View {
         Button(action: {}) {
             ZStack{
                 Image("default_cover").overlay(Image("label_reading").offset(x:30,y:-55)).background(Image("blank_book_shadow").background(Image("label_hot").offset(x:-20,y:-80))).frame(width: 90, height: 160, alignment: .bottom)
+                Text("Item")
             }
         }
     }
@@ -22,4 +23,3 @@ struct BookButton_Previews: PreviewProvider {
         BookButton()
     }
 }
-

@@ -18,9 +18,13 @@ class LibbrisTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
+    func testDownloadJsonGetData() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        var testObj: DownloadJson = DownloadJson()
+        testObj.getData(URLString: "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/1/chapters")
+        sleep(3)
+        XCTAssertFalse(testObj.jsonData == Data())
     }
 
     func testPerformanceExample() throws {
