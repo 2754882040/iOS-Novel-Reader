@@ -9,11 +9,32 @@ import SwiftUI
 
 struct MoreButton: View {
     @ObservedObject var listdata = getData()
+    @State private var showMore = false
+    @State var range: Range<Int> = 0..<3
     var body: some View {
-        List(0..<listdata.data.count, id:\.self){i in
-            Text(self.listdata.data[i].id)
+        //List(0..<listdata.data.count, id:\.self){i in
+            //Text(self.listdata.data[i].id)
+        //}
+        Button("More"){
+            showMore.toggle()
         }
+        
+        if showMore{
+            ScrollView(.vertical){
+                VStack(alignment:.leading, spacing: 50){
+                    ForEach(range) {_ in
+                        HorizontalBookList();
+                    }
+                    MoreButton()
+                }
+            }
+        }
+        
     }
+    //func loadMore(){
+       // print("Load more ...")
+        //self.range = 0..<self.range.upperBound
+    //}
 }
 
 class getData: ObservableObject{

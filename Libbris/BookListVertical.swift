@@ -12,23 +12,23 @@ struct BookListVertical: View {
         stringLiteral = localizedString(text: header);
     }
     @State var stringLiteral: String = localizedString(text: strToRead);
-    
+    @State var range: Range<Int> = 0..<3
     var body: some View {
         Text(stringLiteral).padding(.leading)
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
                                                             self.stringLiteral = localizedString(text: strToRead)})
         ScrollView(.vertical){
             VStack(alignment:.leading, spacing: 50){
-                ForEach(0..<3) {_ in
+                ForEach(range) {_ in
                     HorizontalBookList();
                 }
                 
-                Button(action:{} ){
-                    Text("More")
-                }
+                MoreButton()
+            
             }
         }
     }
+    
 }
 
 struct BookListVertical_Previews: PreviewProvider {

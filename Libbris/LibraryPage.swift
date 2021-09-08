@@ -26,6 +26,7 @@ struct LibraryPage: View {
                         .padding(.trailing, 20.0)}
                 BookListVertical(header:strToRead)
                 Spacer()
+                
                 }
             //}
             
