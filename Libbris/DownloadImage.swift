@@ -58,6 +58,9 @@ public class Loader: ObservableObject {
             URLSession.shared.dataTask(with: parsedURL) { data, response, error in
                 if let img = UIImage(data: data!) {
                     self.saveImage(currentImage: img, persent: 10, imageName: "123")
+                    print("success")
+                }else{
+                    print("failed")
                 }
                 DispatchQueue.main.async {
                     self.objectWillChange.send()

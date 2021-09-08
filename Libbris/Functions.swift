@@ -69,3 +69,18 @@ func getLanguageCode(language:String){}
 extension  Notification.Name {
     static let switchLanguage = Notification.Name("switchLanguage")
 }
+
+func decodeData<T:Codable>(data:Data)throws->T{
+    
+    let jsonDecoder = JSONDecoder()
+    do {
+        let parsedJSON = try jsonDecoder.decode(T.self, from: data)
+        print(parsedJSON)
+        return parsedJSON
+    } catch {
+        print(error)
+        fatalError("\(error)")
+    }
+   
+    
+}

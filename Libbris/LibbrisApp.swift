@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct LibbrisApp: App {
     init() {
-        _loader = StateObject(wrappedValue: Loader(url:"https://media.idownloadblog.com/wp-content/uploads/2018/08/iPhone-XS-marketing-wallpaper-768x1663.jpg"))
+        _loader = StateObject(wrappedValue: Loader(url:"https://uce67a46929e11e1cd30c9f7d909.previews.dropboxusercontent.com/p/thumb/ABTxm9Ptf3B7g2pxy7luelmBgaenKv9nAVH58BZlhUG7tJKK6Z7KRgmn6IigOpenFYr-oiZyiEnjwtyUCjDLOwyYVOuXOcTh9UAV6GRApzbUXHF8vRwc5DfefEXzVeLmO07_xkJSylmbGw5ROU-QvsklwUklK4uSnus3kfViIH0gDndoqWAE9lgsnsREyH6HjnPHN10Fx1AHnuMi1gDeJhdhudtE3YVEtXrZNxK7ntt8hO1_HCCMsAbgtRhV1ubzCyAcUm_pqW0L8vplahO9E4iuqwOrZ8kIO2Ut0-tpLvDSAyrDSzSD2q_BDkjafbs9Xi5FGeUduD7dmKG_8g1xQRpKxQ6NjEWaNTYTzyLc3yezcQ/p.png?fv_content=true&size_mode=5"))
         //_datas = StateObject(wrappedValue: DownloadJson(url:"http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/1/chapters"))
     }
     @Environment(\.scenePhase) var scenePhase
