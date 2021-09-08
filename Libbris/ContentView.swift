@@ -8,18 +8,38 @@
 import SwiftUI
 struct ContentView: View {
     @State private var show:Bool=false
-    
+    @State private var selection: Tabs = .home
+
+     private enum Tabs: Hashable {
+        case home
+        case library
+        case setting
+         
+     }
     var body: some View {
 
-        TabView(selection: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Selection@*/.constant(1)/*@END_MENU_TOKEN@*/) {
+        TabView(selection: $selection) {
             MainView().tabItem {
-                //Image("icon_home_nor")
-                Text("Home")
-            }.tag(1)
+                if selection == Tabs.home{
+                    Image("icon_home_sel_iOS_25@1")
+                }else{
+                    Image("icon_home_nor_iOS_25@1")
+                }
+            }.tag(Tabs.home)
+            LibraryPage().tabItem {
+                if selection == Tabs.library{
+                    Image("icon_library_sel_iOS_25@1")
+                }else{
+                    Image("icon_library_nor_iOS_25@1")
+                }
+            }.tag(Tabs.library)
             ConfigPage().tabItem {
-                //Image("icon_setting_nor")
-                Text("Setting")
-            }.tag(2)
+                if selection == Tabs.setting{
+                    Image("icon_settings_sel_iOS_25@1")
+                }else{
+                    Image("icon_settings_nor_iOS_25@1")
+                }
+            }.tag(Tabs.setting)
         }
     }
 }

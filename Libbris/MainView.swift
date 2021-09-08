@@ -20,8 +20,8 @@ struct MainView: View {
             Image("wall").resizable(resizingMode: .stretch).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             VStack(alignment: .leading)
             {
-                BookListHorizontal()
-                BookListVertical()
+                //BookListHorizontal()
+                BookListVertical(header: strToRead)
             }
         }.navigationBarTitleDisplayMode(.inline).navigationBarItems(leading:Image("logo_libbris_white").imageScale(.large))
         .navigationViewStyle(StackNavigationViewStyle())
