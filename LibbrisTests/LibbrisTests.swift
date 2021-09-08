@@ -21,8 +21,8 @@ class LibbrisTests: XCTestCase {
     func testDownloadJsonGetData() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        var testObj: DownloadJson = DownloadJson()
-        testObj.getData(URLString: "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/1/chapters")
+        var testObj: DownloadJson = DownloadJson(url: "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/1/chapters")
+        //testObj.getData(URLString: "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/1/chapters")
         sleep(3)
         XCTAssertFalse(testObj.jsonData == Data())
     }

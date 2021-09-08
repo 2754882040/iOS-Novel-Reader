@@ -8,12 +8,22 @@ import Foundation
 import SwiftUI
 
 struct InfoPage: View {
-    //@Binding var shouldShowInfoPage:Bool
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var teamText = localizedString(text: strTeam)
     @State var versionText = localizedString(text: strVersion)
     @State var mailText = localizedString(text: strMail)
+    @State var infos = localizedString(text: strInfos);
+    var btnBack : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+            }) {
+                HStack {
+                    Image(systemName: "arrow.backward").foregroundColor(.white)
+                    Text(infos).foregroundColor(.white).font(.custom("Dosis-Bold", size: 20))
+                }
+            }
+        }
     var body: some View {
-        //Text("Hello, World!12312313")
         VStack(alignment: .center){
             Image(uiImage: UIImage(imageLiteralResourceName: "AppIcon"))
                 .resizable(resizingMode: .stretch)
@@ -31,7 +41,14 @@ struct InfoPage: View {
                     """).accessibilityIdentifier("teamInfo")
                 Text("\(mailText): info.libbris.com")
             }
-        }
+        }.navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: btnBack).onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
+            self.infos = localizedString(text: strInfos)
+            self.teamText = localizedString(text: strTeam)
+            self.versionText = localizedString(text: strVersion)
+            self.mailText = localizedString(text: strMail)
+        })
+        
     }
 }
 

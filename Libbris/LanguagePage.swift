@@ -12,16 +12,20 @@ struct LanguagePage: View {
     @State var englishText = localizedString(text: strEnglish)
     @State var chineseText = localizedString(text: strChinese)
     @State var frenchText = localizedString(text: strFrench)
-    @State var backText = localizedString(text: strBack);
+    //@State var backText = localizedString(text: strBack);
     @State var languageSetting = localizedString(text: strLanguageSetting);
     var languages = [localizedString(text: strEnglish), localizedString(text: strChinese), localizedString(text: strFrench)]
     @State private var selectedLanguage:Int = getLanguageNumber()
-    var btnBack : some View { Button(action: {
+    var btnBack : some View {
+        Button(action: {
             self.presentationMode.wrappedValue.dismiss()
             }) {
-                HStack {
-                    Text(backText)
-                }
+            HStack{
+                    Image(systemName: "arrow.backward").foregroundColor(.white).frame(alignment: .leading)
+                Text(languageSetting).foregroundColor(.white).font(.custom("Dosis-Bold", size: 20)).frame(alignment: .leading)
+                    Spacer()
+                }.frame(alignment: .leading)
+            Spacer()
             }
         }
     var body: some View {
@@ -32,12 +36,11 @@ struct LanguagePage: View {
             changeLanguage(languageCode: selectedLanguage)
             NotificationCenter.default.post(name: .switchLanguage, object: nil)
         }).navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: btnBack).navigationTitle(languageSetting)
+        .navigationBarItems(leading: btnBack)
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
             self.englishText = localizedString(text: strEnglish)
             self.chineseText = localizedString(text: strChinese)
             self.frenchText = localizedString(text: strFrench)
-            self.backText = localizedString(text: strBack)
             self.languageSetting = localizedString(text: strLanguageSetting)
         })
     }
