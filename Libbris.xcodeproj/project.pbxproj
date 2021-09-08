@@ -31,6 +31,7 @@
 		6EB69CE026E1DA7800649332 /* strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E923B7B26E0326C000E56B4 /* strings.swift */; };
 		6ED7B49026B9AD92005DDB48 /* splashscreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED7B48F26B9AD92005DDB48 /* splashscreen.swift */; };
 		866C1F2226B4E1E900D59699 /* gemfile in Resources */ = {isa = PBXBuildFile; fileRef = 866C1F2126B4E1E900D59699 /* gemfile */; };
+		868D8E1A26E9270500A1ACC6 /* MoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868D8E1926E9270500A1ACC6 /* MoreButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		6ED7B48F26B9AD92005DDB48 /* splashscreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = splashscreen.swift; sourceTree = "<group>"; };
 		866C1F2026B46A9800D59699 /* Libbris.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Libbris.xctestplan; sourceTree = "<group>"; };
 		866C1F2126B4E1E900D59699 /* gemfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = gemfile; sourceTree = "<group>"; };
+		868D8E1926E9270500A1ACC6 /* MoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +155,7 @@
 				6E535F8626C46C55003A1A8F /* BookListVertical.swift */,
 				6E535F8826C46C82003A1A8F /* BookListHorizontal.swift */,
 				6E535F8A26C46DC9003A1A8F /* MainView.swift */,
+				868D8E1926E9270500A1ACC6 /* MoreButton.swift */,
 			);
 			path = Libbris;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 			files = (
 				6E535F8D26C472F2003A1A8F /* BookInfo.swift in Sources */,
 				6E4492EF26D4554F00313F8E /* DownloadJson.swift in Sources */,
+				868D8E1A26E9270500A1ACC6 /* MoreButton.swift in Sources */,
 				6E923B7A26E02070000E56B4 /* Functions.swift in Sources */,
 				6E4492DB26D40E3E00313F8E /* ConfigPage.swift in Sources */,
 				6E9975DC26E063AE00443057 /* BookButton.swift in Sources */,
