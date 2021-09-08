@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct BookListVertical: View {
+    init(header:String){
+        stringLiteral = localizedString(text: header);
+    }
     @State var stringLiteral: String = localizedString(text: strToRead);
     var body: some View {
         Text(stringLiteral).padding(.leading)
@@ -25,6 +28,6 @@ struct BookListVertical: View {
 
 struct BookListVertical_Previews: PreviewProvider {
     static var previews: some View {
-        BookListVertical()
+        BookListVertical(header :strToRead)
     }
 }

@@ -140,6 +140,15 @@ class LibbrisUITests: XCTestCase {
         }
        
     }
+    func testSearchArea(){
+        let app = XCUIApplication()
+        app.launch()
+        sleep(2)
+        app/*@START_MENU_TOKEN@*/.buttons["skipButton"]/*[[".buttons[\"跳过\"]",".buttons[\"skipButton\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.tabBars["Tab Bar"].buttons["icon_library_nor_iOS_25@1"].tap()
+        XCTAssertTrue(app.textFields["search area"].exists)
+        
+    }
 }
 
 
