@@ -4,7 +4,7 @@
 //
 //  Created by 郝育宽 on 2021-08-11.
 //
-
+/*
 import SwiftUI
 
 struct HorizontalBookList: View {
@@ -14,8 +14,8 @@ struct HorizontalBookList: View {
         LazyVGrid(columns: columns)
         {
             ForEach(items,id: \.self)
-            {items in
-                BookButton();
+            {item in
+                BookButton(bookDetail:books[item]);
             }
         }.background(Image("bookshelf").offset(x: /*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/, y: 110))
     }
@@ -25,4 +25,4 @@ struct HorizontalBookList_Previews: PreviewProvider {
     static var previews: some View {
         HorizontalBookList()
     }
-}
+}*/

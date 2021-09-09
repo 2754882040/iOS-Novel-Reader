@@ -26,7 +26,7 @@ struct ContentView: View {
                     Image("icon_home_nor_iOS_25@1")
                 }
             }.tag(Tabs.home)
-            LibraryPage().tabItem {
+            BookShelf().tabItem {
                 if selection == Tabs.library{
                     Image("icon_library_sel_iOS_25@1")
                 }else{

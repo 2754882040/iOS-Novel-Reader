@@ -4,7 +4,7 @@
 //
 //  Created by 郝育宽 on 2021-08-11.
 //
-
+/*
 import SwiftUI
 
 struct BookListVertical: View {
@@ -30,4 +30,4 @@ struct BookListVertical_Previews: PreviewProvider {
     static var previews: some View {
         BookListVertical(header :strToRead)
     }
-}
+}*/
