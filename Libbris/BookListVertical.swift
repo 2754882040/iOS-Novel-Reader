@@ -17,22 +17,23 @@ struct BookListVertical: View {
         Text(stringLiteral).padding(.leading)
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
                                                             self.stringLiteral = localizedString(text: strToRead)})
-        ScrollView(.vertical){
-            VStack(alignment:.leading, spacing: 50){
-                ForEach(range) {_ in
-                    HorizontalBookList();
+            ScrollView(.vertical){
+                VStack(alignment:.leading, spacing: 50){
+                    ForEach(range) {_ in
+                        HorizontalBookList();
+                    }
                 }
-                
-                MoreButton()
-            
+                Spacer(minLength: 26)
+                NavigationLink(destination: MoreBooks())
+                {
+                    Text("More")
+                }
             }
-        }
-    }
-    
 }
 
 struct BookListVertical_Previews: PreviewProvider {
     static var previews: some View {
         BookListVertical(header :strToRead)
     }
+}
 }
