@@ -25,7 +25,6 @@ struct MainView: View {
             }
         }.navigationBarTitleDisplayMode(.inline).navigationBarItems(leading:Image("logo_libbris_white").imageScale(.large))
         .navigationViewStyle(StackNavigationViewStyle())
-            
         }
     }
 }
