@@ -21,7 +21,7 @@ struct MainView: View {
             VStack(alignment: .leading)
             {
                 //BookListHorizontal()
-                BookListVertical(header: strToRead)
+                //BookListVertical(header: strToRead)
             }
         }.navigationBarTitleDisplayMode(.inline).navigationBarItems(leading:Image("logo_libbris_white").imageScale(.large))
         .navigationViewStyle(StackNavigationViewStyle())
