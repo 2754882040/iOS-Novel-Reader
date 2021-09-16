@@ -29,7 +29,21 @@ let apiAllGetFeaturedBookList = "http://libbris2021.us-west-2.elasticbeanstalk.c
 let apiGetFeaturedBookList = "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/featured/\("long")/\("long")"
 let apiListAllLanguages = "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/language/list"
 let apiRankControllerSearch = "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/rank/\("rankTypeName")/\("categoryId")/\("cycle")/\("size")"
-
+let strRecommend = "RECOMMEND"
+let strHot = "HOT"
+let strNew = "NEW"
+let strMore = "MORE"
+let strLibrary = "LIBRARY"
+let strSettings = "SETTINGS"
+let strSearch = "Search"
+let strNoMoreBook = "No more books"
+let strSubmit = "Submit"
+let strSearchArea = "search area"
+let strApplicationSetting = "Application Setting";
+let strPrivacyAndSafety = "Privacy & Safety";
+let strOthers = "Other";
+let strLoading = "Loading..."
+let strChinese1 = "中文（简体）"
 
 
 

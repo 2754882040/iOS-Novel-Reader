@@ -25,12 +25,13 @@ extension URLSession {
 
 public class DownloadJson: ObservableObject {
     enum LoadState {
-            case loading, success, failure
+            case loading,success,failure
         }
+    
     var jsonData = Data();
     var state = LoadState.loading
-    init(){//url: String) {
-        //getData(URLString: url)
+    init(url: String) {
+        getData(URLString: url)
         //getData(url: getLocalFileDir(fileName:url))
     }
 
@@ -45,10 +46,11 @@ public class DownloadJson: ObservableObject {
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let data = data, data.count > 0 {
                 self.jsonData = data
-                self.saveData(data: self.jsonData,fileName: "myJsonString.json")
+                //self.saveData(data: self.jsonData,fileName: "myJsonString.json")
                 self.state = .success
             } else {
                 self.state = .failure
+                print("failed")
             }
 
             DispatchQueue.main.async {
@@ -69,11 +71,13 @@ public class DownloadJson: ObservableObject {
         
         let jsonDecoder = JSONDecoder()
         do {
-            let parsedJSON = try jsonDecoder.decode(T.self, from: self.jsonData)
+            let parsedJSON = try jsonDecoder.decode(T.self, from: data)
             print(parsedJSON)
             return parsedJSON
         } catch {
+            print("error")
             print(error)
+            
             fatalError("\(error)")
         }
         
