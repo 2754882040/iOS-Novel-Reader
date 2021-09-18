@@ -47,4 +47,3 @@ let strChinese1 = "中文（简体）"
 
 
 
-
