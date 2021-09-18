@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     init() {
-        _datas = StateObject(wrappedValue: DownloadJson(url:"http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/category/16?start=1&size=20"))
+        _datas = StateObject(wrappedValue: DownloadJson(url:"http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/category/16?start=1&size=1"))
         UINavigationBar.appearance().backgroundColor =
             #colorLiteral(red: 0.1607843137, green: 0.2745098039, blue: 0.5529411765, alpha: 1)
         UINavigationBar.appearance().barTintColor =

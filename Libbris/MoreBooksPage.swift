@@ -29,9 +29,9 @@ struct MoreBooksPage: View {
                     TabBarView(tabIndex: $selection)
                     
                 TabView(selection: $selection) {
-                    BookList(url: "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/category/11?start=1&size=9").tag(Tabs.hot).accessibility(identifier: "HotPage")
-                    BookList(url: "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/category/12?start=1&size=9").tag(Tabs.recommend)..accessibility(identifier: "RecPage")
-                    BookList(url: "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/category/13?start=1&size=9").tag(Tabs.new).accessibility(identifier: "NewPage")
+                    BookList(url: "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/category/11?start=1&size=9").tag(Tabs.hot).accessibilityIdentifier("HotPage")
+                    BookList(url: "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/category/12?start=1&size=9").tag(Tabs.recommend).accessibilityIdentifier("RecPage")
+                    BookList(url: "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/category/13?start=1&size=9").tag(Tabs.new).accessibilityIdentifier("NewPage")
                 }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                     
                 }

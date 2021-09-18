@@ -15,6 +15,7 @@ struct BookList: View {
     @State var books:[BookInfoBrief] = [BookInfoBrief]()
     @StateObject public var datas: DownloadJson
     @State var loadingText = localizedString(text: strLoading)
+    @State var noBooksText = localizedString(text: strNoMoreBook)
     let screenSize: CGRect = UIScreen.main.bounds
     var body: some View {
         VStack(alignment: .leading, spacing: 10){
@@ -30,6 +31,7 @@ struct BookList: View {
                         LibraryBook(bookDetail:books[item]).accessibilityIdentifier("LibraryBook\(item)");
                         Spacer(minLength: 20)
                     }
+                    Text(noBooksText).accessibilityIdentifier("NoMoreBooksText")
                     Spacer(minLength: 10)
                 }
                 
@@ -46,6 +48,7 @@ struct BookList: View {
             }
         }).onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
             self.loadingText = localizedString(text: strLoading)
+            self.noBooksText = localizedString(text: strNoMoreBook)
         })
     }
 }
