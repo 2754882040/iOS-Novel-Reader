@@ -39,6 +39,7 @@ public class DownloadJson: ObservableObject {
         guard let parsedURL = URL(string: URLString) else {
             fatalError("Invalid URL: \(URLString)")
         }
+        state = LoadState.loading
         getData(url:parsedURL)
     }
     
@@ -72,7 +73,7 @@ public class DownloadJson: ObservableObject {
         let jsonDecoder = JSONDecoder()
         do {
             let parsedJSON = try jsonDecoder.decode(T.self, from: data)
-            print(parsedJSON)
+            print("decode:\(parsedJSON)")
             return parsedJSON
         } catch {
             print("error")

@@ -8,15 +8,24 @@
 import SwiftUI
 
 struct BookList: View {
-    init(url:String){
+    init(url:String,cId:Int){
         _datas = StateObject(wrappedValue: DownloadJson(url:url))
+        self.categoryId = cId
+        self.url = url
     }
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var books:[BookInfoBrief] = [BookInfoBrief]()
     @StateObject public var datas: DownloadJson
     @State var loadingText = localizedString(text: strLoading)
     @State var noBooksText = localizedString(text: strNoMoreBook)
+    @State var noMoreBook: Bool = false
+    @State var curBookCount: Int = 0
+    let url:String
+    let categoryId:Int
     let screenSize: CGRect = UIScreen.main.bounds
+    var loadMore: some View {
+        Text("loading")
+    }
     var body: some View {
         VStack(alignment: .leading, spacing: 10){
             ScrollView(.vertical){
@@ -27,23 +36,39 @@ struct BookList: View {
                 }
                 else{
                     let items = 0...(books.count-1)
-                    ForEach(items,id: \.self){item in
-                        LibraryBook(bookDetail:books[item]).accessibilityIdentifier("LibraryBook\(item)");
-                        Spacer(minLength: 20)
+                    LazyVStack{
+                        ForEach(items,id: \.self){item in
+                            LibraryBook(bookDetail:books[item]).accessibilityIdentifier("LibraryBook\(item)");
+                            Spacer(minLength: 20)
+                        }
+                        if noMoreBook {Text(noBooksText).accessibilityIdentifier("NoMoreBooksText")}
+                        else{loadMore.onAppear(perform: {loadBook()})}
+                        Spacer(minLength: 10)
+                        
                     }
-                    Text(noBooksText).accessibilityIdentifier("NoMoreBooksText")
-                    Spacer(minLength: 10)
                 }
                 
             }.frame(width: screenSize.width)
+           
         }.onAppear(perform: {
             DispatchQueue.global(qos: .background).async {
             while(datas.state == .loading){
                 sleep(1)
             }
             if datas.state == .success{
-                books = try! datas.decodeData(data: datas.jsonData)
-                //print(books.count)
+                let temp:[BookInfoBrief] = try! datas.decodeData(data: datas.jsonData)
+                if !temp.isEmpty {
+                    books += temp
+                }
+                let jsonEncoder = JSONEncoder()
+                //jsonEncoder.outputFormatting = .prettyPrinted
+                let tempdata = try! jsonEncoder.encode(books)
+                let tempString = String(data: tempdata, encoding: .utf8)
+                print(tempString)
+                let temp2:[BookInfoBrief] = try! datas.decodeData(data: tempdata)
+                print(temp2)
+                books += temp2
+                curBookCount = books.count
             }
             }
         }).onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
@@ -51,10 +76,31 @@ struct BookList: View {
             self.noBooksText = localizedString(text: strNoMoreBook)
         })
     }
+    func loadBook(){
+        datas.getData(URLString: getBookByCategoryAPI(categoryId: categoryId, start: curBookCount+1, size: 20))
+        print("loading book")
+        DispatchQueue.global(qos: .background).async {
+            while(datas.state == .loading){
+                sleep(1)
+                print("sleep")
+            }
+            if datas.state == .success{
+                books += try! datas.decodeData(data: datas.jsonData)
+                if curBookCount != books.count{
+                    curBookCount = books.count
+                }else{
+                    noMoreBook = true
+                    print(books.count)
+                }
+            }else{
+                //lastBookCount = curBookCount
+            }
+        }
+    }
 }
 
-struct BookList_Previews: PreviewProvider {
+/*struct BookList_Previews: PreviewProvider {
     static var previews: some View {
         BookList(url:"http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/category/11?start=1&size=9")
     }
-}
+}*/

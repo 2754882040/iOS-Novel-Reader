@@ -33,8 +33,8 @@
             filePath = "Libbris/DownloadJson.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "getData(url:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -49,8 +49,8 @@
             filePath = "Libbris/DownloadJson.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "decodeData(data:)"
             landmarkType = "7">
          </BreakpointContent>

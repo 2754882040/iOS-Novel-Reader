@@ -34,8 +34,9 @@ struct BookShelf: View {
                         }.accessibilityIdentifier("MorePageButton")
                         .padding(.trailing, 10.0)
                     }
-                    BookList(url:"http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/category/11?start=1&size=9").navigationViewStyle(StackNavigationViewStyle()).navigationBarBackButtonHidden(true)
+                    BookList(url:"http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/category/11?start=1&size=5", cId: 11).navigationViewStyle(StackNavigationViewStyle()).navigationBarBackButtonHidden(true)
                         .navigationBarTitleDisplayMode(.inline).navigationBarItems(leading: Text(libraryText).foregroundColor(.white).font(.custom("Dosis-Bold", size: 20)),trailing: NavigationLink(destination: SearchPage()){Image(systemName: "magnifyingglass")}.accessibilityIdentifier("Search"))
+                    Spacer(minLength: 20)
                 }.padding(.leading,10).onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
                     self.recommendText = localizedString(text: strRecommend)
                     self.hotText = localizedString(text: strHot)

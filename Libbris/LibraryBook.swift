@@ -14,13 +14,11 @@ struct LibraryBook: View {
     private class Loader: ObservableObject {
         var data = Data()
         var state = LoadState.loading
-
         init(url: String) {
             let urlWithoutSpace:String = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "badlink"
             guard let parsedURL = URL(string: urlWithoutSpace) else {
                 fatalError("Invalid URL: \(url)")
             }
-
             URLSession.shared.dataTask(with: parsedURL) { data, response, error in
                 if let data = data, data.count > 0 {
                     self.data = data
@@ -37,8 +35,11 @@ struct LibraryBook: View {
     }
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject private var loader: Loader
+    @StateObject var localJsonFile: localJsonFileManager = localJsonFileManager.shared
     var loading: Image
     var failure: Image
+    
+    //let fullPath = NSHomeDirectory().appending("/Documents/").appending("bookShelf.json")
     init(bookDetail: BookInfoBrief, loading: Image = Image("default_cover"), failure: Image = Image("default_cover")) {
         _loader = StateObject(wrappedValue: Loader(url: bookDetail.cover ?? "badlink"))
         self.loading = loading
@@ -58,7 +59,28 @@ struct LibraryBook: View {
                 }
                 Spacer()
             }
-        }
+        }.contextMenu(menuItems: {
+            Button("add to bookshelf"){
+                var tempData: BookInfoBriefWithTime = BookInfoBriefWithTime()
+                tempData.id = bookDetail.id
+                tempData.authorName = bookDetail.authorName
+                tempData.bookUrlName = bookDetail.bookUrlName
+                tempData.cover = bookDetail.cover
+                tempData.time = Date()
+                tempData.name = bookDetail.name
+                tempData.summary = bookDetail.summary
+                let tempVar = localJsonFile.findBookId(id: tempData.id)
+                if(tempVar >= 0){
+                    print("already in bookshelf")
+                    localJsonFile.bookShelfBook[tempVar].time = Date()
+                }else{
+                    localJsonFile.bookShelfBook += [tempData]
+                }
+                localJsonFile.sortArray()
+                localJsonFile.saveData(data: localJsonFile.encodeData(data: localJsonFile.bookShelfBook))
+                NotificationCenter.default.post(name: .refreshBook, object: nil)
+            }
+        })
     }
     private func selectImage() -> Image {
         switch loader.state {

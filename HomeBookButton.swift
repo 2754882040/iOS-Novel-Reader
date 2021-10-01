@@ -7,15 +7,21 @@
 
 import SwiftUI
 
-struct BookButton: View {
+struct HomeBookButton: View {
     public enum LoadState {
     case loading, success, failure
     }
     private class Loader: ObservableObject {
         var data = Data()
+        //let imageURL:URL
         var state = LoadState.loading
         init(url: String) {
+            refresh(url:url)
+        }
+        func refresh(url:String){
+            state = LoadState.loading
             let urlWithoutSpace:String = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "badlink"
+            
             guard let parsedURL = URL(string: urlWithoutSpace) else {
                 fatalError("Invalid URL: \(url)")
             }
@@ -35,19 +41,36 @@ struct BookButton: View {
     }
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject private var loader: Loader
+    @State var bookCover = Image("default_cover")
     var loading: Image
     var failure: Image
-    init(bookDetail: BookInfoBrief, loading: Image = Image("default_cover"), failure: Image = Image("default_cover")) {
+    //let imageURL:URL
+    init(bookDetail: BookInfoBriefWithTime, loading: Image = Image("default_cover"), failure: Image = Image("default_cover")) {
         _loader = StateObject(wrappedValue: Loader(url: bookDetail.cover ?? "badlink"))
         self.loading = loading
         self.failure = failure
         self.bookDetail = bookDetail
     }
-    var bookDetail:BookInfoBrief
+    var bookDetail:BookInfoBriefWithTime
     var body: some View {
         NavigationLink(destination: BookDetailView(bookId:bookDetail.id)){
-            selectImage().resizable().padding(.top, 13.0).padding(.bottom, 22.0).background(Image("blank_book_shadow")).frame(width: 90, height: 160, alignment: .bottom)//.overlay(Text(bookDetail.name))
-        }
+            bookCover.resizable().padding(.top, 13.0).padding(.bottom, 22.0).background(Image("blank_book_shadow")).frame(width: 90, height: 160, alignment: .bottom)//.overlay(Text(bookDetail.name))
+        }.onAppear (perform:{
+            DispatchQueue.global(qos: .background).async {
+                loader.refresh(url: bookDetail.cover ?? "badlink")
+                while (loader.state != .success){
+                    sleep(1)
+                }
+                bookCover = selectImage()}}
+        ).onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("refreshBook")), perform: { _ in
+            DispatchQueue.global(qos: .background).async {
+            loader.refresh(url: bookDetail.cover ?? "badlink")
+            while(loader.state != .success){
+                sleep(1)
+            }
+            self.bookCover = selectImage()
+            
+            }})
     }
     private func selectImage() -> Image {
         switch loader.state {

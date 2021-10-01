@@ -40,6 +40,7 @@ struct LibraryBookRecommend: View {
     @StateObject private var loader: Loader
     var loading: Image
     var failure: Image
+    //let fullPath = NSHomeDirectory().appending("/Documents/").appending("bookShelf.json")
     init(bookDetail: BookInfoBrief, loading: Image = Image("default_cover"), failure: Image = Image("default_cover")) {
         _loader = StateObject(wrappedValue: Loader(url: bookDetail.cover ?? "badlink" ))
         self.loading = loading
@@ -61,7 +62,9 @@ struct LibraryBookRecommend: View {
                 }.frame(width:120)
             }
             
-        }
+        }.contextMenu(menuItems: {
+            Button("add to bookshelf"){}
+        })
     }
     private func selectImage() -> Image {
         switch loader.state {

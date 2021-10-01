@@ -16,13 +16,39 @@ struct BookInfo:Codable{
     var lastChapterTitle: String
     var lastUpdatedDate:Int64
 }
-struct BookInfoBrief:Codable{
+struct BookInfoBrief:Codable,Hashable{
     var id:Int
     var name: String
     var authorName: String
     var summary: String
     var cover: String?
     var bookUrlName: String
+}
+struct BookInfoBriefWithTime:Codable,Hashable,Comparable{
+    static func < (lhs: BookInfoBriefWithTime, rhs: BookInfoBriefWithTime) -> Bool {
+        if lhs.time > rhs.time{
+            return true
+        }else{
+            return false
+        }
+    }
+    init(){
+    id = 0
+    name = " "
+    authorName = " "
+    summary = " "
+    cover = " "
+    bookUrlName = " "
+    time = Date()
+    }
+    
+    var id:Int
+    var name: String
+    var authorName: String
+    var summary: String
+    var cover: String?
+    var bookUrlName: String
+    var time: Date
 }
 struct BookInfos:Codable{
     var result :[BookInfo]
