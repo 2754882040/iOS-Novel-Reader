@@ -60,14 +60,6 @@ struct BookList: View {
                 if !temp.isEmpty {
                     books += temp
                 }
-                let jsonEncoder = JSONEncoder()
-                //jsonEncoder.outputFormatting = .prettyPrinted
-                let tempdata = try! jsonEncoder.encode(books)
-                let tempString = String(data: tempdata, encoding: .utf8)
-                print(tempString)
-                let temp2:[BookInfoBrief] = try! datas.decodeData(data: tempdata)
-                print(temp2)
-                books += temp2
                 curBookCount = books.count
             }
             }
@@ -77,6 +69,7 @@ struct BookList: View {
         })
     }
     func loadBook(){
+        curBookCount = books.count
         datas.getData(URLString: getBookByCategoryAPI(categoryId: categoryId, start: curBookCount+1, size: 20))
         print("loading book")
         DispatchQueue.global(qos: .background).async {

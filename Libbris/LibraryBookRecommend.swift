@@ -37,6 +37,7 @@ struct LibraryBookRecommend: View {
         }
     }
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @StateObject var localJsonFile: localJsonFileManager = localJsonFileManager.shared
     @StateObject private var loader: Loader
     var loading: Image
     var failure: Image
@@ -63,7 +64,26 @@ struct LibraryBookRecommend: View {
             }
             
         }.contextMenu(menuItems: {
-            Button("add to bookshelf"){}
+            Button("add to bookshelf"){
+                var tempData: BookInfoBriefWithTime = BookInfoBriefWithTime()
+                tempData.id = bookDetail.id
+                tempData.authorName = bookDetail.authorName
+                tempData.bookUrlName = bookDetail.bookUrlName
+                tempData.cover = bookDetail.cover
+                tempData.time = Date()
+                tempData.name = bookDetail.name
+                tempData.summary = bookDetail.summary
+                let tempVar = localJsonFile.findBookId(id: tempData.id)
+                if(tempVar >= 0){
+                    print("already in bookshelf")
+                    localJsonFile.bookShelfBook[tempVar].time = Date()
+                }else{
+                    localJsonFile.bookShelfBook += [tempData]
+                }
+                localJsonFile.sortArray()
+                localJsonFile.saveData(data: localJsonFile.encodeData(data: localJsonFile.bookShelfBook))
+                NotificationCenter.default.post(name: .refreshBook, object: nil)
+            }
         })
     }
     private func selectImage() -> Image {
