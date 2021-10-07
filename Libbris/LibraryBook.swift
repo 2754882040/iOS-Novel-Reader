@@ -79,7 +79,7 @@ struct LibraryBook: View {
                 localJsonFile.sortArray()
                 localJsonFile.saveData(data: localJsonFile.encodeData(data: localJsonFile.bookShelfBook))
                 NotificationCenter.default.post(name: .refreshBook, object: nil)
-            }
+            }.accessibilityIdentifier("loveIt")
         })
     }
     private func selectImage() -> Image {
