@@ -24,7 +24,7 @@ struct BookList: View {
     let categoryId:Int
     let screenSize: CGRect = UIScreen.main.bounds
     var loadMore: some View {
-        Text("loading")
+        Text("loading").accessibilityIdentifier("textLoading")
     }
     var body: some View {
         VStack(alignment: .leading, spacing: 10){
@@ -41,7 +41,7 @@ struct BookList: View {
                             LibraryBook(bookDetail:books[item]).accessibilityIdentifier("LibraryBook\(item)");
                             Spacer(minLength: 20)
                         }
-                        if noMoreBook {Text(noBooksText).accessibilityIdentifier("NoMoreBooksText")}
+                        if noMoreBook {Text(noBooksText).accessibilityIdentifier("textNoMoreBooks")}
                         else{loadMore.onAppear(perform: {loadBook()})}
                         Spacer(minLength: 10)
                     }

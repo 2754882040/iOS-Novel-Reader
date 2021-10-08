@@ -184,16 +184,15 @@ class LibbrisUITests: XCTestCase {
         app.buttons["MorePageButton"].tap()
         sleep(2)
         XCTAssert(app.scrollViews["HotPage"].exists)
-        //XCTAssert(app.buttons["MorePageBooks1"].exists)
+        app.swipeUp(velocity: 10000)
+        XCTAssert(app.staticTexts["textLoading"].exists)
+        app.swipeUp(velocity: 1000)
+        app.swipeUp(velocity: 1000)
+        XCTAssert(app.staticTexts["textNoMoreBooks"].exists)
         app.swipeLeft()
         XCTAssert(app.scrollViews["RecPage"].exists)
-        //XCTAssert(app.buttons["MorePageBooks1"].exists)
         app.swipeLeft()
         XCTAssert(app.scrollViews["NewPage"].exists)
-        //XCTAssert(app.buttons["MorePageBooks1"].exists)
-        app.swipeUp()
-        app.swipeUp()
-        XCTAssert(app.staticTexts["NoMoreBooksText"].exists)
     }
 
     func testHomeBook(){
@@ -205,6 +204,11 @@ class LibbrisUITests: XCTestCase {
         //app.buttons["LibraryBook0"].tap()
         sleep(2)
         XCTAssertTrue(app.buttons["BookButton77"].exists)
+        app.tabBars["Tab Bar"].buttons["icon_home_nor_iOS_25@1"].tap()
+        app.buttons["MorePageButton"].tap()
+        sleep(2)
+        app.buttons["LibraryBook1"].press(forDuration: 1)
+//        XCTAssertTrue(app.buttons["loveIt"].exists)
     }
     
     func testLoadMoreBook(){
