@@ -8,9 +8,7 @@
 import Foundation
 
 public class localJsonFileManager: ObservableObject {
-    enum LoadState {
-            case loading,success,failure
-        }
+ 
     static let shared = localJsonFileManager()
     var jsonData = Data();
     var bookShelfBook:[BookInfoBriefWithTime] = [BookInfoBriefWithTime]()
@@ -34,8 +32,7 @@ public class localJsonFileManager: ObservableObject {
             
         }
         print("loading from local")
-        
-        
+
     }
     func findBookId(id:Int)->Int{
         for i in 0..<bookShelfBook.count{
@@ -87,16 +84,11 @@ public class localJsonFileManager: ObservableObject {
     func saveData(data:Data){
         sortArray()
         print(fullPath)
-     
-        do {
-            if let tempdata = data as NSData? {
-                tempdata.write(toFile: NSHomeDirectory().appending("/Documents/").appending("bookShelf"), atomically: true)
-                print("success")
-                print(fullPath)}
-        } catch {
-            // Handle error
-            print("local json file save failed")
-        }
+        if let tempdata = data as NSData? {
+            tempdata.write(toFile: NSHomeDirectory().appending("/Documents/").appending("bookShelf"), atomically: true)
+            print("success")
+            print(fullPath)}
+        
     }
         
 }

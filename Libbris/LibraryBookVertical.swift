@@ -30,20 +30,17 @@ struct LibraryBookVertical: View {
                     ForEach(items,id: \.self)
                     {item in
                         LibraryBookRecommend(bookDetail:books[item]).accessibilityIdentifier("LibraryBookRecommend\(item)");
-                        
-                        
                     }
                 }.frame(height: 300)
             }
         }.onAppear(perform: {
             DispatchQueue.global(qos: .background).async {
-            while(datas.state == .loading){
-                sleep(1)
-            }
-            if datas.state == .success{
-                books = try! datas.decodeData(data: datas.jsonData)
-                //print(books.count)
-            }
+                while(datas.state == .loading){
+                    sleep(1)
+                }
+                if datas.state == .success{
+                    books = try! datas.decodeData(data: datas.jsonData)
+                }
             }
         }).onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
             self.loadingText = localizedString(text: strLoading)

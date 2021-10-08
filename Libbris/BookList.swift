@@ -44,13 +44,11 @@ struct BookList: View {
                         if noMoreBook {Text(noBooksText).accessibilityIdentifier("NoMoreBooksText")}
                         else{loadMore.onAppear(perform: {loadBook()})}
                         Spacer(minLength: 10)
-                        
                     }
                 }
-                
             }.frame(width: screenSize.width)
-           
-        }.onAppear(perform: {
+        }
+        .onAppear(perform: {
             DispatchQueue.global(qos: .background).async {
             while(datas.state == .loading){
                 sleep(1)
@@ -63,7 +61,8 @@ struct BookList: View {
                 curBookCount = books.count
             }
             }
-        }).onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
+        })
+            .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
             self.loadingText = localizedString(text: strLoading)
             self.noBooksText = localizedString(text: strNoMoreBook)
         })
@@ -85,15 +84,13 @@ struct BookList: View {
                     noMoreBook = true
                     print(books.count)
                 }
-            }else{
-                //lastBookCount = curBookCount
             }
         }
     }
 }
 
-/*struct BookList_Previews: PreviewProvider {
+struct BookList_Previews: PreviewProvider {
     static var previews: some View {
-        BookList(url:"http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/category/11?start=1&size=9")
+        BookList(url:"http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/category/11?start=1&size=9", cId: 11)
     }
-}*/
+}

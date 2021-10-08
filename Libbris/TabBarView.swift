@@ -9,11 +9,9 @@ import SwiftUI
 
 struct TabBarView: View {
     @Binding var tabIndex: Tabs
-    
     @State var hotText = localizedString(text: strHot)
     @State var recommendText = localizedString(text: strRecommend)
     @State var newText = localizedString(text: strNew)
-    
        var body: some View {
            HStack(spacing: 20) {
             TabBarButton(text: hotText, isSelected: .constant(tabIndex == .hot))

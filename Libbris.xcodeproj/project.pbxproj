@@ -174,6 +174,7 @@
 		6E0308A626A7D9350030753C /* Libbris */ = {
 			isa = PBXGroup;
 			children = (
+				6E26FD4B270B9F0E000EFF6E /* AppViews */,
 				6E03209026F1317400981B15 /* Resources */,
 				6E9975DB26E063AE00443057 /* HomeBookButton.swift */,
 				6E25E76026EB299E008B26AF /* LibraryBook.swift */,
@@ -247,6 +248,13 @@
 				6E03209526F131D100981B15 /* Dosis-VariableFont_wght.ttf */,
 			);
 			path = fonts;
+			sourceTree = "<group>";
+		};
+		6E26FD4B270B9F0E000EFF6E /* AppViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AppViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -204,8 +204,28 @@ class LibbrisUITests: XCTestCase {
         //app.tabBars["Tab Bar"].buttons["icon_home_nor_iOS_25@1"].tap()
         //app.buttons["LibraryBook0"].tap()
         sleep(2)
-        XCTAssertTrue(app.buttons["BookButton0"].exists)
+        XCTAssertTrue(app.buttons["BookButton77"].exists)
+    }
+    
+    func testLoadMoreBook(){
+        let app = XCUIApplication()
+        app.launch()
+        app/*@START_MENU_TOKEN@*/.buttons["skipButton"]/*[[".buttons[\"Skip\"]",".buttons[\"skipButton\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.tabBars["Tab Bar"].buttons["icon_home_nor_iOS_25@1"].tap()
+        app.scrollViews.otherElements/*@START_MENU_TOKEN@*/.buttons["LibraryBook0"].press(forDuration: 1.4);/*[[".buttons[\"The Black Cat, \\\"The Black Cat\\\" is a short story by Edgar Allan Poe. It was first published in the August 19, 1843, edition of The Saturday Evening Post. It is a study of the psychology of guilt, often paired in analysis with Poe's \\\"The Tell-Tale Heart\\\". In both, a murderer carefully conceals his crime and believes himself unassailable, but eventually breaks down and reveals himself, impelled by a nagging reminder of his guilt., Edgar Allan Poe\"]",".tap()",".press(forDuration: 1.4);",".buttons[\"LibraryBook0\"]"],[[[-1,3,1],[-1,0,1]],[[-1,2],[-1,1]]],[0,0]]@END_MENU_TOKEN@*/
+        XCTAssertTrue(app.buttons["LongPressMenu"].exists)
+        app.buttons["LongPressMenu"].tap()
+        app.tabBars["Tab Bar"].buttons["icon_home_20210913_nor@25"].tap()
+        sleep(1)
+        let frame1 = app.buttons["HomeBookButton77"].frame
+        app.tabBars["Tab Bar"].buttons["icon_home_nor_iOS_25@1"].tap()
+        app.scrollViews.otherElements.buttons["LibraryBook1"].press(forDuration: 1.4);
+        XCTAssertTrue(app.buttons["LongPressMenu"].exists)
+        app.buttons["LongPressMenu"].tap()
+        app.tabBars["Tab Bar"].buttons["icon_home_20210913_nor@25"].tap()
+        sleep(1)
+        let frame2 = app.buttons["HomeBookButton76"].frame
+        XCTAssertEqual(frame1.origin.x, frame2.origin.x)
+        XCTAssertEqual(frame1.origin.y, frame2.origin.y)
     }
 }
-
-

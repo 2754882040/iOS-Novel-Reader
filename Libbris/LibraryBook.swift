@@ -8,40 +8,13 @@
 import SwiftUI
 
 struct LibraryBook: View {
-    private enum LoadState {
-    case loading, success, failure
-    }
-    private class Loader: ObservableObject {
-        var data = Data()
-        var state = LoadState.loading
-        init(url: String) {
-            let urlWithoutSpace:String = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "badlink"
-            guard let parsedURL = URL(string: urlWithoutSpace) else {
-                fatalError("Invalid URL: \(url)")
-            }
-            URLSession.shared.dataTask(with: parsedURL) { data, response, error in
-                if let data = data, data.count > 0 {
-                    self.data = data
-                    self.state = .success
-                } else {
-                    self.state = .failure
-                }
-
-                DispatchQueue.main.async {
-                    self.objectWillChange.send()
-                }
-            }.resume()
-        }
-    }
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @StateObject private var loader: Loader
+    @StateObject private var loader: ImageLoader
     @StateObject var localJsonFile: localJsonFileManager = localJsonFileManager.shared
     var loading: Image
     var failure: Image
-    
-    //let fullPath = NSHomeDirectory().appending("/Documents/").appending("bookShelf.json")
     init(bookDetail: BookInfoBrief, loading: Image = Image("default_cover"), failure: Image = Image("default_cover")) {
-        _loader = StateObject(wrappedValue: Loader(url: bookDetail.cover ?? "badlink"))
+        _loader = StateObject(wrappedValue: ImageLoader(url: bookDetail.cover ?? "badlink"))
         self.loading = loading
         self.failure = failure
         self.bookDetail = bookDetail
@@ -52,14 +25,15 @@ struct LibraryBook: View {
             HStack(alignment: .top){
                 selectImage().resizable().frame(width: 90, height: 120, alignment: .bottom)
                 VStack(alignment: .leading, spacing: 3.0){
-                    Text("\(bookDetail.name)").lineLimit(1).foregroundColor(.black).font(.custom("Dosis-Bold", size: 17))//.font(.system(size: 20, weight: .light, design: .default))
+                    Text("\(bookDetail.name)").lineLimit(1).foregroundColor(.black).font(.custom("Dosis-Bold", size: 17))
                     Text("\(bookDetail.summary)").lineLimit(3).foregroundColor(.black).font(.custom("Dosis-Regular", size: 12))
                     Spacer(minLength: 25)
                     Text("\(bookDetail.authorName)").lineLimit(1).foregroundColor(.black).font(.custom("Dosis-Regular", size: 12))
                 }
                 Spacer()
             }
-        }.contextMenu(menuItems: {
+        }
+        .contextMenu(menuItems: {
             Button("add to bookshelf"){
                 var tempData: BookInfoBriefWithTime = BookInfoBriefWithTime()
                 tempData.id = bookDetail.id
@@ -79,7 +53,7 @@ struct LibraryBook: View {
                 localJsonFile.sortArray()
                 localJsonFile.saveData(data: localJsonFile.encodeData(data: localJsonFile.bookShelfBook))
                 NotificationCenter.default.post(name: .refreshBook, object: nil)
-            }
+            }.accessibilityIdentifier("LongPressMenu")
         })
     }
     private func selectImage() -> Image {

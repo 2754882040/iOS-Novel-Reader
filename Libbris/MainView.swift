@@ -15,6 +15,7 @@ struct MainView: View {
             #colorLiteral(red: 0.1607843137, green: 0.2745098039, blue: 0.5529411765, alpha: 1)
         UINavigationBar.appearance().barTintColor =
             #colorLiteral(red: 0.1607843137, green: 0.2745098039, blue: 0.5529411765, alpha: 1)
+        
     }
     @State var books:[BookInfoBriefWithTime] = [BookInfoBriefWithTime]()
     //@StateObject public var datas: DownloadJson
@@ -26,13 +27,11 @@ struct MainView: View {
                 localJsonFile.readData()
                 DispatchQueue.global(qos: .background).async {
                 while(localJsonFile.state == .loading){
-                    sleep(1)
+                    //sleep(1)
                 }
                 if localJsonFile.state == .success{
                     print("test main view loading books")
                     books = localJsonFile.bookShelfBook
-                    //Sort()
-                    
                     print(books.count)
                 }
                 }
@@ -40,7 +39,6 @@ struct MainView: View {
                 DispatchQueue.global(qos: .background).async {
                     localJsonFile.sortArray()
                     books = localJsonFile.bookShelfBook
-                
                 }})
             VStack(alignment: .leading, spacing: 10)
             {
@@ -51,26 +49,25 @@ struct MainView: View {
                         let columns = [GridItem(),GridItem(),GridItem()]
                         LazyVGrid(columns: columns)
                         {
-                            
                             ForEach(items,id: \.self)
-                            {item in //items.sort({$0.id < $1.id})
+                            {item in
                                 ZStack{
                                     if(item % 3 == 0){
                                         Image("bookshelf").offset(x: /*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/, y: 85)                }
-                                    HomeBookButton(bookDetail:books[item]).padding(.bottom, 15.0).accessibilityIdentifier("BookButton\(books[item].id)").onAppear(perform: {print(books[item].id)});
-                                    
+                                    HomeBookButton(bookDetail:books[item]).padding(.bottom, 15.0)
                                 }
                             }
                         }
                     }
-                }
+                }.accessibilityIdentifier("HomePageScrollView")
             }
-        }.navigationBarTitleDisplayMode(.inline).navigationBarItems(leading:Image("logo_libbris_white").imageScale(.large))
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarItems(leading:Image("logo_libbris_white").imageScale(.large))
         .navigationViewStyle(StackNavigationViewStyle())
             
         }
     }
-    //func Sort()
 }
 
 struct MainView_Previews: PreviewProvider {

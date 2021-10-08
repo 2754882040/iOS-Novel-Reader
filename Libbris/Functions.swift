@@ -9,17 +9,14 @@ import Foundation
 
 func localizedString(text:String)->String{
 let name = UserDefaults.standard.string(forKey: "language")
-    //print(name ?? "nil")
     if(name == nil){
         let language = Bundle.main.preferredLocalizations.first
         let languageBundlePath = Bundle.main.path(forResource: language, ofType: "lproj")
         let languageBundle = Bundle.init(path: languageBundlePath!)
-        //print(NSLocalizedString(text, tableName: "Localizable", bundle: languageBundle!, value: "?", comment: ""))
         return NSLocalizedString(text, tableName: "Localizable", bundle: languageBundle!, value: "?", comment: "")
     }else{
         let languageBundlePath = Bundle.main.path(forResource: name, ofType: "lproj")
         let languageBundle = Bundle.init(path: languageBundlePath!)
-        //print(NSLocalizedString(text, tableName: "Localizable", bundle: languageBundle!, value: "?", comment: ""))
         return NSLocalizedString(text, tableName: "Localizable", bundle: languageBundle!, value: "?", comment: "")
     }
 }

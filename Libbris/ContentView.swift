@@ -9,7 +9,6 @@ import SwiftUI
 struct ContentView: View {
     @State private var show:Bool=false
     @State private var selection: Tabs = .home
-
      private enum Tabs: Hashable {
         case home
         case library

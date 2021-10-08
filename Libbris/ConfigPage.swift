@@ -13,7 +13,6 @@ struct ConfigPage: View {
     @State var languageSetting = localizedString(text: strLanguageSetting);
     @State var infos = localizedString(text: strInfos);
     @State var applicationSetting = localizedString(text: strApplicationSetting);
-
     @State var PrivacyAndSafety = localizedString(text: strPrivacyAndSafety);
     @State var textOthers = localizedString(text: strOthers);
     var body: some View {
@@ -47,12 +46,13 @@ struct ConfigPage: View {
                 NavigationLink(destination: LanguagePage()){
                     Text(languageSetting).accessibilityIdentifier("languageSetting").font(.custom("Dosis-Regular", size: 15))
                 };
-               
-                
             }
-            
-        }.navigationViewStyle(StackNavigationViewStyle()).navigationBarBackButtonHidden(true)
-        .navigationBarTitleDisplayMode(.inline).navigationBarItems(leading: Text(settingsText).foregroundColor(.white).font(.custom("Dosis-Bold", size: 20))
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
+        .navigationBarBackButtonHidden(true)
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarItems(leading: Text(settingsText)
+        .foregroundColor(.white).font(.custom("Dosis-Bold", size: 20))
             )
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
             self.languageSetting = localizedString(text: strLanguageSetting)
@@ -62,13 +62,12 @@ struct ConfigPage: View {
             self.PrivacyAndSafety = localizedString(text: strPrivacyAndSafety)
             self.textOthers = localizedString(text: strOthers)
         })
-            
         }
     }
 }
 
 struct ConfigPage_Previews: PreviewProvider {
     static var previews: some View {
-        ConfigPage()//shouldShowConfigPage:.constant(true))
+        ConfigPage()
     }
 }

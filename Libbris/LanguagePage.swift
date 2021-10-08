@@ -12,7 +12,6 @@ struct LanguagePage: View {
     @State var englishText = localizedString(text: strEnglish)
     @State var chineseText = localizedString(text: strChinese)
     @State var frenchText = localizedString(text: strFrench)
-    //@State var backText = localizedString(text: strBack);
     @State var languageSetting = localizedString(text: strLanguageSetting);
     var languages = [localizedString(text: strEnglish), localizedString(text: strChinese), localizedString(text: strFrench)]
     @State private var selectedLanguage:Int = getLanguageNumber()
@@ -48,6 +47,6 @@ struct LanguagePage: View {
 
 struct LanguagePage_Previews: PreviewProvider {
     static var previews: some View {
-        LanguagePage()//shouldShowLanguagePage:.constant(true))
+        LanguagePage()
     }
 }

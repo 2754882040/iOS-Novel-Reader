@@ -42,7 +42,8 @@ struct InfoPage: View {
                 Text("\(mailText): info.libbris.com")
             }
         }.navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: btnBack).onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
+        .navigationBarItems(leading: btnBack)
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
             self.infos = localizedString(text: strInfos)
             self.teamText = localizedString(text: strTeam)
             self.versionText = localizedString(text: strVersion)
@@ -54,7 +55,7 @@ struct InfoPage: View {
 
 struct InfoPage_Previews: PreviewProvider {
     static var previews: some View {
-        InfoPage()//shouldShowInfoPage:.constant(true))
+        InfoPage()
     }
 }
 

@@ -22,15 +22,17 @@ struct SearchPage: View {
             searchArea.padding(.leading, 20.0)
             Button(submitText) {}
                 .padding(.trailing, 20.0)
-        }.navigationBarBackButtonHidden(true).navigationBarItems(leading:Button(action: {self.presentationMode.wrappedValue.dismiss()}){Text(libraryText)})
+        }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading:Button(action: {self.presentationMode.wrappedValue.dismiss()}){Text(libraryText)})
         .navigationViewStyle(StackNavigationViewStyle())
         Spacer()
-        }.onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
             self.submitText = localizedString(text: strSubmit)
             self.libraryText = localizedString(text: strLibrary)
             self.searchAreaText = localizedString(text: strSearchArea)
         })
-        
     }
 }
 

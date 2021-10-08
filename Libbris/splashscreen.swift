@@ -18,28 +18,27 @@ struct SplashScreen:View {
     var body:some View
     {
         ZStack{
-            Image("screens/Default-568h").resizable(resizingMode: .stretch).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/).onAppear(perform: countTime).navigationBarBackButtonHidden(true).navigationBarHidden(true).onAppear(perform:countADTime).onAppear(perform:checkAdFile)
+            Image("screens/Default-568h").resizable(resizingMode: .stretch).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                .onAppear(perform: countTime).navigationBarBackButtonHidden(true).navigationBarHidden(true).onAppear(perform:countADTime)
+                .onAppear(perform:checkAdFile)
             if(showAD){
                 if(ADExist){
-                    Image(uiImage:UIImage(contentsOfFile:NSHomeDirectory().appending(imageDir))!).resizable(resizingMode: .stretch).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/).accessibilityIdentifier("ADImage")
+                    Image(uiImage:UIImage(contentsOfFile:NSHomeDirectory().appending(imageDir))!)
+                        .resizable(resizingMode: .stretch).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/).accessibilityIdentifier("ADImage")
                     
                 }
-            Button(action: {
-                goBackToPreviousView()
-                            }) {
+            Button(action: {goBackToPreviousView()}){
                 ZStack{
                     Color.gray.frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, idealWidth: 70, maxWidth: 80, minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, idealHeight: 30, maxHeight: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     let skipmessage = localizedString(text: strSkip);
                     Text(skipmessage).foregroundColor(.white)
-                        
-                    }.cornerRadius(20)
-            }.position(x: 330, y: 30.0).accessibilityIdentifier("skipButton");
+                    }
+                .cornerRadius(20)
+            }
+            .position(x: 330, y: 30.0).accessibilityIdentifier("skipButton");
             }
         }
     }
-    /*
-     create a timer, after finish count, pop current view and set binding variable 'time' to nil
-     */
     func checkAdFile(){
         do{
             _ = try FileManager.default.attributesOfItem(atPath:  NSHomeDirectory().appending(imageDir))

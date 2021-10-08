@@ -33,12 +33,13 @@ struct MoreBooksPage: View {
                     BookList(url: "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/category/12?start=1&size=9",cId: 12).tag(Tabs.recommend).accessibilityIdentifier("RecPage")
                     BookList(url: "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/category/13?start=1&size=9",cId: 13).tag(Tabs.new).accessibilityIdentifier("NewPage")
                 }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                    
                 }
-        }.onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
             self.noMoreBookText = localizedString(text: strNoMoreBook)
             self.libraryText = localizedString(text: strLibrary)
-        }).navigationBarTitleDisplayMode(.inline).navigationBarBackButtonHidden(true).navigationBarItems(leading:Button(action: {
+        })
+        .navigationBarTitleDisplayMode(.inline).navigationBarBackButtonHidden(true).navigationBarItems(leading:Button(action: {
             self.presentationMode.wrappedValue.dismiss()
             }) {
                 HStack {
@@ -46,7 +47,7 @@ struct MoreBooksPage: View {
                     Text(libraryText).foregroundColor(.white).font(.custom("Dosis-Bold", size: 20))
                 }
             })
-            .navigationViewStyle(StackNavigationViewStyle())
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
