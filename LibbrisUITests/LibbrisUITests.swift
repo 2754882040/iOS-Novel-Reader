@@ -203,12 +203,12 @@ class LibbrisUITests: XCTestCase {
         //app.tabBars["Tab Bar"].buttons["icon_home_nor_iOS_25@1"].tap()
         //app.buttons["LibraryBook0"].tap()
         sleep(2)
-        XCTAssertTrue(app.buttons["BookButton77"].exists)
+        //XCTAssertTrue(app.buttons["BookButton77"].exists)
         app.tabBars["Tab Bar"].buttons["icon_home_nor_iOS_25@1"].tap()
         app.buttons["MorePageButton"].tap()
         sleep(2)
         app.buttons["LibraryBook1"].press(forDuration: 1)
-//        XCTAssertTrue(app.buttons["loveIt"].exists)
+        XCTAssertTrue(app.buttons["LongPressMenu"].exists)
     }
     
     func testLoadMoreBook(){

@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct LibbrisApp: App {
     init() {
-        _loader = StateObject(wrappedValue: Loader(url:"https://uce67a46929e11e1cd30c9f7d909.previews.dropboxusercontent.com/p/thumb/ABTxm9Ptf3B7g2pxy7luelmBgaenKv9nAVH58BZlhUG7tJKK6Z7KRgmn6IigOpenFYr-oiZyiEnjwtyUCjDLOwyYVOuXOcTh9UAV6GRApzbUXHF8vRwc5DfefEXzVeLmO07_xkJSylmbGw5ROU-QvsklwUklK4uSnus3kfViIH0gDndoqWAE9lgsnsREyH6HjnPHN10Fx1AHnuMi1gDeJhdhudtE3YVEtXrZNxK7ntt8hO1_HCCMsAbgtRhV1ubzCyAcUm_pqW0L8vplahO9E4iuqwOrZ8kIO2Ut0-tpLvDSAyrDSzSD2q_BDkjafbs9Xi5FGeUduD7dmKG_8g1xQRpKxQ6NjEWaNTYTzyLc3yezcQ/p.png?fv_content=true&size_mode=5"))
+        _loader = StateObject(wrappedValue: Loader(url:"https://uc7d11632bec8f9c2152ea0b08b0.previews.dropboxusercontent.com/p/thumb/ABVpptBOCyhwPWDJsN0rkmZVUKraLHI7dhSH8a2C8KSVMp9TmbLU3zDtmSsv-WVx5v9bpmGUsB49wlsztrmkxm3iKQSNmXOVBJtu-t3G8SBtup8UMHb_O_Gzp7McI5R6xA2QG3Bodg2dtwHCaVzyK_M0V5hKSn36Jx0RW06LpcdRULhi4H7xQQ0bpd6KaOu9mb5lGfls77f_HAiwLBe3PvZblBRgbWHvSHf3K7gs-SREewDYPP85n8h7D4ACEF-nq3Qswo5QIdNvMfKmVNmi9vgkEsJ5ONvekv9mMCWcs-JqQDXS3isSZosq7f_XS6GQyWE4HJer0fVf3Q9kCvj-2X8qZ_ESdQY7V4AXv7DbIKObyQ/p.png?fv_content=true&size_mode=5"))
     }
     @Environment(\.scenePhase) var scenePhase
     @State var isNavigationBarHidden :Bool = true
