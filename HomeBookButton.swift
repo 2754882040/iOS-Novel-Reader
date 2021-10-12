@@ -7,9 +7,7 @@
 
 import SwiftUI
 
-enum LoadState {
-case loading, success, failure
-}
+
 class ImageLoader: ObservableObject {
     init(url: String) {
         refresh(url:url)

@@ -65,12 +65,7 @@ public class localJsonFileManager: ObservableObject {
             let parsedJSON = try jsonDecoder.decode(T.self, from: data)
             print("decode:\(parsedJSON)")
             return parsedJSON
-        } catch {
-            print("error")
-            print(error)
-            
-            fatalError("\(error)")
-        }
+        } catch {fatalError("\(error)")}
         
     }
     

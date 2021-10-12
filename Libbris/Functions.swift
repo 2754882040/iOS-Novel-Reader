@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum LoadState {
+case loading, success, failure
+}
+
 func localizedString(text:String)->String{
 let name = UserDefaults.standard.string(forKey: "language")
     if(name == nil){
@@ -122,3 +126,4 @@ func listAllLanguagesAPI()->String{
 func rankControllerSearch(rankTypeName:String,categoryId:Int,cycle:String,size:Int)->String{
     return "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/rank/\(rankTypeName)/\(categoryId)/\(cycle)/\(size)"
 }
+

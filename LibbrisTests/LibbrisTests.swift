@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import Libbris
+
 
 class LibbrisTests: XCTestCase {
 
@@ -65,6 +65,18 @@ class LibbrisTests: XCTestCase {
         testObj.sortArray()
         XCTAssertEqual(testObj.bookShelfBook[0].id, 2)
         
+    }
+    func testAPIfunctions(){
+        getBookByCategoryAPI(categoryId: 11, start: 1, size: 9)
+        searchAPI(name: "BALA")
+        getBookAPI(bookId: 1)
+        getChapterContentAPI(bookId: 1, chapterId: 1)
+        getAllChaptersAPI(bookId: 1)
+        findCategoriesByLanguageAPI(language: "EN")
+        getFeaturedBookListAPI(bookCategoryId: 11)
+        getFeaturedBookListAPI(featureBookId: 1, bookCategoryId: 11)
+        listAllLanguagesAPI()
+        rankControllerSearch(rankTypeName: "HOT", categoryId: 1, cycle: "MONTH", size: 9)
     }
     
     func testPerformanceExample() throws {
