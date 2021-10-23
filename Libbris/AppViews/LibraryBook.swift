@@ -35,14 +35,7 @@ struct LibraryBook: View {
         }
         .contextMenu(menuItems: {
             Button("add to bookshelf"){
-                var tempData: BookInfoBriefWithTime = BookInfoBriefWithTime()
-                tempData.id = bookDetail.id
-                tempData.authorName = bookDetail.authorName
-                tempData.bookUrlName = bookDetail.bookUrlName
-                tempData.cover = bookDetail.cover
-                tempData.time = Date()
-                tempData.name = bookDetail.name
-                tempData.summary = bookDetail.summary
+                var tempData: BookInfoBriefWithTime = BookInfoBriefWithTime(book: bookDetail)
                 let tempVar = localJsonFile.findBookId(id: tempData.id)
                 if(tempVar >= 0){
                     print("already in bookshelf")

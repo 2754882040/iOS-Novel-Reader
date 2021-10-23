@@ -33,33 +33,28 @@ func attribute()->[NSAttributedString.Key:Any]{
 }
 
 struct BookDetailView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     var bookChapterId:Int
     var bookId:Int
+    var bookContentURL:URL
+    let screenSize: CGRect = UIScreen.main.bounds
+    
     @State var pages = [NSAttributedString]()
     @State var testInput = NSMutableAttributedString()
     @State var currentPage:Int = 0
     @State var ChapterContent:String = ""
-    var bookContentURL:URL
-    let screenSize: CGRect = UIScreen.main.bounds
-    init(bookId:Int, bookChapterId:Int = 1){
-        self.bookId = bookId
-        self.bookChapterId = bookChapterId
-        guard let parsedURL = URL(string: getChapterContentAPI(bookId:bookId,chapterId:bookChapterId)) else {
-            fatalError("Invalid URL: \(getChapterContentAPI(bookId:bookId,chapterId:bookChapterId))")
-        }
-        bookContentURL = parsedURL
-    }
     
     var body: some View {
         ZStack{
-            Color(hue: 0.1639, saturation: 1, brightness: 1)
+            Color(white: 1, opacity: 1)
                 .navigationViewStyle(StackNavigationViewStyle())
-                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarHidden(true)
                 .onAppear(perform:{
                     URLSession.shared.dataTask(with: bookContentURL) { data, response, error in
                         let tempString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
                         print("success")
-                        ChapterContent = tempString as! String
+                        ChapterContent = tempString! as String
                         pages = getContent(content: ChapterContent)
                         
                     }.resume()
@@ -68,9 +63,23 @@ struct BookDetailView: View {
                 MyTextView(text: pages[0] as! NSMutableAttributedString, width: screenSize.width * 0.75).frame(width: screenSize.width * 0.75, height: screenSize.height * 0.75).accessibilityIdentifier("BookContent")}
                
             }
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+            }) {
+               Text("back")
+            }
             
             
         }
+    
+    init(bookId:Int, bookChapterId:Int = 1){
+        self.bookId = bookId
+        self.bookChapterId = bookChapterId
+        guard let parsedURL = URL(string: getChapterContentAPI(bookId:bookId,chapterId:bookChapterId)) else {
+            fatalError("Invalid URL: \(getChapterContentAPI(bookId:bookId,chapterId:bookChapterId))")
+        }
+        bookContentURL = parsedURL
+    }
    
     func getContent(content:String)->[NSAttributedString]{
         self.testInput = NSMutableAttributedString(string: content,attributes: attribute())

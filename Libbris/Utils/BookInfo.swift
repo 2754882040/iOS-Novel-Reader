@@ -41,6 +41,15 @@ struct BookInfoBriefWithTime:Codable,Hashable,Comparable{
     bookUrlName = " "
     time = Date()
     }
+    init(book:BookInfoBrief){
+        id = book.id
+        authorName = book.authorName
+        bookUrlName = book.bookUrlName
+        cover = book.cover
+        time = Date()
+        name = book.name
+        summary = book.summary
+    }
     var id:Int
     var name: String
     var authorName: String

@@ -21,7 +21,7 @@ struct MainView: View {
     //@StateObject public var datas: DownloadJson
     @StateObject public var localJsonFile: localJsonFileManager = localJsonFileManager.shared
     var body: some View {
-        NavigationView{
+       
         ZStack{
             Image("wall").resizable(resizingMode: .stretch).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/).onAppear(perform: {
                 localJsonFile.readData()
@@ -42,6 +42,7 @@ struct MainView: View {
                 }})
             VStack(alignment: .leading, spacing: 10)
             {
+                HomePageTopBar()
                 ScrollView(.vertical){
                     if(books.count == 0){}
                     else{
@@ -61,11 +62,6 @@ struct MainView: View {
                     }
                 }.accessibilityIdentifier("HomePageScrollView")
             }
-        }
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(leading:Image("logo_libbris_white").imageScale(.large))
-        .navigationViewStyle(StackNavigationViewStyle())
-            
         }
     }
 }

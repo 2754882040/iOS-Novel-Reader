@@ -9,11 +9,13 @@ import SwiftUI
 
 struct LibraryBookVertical: View {
     init() {
-        _datas = StateObject(wrappedValue: DownloadJson(url:"http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/category/15?start=1&size=9"))
+        _datas = StateObject(wrappedValue: DownloadJson(url:getBookByCategoryAPI(categoryId: 11, start: 1, size: 9)))
     }
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     @State var books:[BookInfoBrief] = [BookInfoBrief]()
     @StateObject public var datas: DownloadJson
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var loadingText = localizedString(text: strLoading)
     var body: some View{
         ScrollView(.horizontal){
