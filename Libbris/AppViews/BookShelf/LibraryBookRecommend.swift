@@ -42,7 +42,7 @@ struct LibraryBookRecommend: View {
     
     var MenuAfterLongPressed:some View{
         Button("add to bookshelf"){
-            var tempData: BookInfoBriefWithTime = BookInfoBriefWithTime(book: bookDetail)
+            let tempData: BookInfoBriefWithTime = BookInfoBriefWithTime(book: bookDetail)
             let tempVar = localJsonFile.findBookId(id: tempData.id)
             if(tempVar >= 0){
                 print("already in bookshelf")

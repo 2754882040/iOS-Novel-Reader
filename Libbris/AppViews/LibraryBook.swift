@@ -9,17 +9,21 @@ import SwiftUI
 
 struct LibraryBook: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     @StateObject private var loader: ImageLoader
     @StateObject var localJsonFile: localJsonFileManager = localJsonFileManager.shared
+    
     var loading: Image
     var failure: Image
+    var bookDetail:BookInfoBrief
+    
     init(bookDetail: BookInfoBrief, loading: Image = Image("default_cover"), failure: Image = Image("default_cover")) {
         _loader = StateObject(wrappedValue: ImageLoader(url: bookDetail.cover ?? "badlink"))
         self.loading = loading
         self.failure = failure
         self.bookDetail = bookDetail
     }
-    var bookDetail:BookInfoBrief
+    
     var body: some View {
         NavigationLink(destination: BookDetailView(bookId:bookDetail.id)){
             HStack(alignment: .top){
@@ -35,7 +39,7 @@ struct LibraryBook: View {
         }
         .contextMenu(menuItems: {
             Button("add to bookshelf"){
-                var tempData: BookInfoBriefWithTime = BookInfoBriefWithTime(book: bookDetail)
+                let tempData: BookInfoBriefWithTime = BookInfoBriefWithTime(book: bookDetail)
                 let tempVar = localJsonFile.findBookId(id: tempData.id)
                 if(tempVar >= 0){
                     print("already in bookshelf")
