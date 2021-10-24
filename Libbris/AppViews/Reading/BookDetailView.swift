@@ -63,13 +63,7 @@ struct BookDetailView: View {
                 MyTextView(text: pages[0] as! NSMutableAttributedString, width: screenSize.width * 0.75).frame(width: screenSize.width * 0.75, height: screenSize.height * 0.75).accessibilityIdentifier("BookContent")}
                
             }
-        Button(action: {
-            self.presentationMode.wrappedValue.dismiss()
-            }) {
-               Text("back")
-            }
-            
-            
+        Button(action: {self.presentationMode.wrappedValue.dismiss()}) {Text("back")}
         }
     
     init(bookId:Int, bookChapterId:Int = 1){

@@ -58,14 +58,9 @@ struct BookInfoBriefWithTime:Codable,Hashable,Comparable{
     var bookUrlName: String
     var time: Date
 }
-struct BookInfos:Codable{
-    var result :[BookInfo]
-}
 struct BookChapter: Codable{
     var id:Int
     var title:String
 }
-struct BookChapters:Codable{
-    var result:[BookChapter]
-}
+
 

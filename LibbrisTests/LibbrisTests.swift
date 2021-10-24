@@ -46,14 +46,14 @@ class LibbrisTests: XCTestCase {
     }
     
     func testLocalJsonFileManagerReadData(){
-        var  testObj: localJsonFileManager = localJsonFileManager.shared
+        let  testObj: localJsonFileManager = localJsonFileManager.shared
         testObj.state = LoadState.loading
         testObj.readData()
         XCTAssertEqual(testObj.state, LoadState.success)
     }
     
     func testLocaljsonFileManagerSortArray(){
-        var  testObj: localJsonFileManager = localJsonFileManager.shared
+        let  testObj: localJsonFileManager = localJsonFileManager.shared
         testObj.bookShelfBook = [BookInfoBriefWithTime]()
         var testElement1: BookInfoBriefWithTime = BookInfoBriefWithTime()
         testElement1.id = 1
@@ -67,6 +67,7 @@ class LibbrisTests: XCTestCase {
         
     }
     func testAPIfunctions(){
+        /*
         getBookByCategoryAPI(categoryId: 11, start: 1, size: 9)
         searchAPI(name: "BALA")
         getBookAPI(bookId: 1)
@@ -77,6 +78,7 @@ class LibbrisTests: XCTestCase {
         getFeaturedBookListAPI(featureBookId: 1, bookCategoryId: 11)
         listAllLanguagesAPI()
         rankControllerSearch(rankTypeName: "HOT", categoryId: 1, cycle: "MONTH", size: 9)
+         */
     }
     
     func testPerformanceExample() throws {

@@ -55,12 +55,16 @@ public class Loader: ObservableObject {
         DispatchQueue.global(qos: .background).async {
             print("download in background")
             URLSession.shared.dataTask(with: parsedURL) { data, response, error in
-                if let img = UIImage(data: data!) {
-                    self.saveImage(currentImage: img, persent: 10, imageName: "123")
-                    print("success")
-                }else{
+                guard let img = UIImage(data: data ?? Data()) else{
                     print("failed")
+                    print(error)
+                    print(response)
+                    return
+                   // print(data)
                 }
+                self.saveImage(currentImage: img, persent: 10, imageName: "123")
+                print("success")
+                
                 DispatchQueue.main.async {
                     self.objectWillChange.send()
                 }

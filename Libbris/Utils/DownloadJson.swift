@@ -20,28 +20,22 @@ public class DownloadJson: ObservableObject {
     }
 
     func getData(URLString:String){
-        guard let parsedURL = URL(string: URLString) else {
-            fatalError("Invalid URL: \(URLString)")
-        }
         state = LoadState.loading
-        getData(url:parsedURL)
+        DownloadData.request(urlString: URLString, completion: {
+            result in
+            switch result {
+                case .failure(let error):
+                    // do something with `error`
+                    print(error)
+                    self.state = .failure
+                case .success(let data):
+                    // do something with `data`
+                    print("success")
+                    self.jsonData = data
+                    self.state = .success
+                }
+        })
     }
-    
-    func getData(url:URL){
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let data = data, data.count > 0 {
-                self.jsonData = data
-                self.state = .success
-            } else {
-                self.state = .failure
-                print("failed")
-            }
-            DispatchQueue.main.async {
-                self.objectWillChange.send()
-            }
-        }.resume()
-    }
-    
     
     func decodeData<T:Codable>(data:Data)throws->T{
         

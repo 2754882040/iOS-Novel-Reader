@@ -39,6 +39,7 @@
 		6E2AE92927248B0100081BA0 /* HomePageTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2AE92827248B0100081BA0 /* HomePageTopBar.swift */; };
 		6E2AE92B27248D2800081BA0 /* ConfigPageTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2AE92A27248D2800081BA0 /* ConfigPageTopBar.swift */; };
 		6E2AE92D272491D100081BA0 /* BookShelfTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2AE92C272491D100081BA0 /* BookShelfTopBar.swift */; };
+		6E2AE9302724E31C00081BA0 /* DownloadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2AE92E2724BB7300081BA0 /* DownloadData.swift */; };
 		6E31CD5726F278F000956223 /* BookList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E31CD5626F278F000956223 /* BookList.swift */; };
 		6E4492DB26D40E3E00313F8E /* ConfigPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4492DA26D40E3E00313F8E /* ConfigPage.swift */; };
 		6E4492DD26D40E8300313F8E /* InfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4492DC26D40E8300313F8E /* InfoPage.swift */; };
@@ -112,6 +113,7 @@
 		6E2AE92827248B0100081BA0 /* HomePageTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageTopBar.swift; sourceTree = "<group>"; };
 		6E2AE92A27248D2800081BA0 /* ConfigPageTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigPageTopBar.swift; sourceTree = "<group>"; };
 		6E2AE92C272491D100081BA0 /* BookShelfTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfTopBar.swift; sourceTree = "<group>"; };
+		6E2AE92E2724BB7300081BA0 /* DownloadData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadData.swift; sourceTree = "<group>"; };
 		6E31CD5626F278F000956223 /* BookList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookList.swift; sourceTree = "<group>"; };
 		6E4492DA26D40E3E00313F8E /* ConfigPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigPage.swift; sourceTree = "<group>"; };
 		6E4492DC26D40E8300313F8E /* InfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPage.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 				6E535F8C26C472F2003A1A8F /* BookInfo.swift */,
 				6E923B7926E02070000E56B4 /* Functions.swift */,
 				6E4492EE26D4554F00313F8E /* DownloadJson.swift */,
+				6E2AE92E2724BB7300081BA0 /* DownloadData.swift */,
 				6E0037E326FD66DD00DD8A2A /* LocalJsonFileManager.swift */,
 				6E923B7B26E0326C000E56B4 /* strings.swift */,
 			);
@@ -372,7 +375,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1300;
 				TargetAttributes = {
 					6E0308A326A7D9350030753C = {
 						CreatedOnToolsVersion = 12.5.1;
@@ -469,6 +472,7 @@
 				6E9975DC26E063AE00443057 /* HomeBookButton.swift in Sources */,
 				6E923B7C26E0326C000E56B4 /* strings.swift in Sources */,
 				6EACE72326CEE9CB0063BAD5 /* DownloadImage.swift in Sources */,
+				6E2AE9302724E31C00081BA0 /* DownloadData.swift in Sources */,
 				6E4492E626D443DE00313F8E /* LanguagePage.swift in Sources */,
 				6E1E89B926EA87F8008EB44D /* BookShelf.swift in Sources */,
 				6E0320AB26F1385000981B15 /* LibraryBookVertical.swift in Sources */,
@@ -543,6 +547,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -604,6 +609,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

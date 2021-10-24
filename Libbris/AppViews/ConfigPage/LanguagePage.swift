@@ -31,7 +31,7 @@ struct LanguagePage: View {
         Picker(languageSetting, selection: $selectedLanguage) {
                ForEach(0 ..< languages.count) {
                 Text(self.languages[$0]).accessibilityIdentifier("\(self.languages[$0])")               }
-        }.accessibilityIdentifier("picker") .onChange(of: selectedLanguage, perform: { selectedLanguage in
+        }.pickerStyle(.wheel).accessibilityIdentifier("picker") .onChange(of: selectedLanguage, perform: { selectedLanguage in
             changeLanguage(languageCode: selectedLanguage)
             NotificationCenter.default.post(name: .switchLanguage, object: nil)
         }).navigationBarBackButtonHidden(true)
