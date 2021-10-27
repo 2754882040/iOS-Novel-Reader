@@ -39,7 +39,7 @@ struct BookDetailView: View {
     var bookId:Int
     var bookContentURL:URL
     let screenSize: CGRect = UIScreen.main.bounds
-    
+    @State var curPage = 0
     @State var pages = [NSAttributedString]()
     @State var testInput = NSMutableAttributedString()
     @State var currentPage:Int = 0
@@ -52,18 +52,23 @@ struct BookDetailView: View {
                 .navigationBarHidden(true)
                 .onAppear(perform:{
                     URLSession.shared.dataTask(with: bookContentURL) { data, response, error in
-                        let tempString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+                        guard let tempString = NSString(data: data ?? Data(), encoding: String.Encoding.utf8.rawValue) else{return}
                         print("success")
-                        ChapterContent = tempString! as String
+                        ChapterContent = tempString as String
                         pages = getContent(content: ChapterContent)
                         
                     }.resume()
                 })
             if pages.count > 0{
-                MyTextView(text: pages[0] as! NSMutableAttributedString, width: screenSize.width * 0.75).frame(width: screenSize.width * 0.75, height: screenSize.height * 0.75).accessibilityIdentifier("BookContent")}
+                MyTextView(text: pages[curPage] as! NSMutableAttributedString, width: screenSize.width * 0.75).frame(width: screenSize.width * 0.75, height: screenSize.height * 0.75).accessibilityIdentifier("BookContent")}
                
             }
-        Button(action: {self.presentationMode.wrappedValue.dismiss()}) {Text("back")}
+        HStack{
+            Button(action: {curPage -= 1}) {Text("PREVIOUS PAGE")}
+            Button(action: {self.presentationMode.wrappedValue.dismiss()}) {Text("back")}
+            Button(action: {curPage += 1}) {Text("NEXT PAGE")}
+            
+        }
         }
     
     init(bookId:Int, bookChapterId:Int = 1){
