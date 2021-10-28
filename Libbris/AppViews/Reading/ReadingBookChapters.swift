@@ -81,9 +81,9 @@ struct ReadingBookChapters: View {
                 }
             }
         HStack{
-            Button(action: {curPage -= 1}) {Text("PREVIOUS PAGE")}
+            Button(action: {curPage -= 1}) {Text("PREVIOUS PAGE")}.disabled(curPage < 1)
             Button(action: {self.presentationMode.wrappedValue.dismiss()}) {Text("back")}
-            Button(action: {curPage += 1}) {Text("NEXT PAGE")}
+            Button(action: {curPage += 1}) {Text("NEXT PAGE")}.disabled(curPage >= pages.count-1)
             
         }
     }
