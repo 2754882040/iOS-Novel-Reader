@@ -18,6 +18,9 @@ struct HomePageTopBar: View {
             }
         }
     }
+    func add(a:Int,b:Int)->Int{
+        return a+b
+    }
 }
 
 struct HomePageTopBar_Previews: PreviewProvider {

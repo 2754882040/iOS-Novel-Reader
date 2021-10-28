@@ -21,7 +21,7 @@ struct LibraryBookRecommend: View {
     var failure: Image
     var bookDetail:BookInfoBrief
     var body: some View {
-        NavigationLink(destination: BookDetailView(bookId:bookDetail.id)){
+        NavigationLink(destination: ReadingBookChapters(bookId:bookDetail.id)){
             CoverWithIntro
         }
         .contextMenu(menuItems: {

@@ -7,6 +7,20 @@
 
 import SwiftUI
 
+extension String {
+    var htmlToAttributedString: NSAttributedString? {
+        guard let data = data(using: .utf8) else { return nil }
+        do {
+            return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue], documentAttributes: nil)
+        } catch {
+            return nil
+        }
+    }
+    var htmlToString: String {
+        return htmlToAttributedString?.string ?? ""
+    }
+}
+
 struct ReadingBookChapters: View {
     init(bookId:Int){
         _datas = StateObject(wrappedValue: DownloadJson(url:getAllChaptersAPI(bookId: bookId)))
@@ -63,7 +77,7 @@ struct ReadingBookChapters: View {
                     loadingText.onAppear(perform: {loadContentData()})
                 }else{
                     if pages.count > 0{
-                        MyTextView(text: pages[curPage] as! NSMutableAttributedString, width: screenSize.width * 0.75).frame(width: screenSize.width * 0.75, height: screenSize.height * 0.75).accessibilityIdentifier("BookContent")}
+                        MyTextView(text: pages[curPage].mutableCopy() as! NSMutableAttributedString, width: screenSize.width * 0.75).frame(width: screenSize.width * 0.75, height: screenSize.height * 0.75).accessibilityIdentifier("BookContent")}
                 }
             }
         HStack{
@@ -105,6 +119,7 @@ struct ReadingBookChapters: View {
                 return}
             print("success")
             ChapterContent = tempString as String
+            ChapterContent = ChapterContent.htmlToString
             pages = getContent(content: ChapterContent)
             self.loadingState = bookDetailLoadingState.Success
             
@@ -128,7 +143,7 @@ struct ReadingBookChapters: View {
         }while(range.location + range.length < testInput.string.count)
         let size = rangeArray.count
         var page = [NSAttributedString]()
-       
+       print(size)
         for n in 0..<size {
             let attributedString = testInput.attributedSubstring(from: rangeArray[n])
             page.append(attributedString)

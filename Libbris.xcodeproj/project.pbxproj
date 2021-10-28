@@ -52,6 +52,7 @@
 		6E535F8D26C472F2003A1A8F /* BookInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E535F8C26C472F2003A1A8F /* BookInfo.swift */; };
 		6E67D49826F1B1B00037F17A /* BlankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E67D49726F1B1B00037F17A /* BlankView.swift */; };
 		6E6C428626E1C80600202A9E /* LibbrisUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0308C426A7D9360030753C /* LibbrisUITests.swift */; };
+		6E717FF8272A374300937E0C /* strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E923B7B26E0326C000E56B4 /* strings.swift */; };
 		6E923B7A26E02070000E56B4 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E923B7926E02070000E56B4 /* Functions.swift */; };
 		6E923B7C26E0326C000E56B4 /* strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E923B7B26E0326C000E56B4 /* strings.swift */; };
 		6E9975DC26E063AE00443057 /* HomeBookButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9975DB26E063AE00443057 /* HomeBookButton.swift */; };
@@ -503,6 +504,7 @@
 			files = (
 				6EA5F4AD271908C90059DB4D /* BookInfo.swift in Sources */,
 				6E0308BA26A7D9360030753C /* LibbrisTests.swift in Sources */,
+				6E717FF8272A374300937E0C /* strings.swift in Sources */,
 				6EA5F4AA271908760059DB4D /* DownloadJson.swift in Sources */,
 				6E2AE927272489AA00081BA0 /* Functions.swift in Sources */,
 				6EA5F4AB271908830059DB4D /* LocalJsonFileManager.swift in Sources */,

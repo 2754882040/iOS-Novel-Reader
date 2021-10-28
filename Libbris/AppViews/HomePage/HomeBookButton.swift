@@ -49,7 +49,7 @@ struct HomeBookButton: View {
     }
     var bookDetail:BookInfoBriefWithTime
     var body: some View {
-        NavigationLink(destination: BookDetailView(bookId:bookDetail.id)){
+        NavigationLink(destination: ReadingBookChapters(bookId:bookDetail.id)){
             bookCover.resizable().padding(.top, 13.0).padding(.bottom, 22.0)
                 .background(Image("blank_book_shadow")).frame(width: 90, height: 160, alignment: .bottom)
         }

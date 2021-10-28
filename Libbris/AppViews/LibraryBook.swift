@@ -25,7 +25,7 @@ struct LibraryBook: View {
     }
     
     var body: some View {
-        NavigationLink(destination: BookDetailView(bookId:bookDetail.id)){
+        NavigationLink(destination: ReadingBookChapters(bookId:bookDetail.id)){
             HStack(alignment: .top){
                 selectImage().resizable().frame(width: 90, height: 120, alignment: .bottom)
                 VStack(alignment: .leading, spacing: 3.0){
