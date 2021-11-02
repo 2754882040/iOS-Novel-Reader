@@ -12,7 +12,6 @@ struct LanguagePage: View {
     @State var englishText = localizedString(text: strEnglish)
     @State var chineseText = localizedString(text: strChinese)
     @State var frenchText = localizedString(text: strFrench)
-    //@State var backText = localizedString(text: strBack);
     @State var languageSetting = localizedString(text: strLanguageSetting);
     var languages = [localizedString(text: strEnglish), localizedString(text: strChinese), localizedString(text: strFrench)]
     @State private var selectedLanguage:Int = getLanguageNumber()
@@ -32,11 +31,11 @@ struct LanguagePage: View {
         Picker(languageSetting, selection: $selectedLanguage) {
                ForEach(0 ..< languages.count) {
                 Text(self.languages[$0]).accessibilityIdentifier("\(self.languages[$0])")               }
-        }.accessibilityIdentifier("picker") .onChange(of: selectedLanguage, perform: { selectedLanguage in
+        }.pickerStyle(.wheel).accessibilityIdentifier("picker") .onChange(of: selectedLanguage, perform: { selectedLanguage in
             changeLanguage(languageCode: selectedLanguage)
             NotificationCenter.default.post(name: .switchLanguage, object: nil)
         }).navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: btnBack)
+            .navigationBarItems(leading: btnBack.accessibilityIdentifier("LanguagePageBack"))
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
             self.englishText = localizedString(text: strEnglish)
             self.chineseText = localizedString(text: strChinese)
@@ -48,6 +47,6 @@ struct LanguagePage: View {
 
 struct LanguagePage_Previews: PreviewProvider {
     static var previews: some View {
-        LanguagePage()//shouldShowLanguagePage:.constant(true))
+        LanguagePage()
     }
 }

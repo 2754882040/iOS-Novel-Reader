@@ -9,11 +9,13 @@ import SwiftUI
 
 struct LibraryBookVertical: View {
     init() {
-        _datas = StateObject(wrappedValue: DownloadJson(url:"http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/category/15?start=1&size=9"))
+        _datas = StateObject(wrappedValue: DownloadJson(url:getBookByCategoryAPI(categoryId: 11, start: 1, size: 9)))
     }
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     @State var books:[BookInfoBrief] = [BookInfoBrief]()
     @StateObject public var datas: DownloadJson
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var loadingText = localizedString(text: strLoading)
     var body: some View{
         ScrollView(.horizontal){
@@ -30,20 +32,17 @@ struct LibraryBookVertical: View {
                     ForEach(items,id: \.self)
                     {item in
                         LibraryBookRecommend(bookDetail:books[item]).accessibilityIdentifier("LibraryBookRecommend\(item)");
-                        
-                        
                     }
                 }.frame(height: 300)
             }
         }.onAppear(perform: {
             DispatchQueue.global(qos: .background).async {
-            while(datas.state == .loading){
-                sleep(1)
-            }
-            if datas.state == .success{
-                books = try! datas.decodeData(data: datas.jsonData)
-                //print(books.count)
-            }
+                while(datas.state == .loading){
+                    sleep(1)
+                }
+                if datas.state == .success{
+                    books = try! datas.decodeData(data: datas.jsonData)
+                }
             }
         }).onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
             self.loadingText = localizedString(text: strLoading)

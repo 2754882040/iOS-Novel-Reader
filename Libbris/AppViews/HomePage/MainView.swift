@@ -9,30 +9,40 @@ import SwiftUI
 
 struct MainView: View {
     init() {
-        _datas = StateObject(wrappedValue: DownloadJson(url:"http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/category/16?start=1&size=1"))
+
+        //_datas = StateObject(wrappedValue: DownloadJson(url:fullPath))
         UINavigationBar.appearance().backgroundColor =
             #colorLiteral(red: 0.1607843137, green: 0.2745098039, blue: 0.5529411765, alpha: 1)
         UINavigationBar.appearance().barTintColor =
             #colorLiteral(red: 0.1607843137, green: 0.2745098039, blue: 0.5529411765, alpha: 1)
+        
     }
-    @State var books:[BookInfoBrief] = [BookInfoBrief]()
-    @StateObject public var datas: DownloadJson
+    @State var books:[BookInfoBriefWithTime] = [BookInfoBriefWithTime]()
+    //@StateObject public var datas: DownloadJson
+    @StateObject public var localJsonFile: localJsonFileManager = localJsonFileManager.shared
     var body: some View {
-        NavigationView{
+       
         ZStack{
             Image("wall").resizable(resizingMode: .stretch).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/).onAppear(perform: {
+                localJsonFile.readData()
                 DispatchQueue.global(qos: .background).async {
-                while(datas.state == .loading){
-                    sleep(1)
+                while(localJsonFile.state == .loading){
+                    //sleep(1)
                 }
-                if datas.state == .success{
-                    books = try! datas.decodeData(data: datas.jsonData)
+                if localJsonFile.state == .success{
+                    print("test main view loading books")
+                    books = localJsonFile.bookShelfBook
                     print(books.count)
                 }
                 }
-            })
+            }).onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("refreshBook")), perform: { _ in
+                DispatchQueue.global(qos: .background).async {
+                    localJsonFile.sortArray()
+                    books = localJsonFile.bookShelfBook
+                }})
             VStack(alignment: .leading, spacing: 10)
             {
+                HomePageTopBar()
                 ScrollView(.vertical){
                     if(books.count == 0){}
                     else{
@@ -45,16 +55,13 @@ struct MainView: View {
                                 ZStack{
                                     if(item % 3 == 0){
                                         Image("bookshelf").offset(x: /*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/, y: 85)                }
-                                    BookButton(bookDetail:books[item]).padding(.bottom, 15.0).accessibilityIdentifier("BookButton\(item)");
+                                    HomeBookButton(bookDetail:books[item]).padding(.bottom, 15.0)
                                 }
                             }
                         }
                     }
-                }
+                }.accessibilityIdentifier("HomePageScrollView")
             }
-        }.navigationBarTitleDisplayMode(.inline).navigationBarItems(leading:Image("logo_libbris_white").imageScale(.large))
-        .navigationViewStyle(StackNavigationViewStyle())
-            
         }
     }
 }
