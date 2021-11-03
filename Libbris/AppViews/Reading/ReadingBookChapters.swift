@@ -52,7 +52,8 @@ struct ReadingBookChapters: View {
     @State var testInput = NSMutableAttributedString()
     @State var currentPage:Int = 0
     @State var ChapterContent:String = ""
-    
+    @State var ChapterId:Int = 0
+    @State var PreChapterId:Int = 0
     var reloadButton: some View{
         Button(action: {},label: {Text("Try again")})
         
@@ -81,10 +82,27 @@ struct ReadingBookChapters: View {
                 }
             }
         HStack{
-            Button(action: {curPage -= 1}) {Text("PREVIOUS PAGE")}.disabled(curPage < 1)
-            Button(action: {self.presentationMode.wrappedValue.dismiss()}) {Text("back")}
-            Button(action: {curPage += 1}) {Text("NEXT PAGE")}.disabled(curPage >= pages.count-1)
+            Button(action: {
+                if curPage < 1 && ChapterId >= 1{
+                    ChapterId -= 1
+                    loadingState = bookDetailLoadingState.loadingChapters
+                    curPage = PreChapterId
+                }else{curPage -= 1}
+            }) {Text("PREVIOUS PAGE")}
+            .disabled(curPage < 1 && ChapterId < 1)
             
+            Button(action: {self.presentationMode.wrappedValue.dismiss()}) {Text("back")}
+            
+            Button(action: {
+                if curPage >= pages.count-1{
+                    PreChapterId = curPage
+                    ChapterId += 1
+                    loadingState = bookDetailLoadingState.loadingChapters
+                    curPage = 0
+                }else{curPage += 1}
+                
+            }) {Text("NEXT PAGE")}
+            .disabled(curPage >= pages.count-1 && ChapterId >= bookChapters.count)
         }
     }
     func getChapters(){
@@ -99,7 +117,8 @@ struct ReadingBookChapters: View {
                 if bookChapters.count > 0 {
                     print("chapter id")
                     print(bookChapterId)
-                    bookChapterId = bookChapters[0].id
+                    //bookChapterId += 1
+                    bookChapterId = bookChapters[ChapterId].id
                     print(bookChapterId)
                 }
                 self.loadingState = bookDetailLoadingState.loadingContents
