@@ -54,6 +54,10 @@ struct ReadingBookChapters: View {
     @State var ChapterContent:String = ""
     @State var ChapterId:Int = 0
     @State var PreChapterId:Int = 0
+    @State var width: CGFloat = UIScreen.main.bounds.width
+    @State var starLocation: CGFloat = 0
+    @State var endLocation: CGFloat = 0
+    @State private var isShowingBackButton = false
     var reloadButton: some View{
         Button(action: {},label: {Text("Try again")})
         
@@ -80,31 +84,43 @@ struct ReadingBookChapters: View {
                     if pages.count > 0{
                         MyTextView(text: pages[curPage].mutableCopy() as! NSMutableAttributedString, width: screenSize.width * 0.75).frame(width: screenSize.width * 0.75, height: screenSize.height * 0.75).accessibilityIdentifier("BookContent")}
                 }
-            }
-        HStack{
-            Button(action: {
-                if curPage < 1 && ChapterId >= 1{
-                    ChapterId -= 1
-                    loadingState = bookDetailLoadingState.loadingChapters
-                    curPage = PreChapterId
-                }else{curPage -= 1}
-            }) {Text("PREVIOUS PAGE")}
-            .disabled(curPage < 1 && ChapterId < 1)
-            
-            Button(action: {self.presentationMode.wrappedValue.dismiss()}) {Text("back")}
-            
-            Button(action: {
-                if curPage >= pages.count-1{
-                    PreChapterId = curPage
-                    ChapterId += 1
-                    loadingState = bookDetailLoadingState.loadingChapters
-                    curPage = 0
-                }else{curPage += 1}
-                
-            }) {Text("NEXT PAGE")}
-            .disabled(curPage >= pages.count-1 && ChapterId >= bookChapters.count)
-        }
+        }.onTouch(type: .started, perform: TapToChangePage)
     }
+    
+    
+    func StartLocation(_ location: CGPoint){
+        starLocation = location.x
+        print(starLocation)
+    }
+    
+    func EndedLocation(_ location: CGPoint){
+        endLocation = location.x
+        print(endLocation)
+    }
+    
+    func TapToChangePage(_ location: CGPoint) {
+        print(width)
+        if location.x < width/3 {
+            if curPage < 1 && ChapterId >= 1{
+                ChapterId -= 1
+                loadingState = bookDetailLoadingState.loadingChapters
+                curPage = PreChapterId
+            }else if curPage > 0 {curPage -= 1
+            }else {print("no previous page")}
+        }else if location.x > 2*width/3 {
+            if curPage >= pages.count-1{
+                PreChapterId = curPage
+                ChapterId += 1
+                loadingState = bookDetailLoadingState.loadingChapters
+                curPage = 0
+            }else if curPage < pages.count && ChapterId < bookChapters.count{curPage += 1
+            }else {print("no next chapter")}
+        }else {
+            self.presentationMode.wrappedValue.dismiss()
+            print("back function")}
+    
+    }
+    
     func getChapters(){
         DispatchQueue.global(qos: .background).async {
             print("callgetchapter")
