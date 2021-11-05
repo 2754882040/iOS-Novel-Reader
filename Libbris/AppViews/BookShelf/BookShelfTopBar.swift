@@ -27,7 +27,7 @@ struct BookShelfTopBar: View {
         })
     }
     var searchArea: some View{
-        TextField(searchAreaText, text: $searchName).textFieldStyle(RoundedBorderTextFieldStyle())
+        TextField(searchAreaText, text: $searchName).textFieldStyle(RoundedBorderTextFieldStyle()).accessibilityIdentifier("SearchField")
     }
 }
 
