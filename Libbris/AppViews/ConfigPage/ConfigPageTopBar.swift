@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ConfigPageTopBar: View {
-    @State var settingsText = localizedString(text: strSettings);
+    @State var settingsText = localizedString(text: strSettings)
     var body: some View {
-        ZStack(alignment: .leading){
+        ZStack(alignment: .leading) {
             TopBarBackGround()
-            HStack{
+            HStack {
                 Text(settingsText)
                 .foregroundColor(.white)
                     .font(.custom("Dosis-Bold", size: 20)).padding(.leading, 8.0)

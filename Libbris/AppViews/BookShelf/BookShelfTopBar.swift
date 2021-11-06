@@ -12,9 +12,9 @@ struct BookShelfTopBar: View {
     @State var searchAreaText = localizedString(text: strSearchArea)
     @State private var searchName: String = ""
     var body: some View {
-        ZStack(alignment: .leading){
+        ZStack(alignment: .leading) {
             TopBarBackGround()
-            HStack{
+            HStack {
                 Text(libraryText)
                 .foregroundColor(.white)
                     .font(.custom("Dosis-Bold", size: 20)).padding(.leading, 8.0)
@@ -26,8 +26,10 @@ struct BookShelfTopBar: View {
             self.searchAreaText = localizedString(text: strSearchArea)
         })
     }
-    var searchArea: some View{
-        TextField(searchAreaText, text: $searchName).textFieldStyle(RoundedBorderTextFieldStyle()).accessibilityIdentifier("SearchField")
+    var searchArea: some View {
+        TextField(searchAreaText, text: $searchName)
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .accessibilityIdentifier("SearchField")
     }
 }
 

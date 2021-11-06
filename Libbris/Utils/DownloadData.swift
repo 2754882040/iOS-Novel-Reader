@@ -13,20 +13,19 @@ public enum Result<Data, Error> {
     case failure(Error)
 }
 enum NetworkRequestError: Error {
-    case unknow(Data?,URLResponse?)
+    case unknow(Data?, URLResponse?)
 }
 
 public class DownloadData{
-    static func request(urlString: String, completion: @escaping (Result<Data, Error>) -> ()){
+    static func request(urlString: String, completion: @escaping (Result<Data, Error>) -> Void) {
         let request = URLRequest(url: URL(string: urlString)!)
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 guard let responseData = data, error == nil else {
-                    completion(.failure(error ?? NetworkRequestError.unknow(data,response)))
+                    completion(.failure(error ?? NetworkRequestError.unknow(data, response)))
                     return
                 }
                 completion(.success(responseData))
             }
             task.resume()
     }
-    
 }

@@ -9,44 +9,48 @@ import SwiftUI
 
 struct ConfigPage: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State var settingsText = localizedString(text: strSettings);
-    @State var languageSetting = localizedString(text: strLanguageSetting);
-    @State var infos = localizedString(text: strInfos);
-    @State var applicationSetting = localizedString(text: strApplicationSetting);
-    @State var PrivacyAndSafety = localizedString(text: strPrivacyAndSafety);
-    @State var textOthers = localizedString(text: strOthers);
+    @State var settingsText = localizedString(text: strSettings)
+    @State var languageSetting = localizedString(text: strLanguageSetting)
+    @State var infos = localizedString(text: strInfos)
+    @State var applicationSetting = localizedString(text: strApplicationSetting)
+    @State var privacyAndSafety = localizedString(text: strPrivacyAndSafety)
+    @State var textOthers = localizedString(text: strOthers)
     var body: some View {
-        VStack(spacing:0){
+        VStack(spacing: 0) {
             ConfigPageTopBar()
-            Form{
-                Section(header: Text(applicationSetting).foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/).font(.custom("Dosis-Bold", size: 20))) {
-                    NavigationLink(destination: BlankView()){
+            Form {
+                Section(header: Text(applicationSetting)
+                            .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                            .font(.custom("Dosis-Bold", size: 20))) {
+                    NavigationLink(destination: BlankView()) {
                         Text("\(applicationSetting) 1").font(.custom("Dosis-Regular", size: 15))
-                    };
-                
-                    NavigationLink(destination: BlankView()){
+                    }
+                    NavigationLink(destination: BlankView()) {
                         Text("\(applicationSetting) 2").font(.custom("Dosis-Regular", size: 15))
-                    };
-                    NavigationLink(destination: BlankView()){
+                    }
+                    NavigationLink(destination: BlankView()) {
                         Text("\(applicationSetting) 3").font(.custom("Dosis-Regular", size: 15))
-                    };
-                    
+                    }
                 }
-                Section(header: Text(PrivacyAndSafety).foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/).font(.custom("Dosis-Bold", size: 20))) {
-                    NavigationLink(destination: BlankView()){
-                        Text(PrivacyAndSafety).font(.custom("Dosis-Regular", size: 15))
-                    };
-                
-                    
+                Section(header: Text(privacyAndSafety)
+                            .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                            .font(.custom("Dosis-Bold", size: 20))) {
+                    NavigationLink(destination: BlankView()) {
+                        Text(privacyAndSafety).font(.custom("Dosis-Regular", size: 15))
+                    }
                 }
-                Section(header: Text(textOthers).foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/).font(.custom("Dosis-Bold", size: 20))) {
-                    NavigationLink(destination: InfoPage()){
-                        Text(infos).accessibilityIdentifier("AppInfo").font(.custom("Dosis-Regular", size: 15))
-                    };
-                    
-                    NavigationLink(destination: LanguagePage()){
-                        Text(languageSetting).accessibilityIdentifier("languageSetting").font(.custom("Dosis-Regular", size: 15))
-                    };
+                Section(header: Text(textOthers)
+                            .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                            .font(.custom("Dosis-Bold", size: 20))) {
+                    NavigationLink(destination: InfoPage()) {
+                        Text(infos).accessibilityIdentifier("AppInfo")
+                            .font(.custom("Dosis-Regular", size: 15))
+                    }
+                    NavigationLink(destination: LanguagePage()) {
+                        Text(languageSetting)
+                            .accessibilityIdentifier("languageSetting")
+                            .font(.custom("Dosis-Regular", size: 15))
+                    }
                 }
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
@@ -54,11 +58,10 @@ struct ConfigPage: View {
                 self.infos = localizedString(text: strInfos)
                 self.settingsText = localizedString(text: strSettings)
                 self.applicationSetting = localizedString(text: strApplicationSetting)
-                self.PrivacyAndSafety = localizedString(text: strPrivacyAndSafety)
+                self.privacyAndSafety = localizedString(text: strPrivacyAndSafety)
                 self.textOthers = localizedString(text: strOthers)
             })
         }
-        
     }
 }
 

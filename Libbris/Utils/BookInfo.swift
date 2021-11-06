@@ -6,33 +6,33 @@
 //
 
 import Foundation
-struct BookInfo:Codable{
-    var id:Int
+struct BookInfo: Codable {
+    var id: Int
     var name: String
     var authorName: String
     var summary: String
     var cover: String
     var bookUrlName: String
     var lastChapterTitle: String
-    var lastUpdatedDate:Int64
+    var lastUpdatedDate: Int64
 }
-struct BookInfoBrief:Codable,Hashable{
-    var id:Int
+struct BookInfoBrief: Codable, Hashable {
+    var id: Int
     var name: String
     var authorName: String
     var summary: String
     var cover: String?
     var bookUrlName: String
 }
-struct BookInfoBriefWithTime:Codable,Hashable,Comparable{
+struct BookInfoBriefWithTime: Codable, Hashable, Comparable {
     static func < (lhs: BookInfoBriefWithTime, rhs: BookInfoBriefWithTime) -> Bool {
-        if lhs.time > rhs.time{
+        if lhs.time > rhs.time {
             return true
-        }else{
+        } else {
             return false
         }
     }
-    init(){
+    init() {
     id = 0
     name = " "
     authorName = " "
@@ -41,7 +41,7 @@ struct BookInfoBriefWithTime:Codable,Hashable,Comparable{
     bookUrlName = " "
     time = Date()
     }
-    init(book:BookInfoBrief){
+    init(book: BookInfoBrief) {
         id = book.id
         authorName = book.authorName
         bookUrlName = book.bookUrlName
@@ -50,7 +50,7 @@ struct BookInfoBriefWithTime:Codable,Hashable,Comparable{
         name = book.name
         summary = book.summary
     }
-    var id:Int
+    var id: Int
     var name: String
     var authorName: String
     var summary: String
@@ -58,9 +58,7 @@ struct BookInfoBriefWithTime:Codable,Hashable,Comparable{
     var bookUrlName: String
     var time: Date
 }
-struct BookChapter: Codable{
-    var id:Int
-    var title:String
+struct BookChapter: Codable {
+    var id: Int
+    var title: String
 }
-
-

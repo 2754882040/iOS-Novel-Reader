@@ -39,11 +39,8 @@ let strSearch = "Search"
 let strNoMoreBook = "No more books"
 let strSubmit = "Submit"
 let strSearchArea = "search area"
-let strApplicationSetting = "Application Setting";
-let strPrivacyAndSafety = "Privacy & Safety";
-let strOthers = "Other";
+let strApplicationSetting = "Application Setting"
+let strPrivacyAndSafety = "Privacy & Safety"
+let strOthers = "Other"
 let strLoading = "Loading..."
 let strChinese1 = "中文（简体）"
-
-
-
