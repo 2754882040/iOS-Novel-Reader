@@ -16,7 +16,7 @@ enum NetworkRequestError: Error {
     case unknow(Data?, URLResponse?)
 }
 
-public class DownloadData{
+public class DownloadData {
     static func request(urlString: String, completion: @escaping (Result<Data, Error>) -> Void) {
         let request = URLRequest(url: URL(string: urlString)!)
             let task = URLSession.shared.dataTask(with: request) { data, response, error in

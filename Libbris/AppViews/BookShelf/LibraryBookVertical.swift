@@ -37,7 +37,9 @@ struct LibraryBookVertical: View {
                     sleep(1)
                 }
                 if datas.state == .success {
+                    // swiftlint:disable force_try
                     books = try! datas.decodeData(data: datas.jsonData)
+                    // swiftlint:enable force_try
                 }
             }
         }).onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in

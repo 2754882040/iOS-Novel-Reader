@@ -54,7 +54,9 @@ struct BookList: View {
                 sleep(1)
             }
             if datas.state == .success {
+                // swiftlint:disable force_try
                 let temp: [BookInfoBrief] = try! datas.decodeData(data: datas.jsonData)
+                // swiftlint:enable force_try
                 if !temp.isEmpty {
                     books += temp
                 }
@@ -77,7 +79,9 @@ struct BookList: View {
                 print("sleep")
             }
             if datas.state == .success {
+                // swiftlint:disable force_try
                 books += try! datas.decodeData(data: datas.jsonData)
+                // swiftlint:enable force_try
                 if curBookCount != books.count {
                     curBookCount = books.count
                 } else {

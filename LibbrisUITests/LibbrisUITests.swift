@@ -104,9 +104,9 @@ class LibbrisUITests: XCTestCase {
         let settingButton = app.tabBars["Tab Bar"].buttons["icon_settings_nor_iOS_25@1"]
         XCTAssertTrue(settingButton.exists)
         settingButton.tap()
-        let InfoButton = app.buttons["AppInfo"]
-        XCTAssertTrue(InfoButton.exists)
-        InfoButton.tap()
+        let infoButton = app.buttons["AppInfo"]
+        XCTAssertTrue(infoButton.exists)
+        infoButton.tap()
         let textsInfo = app.staticTexts["teamInfo"]
         XCTAssertTrue(textsInfo.exists)
         let icon = app.images["iconImage"]

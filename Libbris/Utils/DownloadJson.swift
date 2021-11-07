@@ -37,7 +37,9 @@ public class DownloadJson: ObservableObject {
     func decodeData<T: Codable>(data: Data) throws -> T {
         let jsonDecoder = JSONDecoder()
         do {
+            // swiftlint:disable force_try
             let parsedJSON = try! jsonDecoder.decode(T.self, from: data)
+            // swiftlint:enable force_try
             return parsedJSON
         }
     }
@@ -50,7 +52,9 @@ public class DownloadJson: ObservableObject {
         if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
             let pathWithFilename = documentDirectory.appendingPathComponent(fileName)
             do {
+                // swiftlint:disable force_try
                 try! data.write(to: pathWithFilename)
+                // swiftlint:enable force_cast
                 print("success")
                 print(pathWithFilename)
             }

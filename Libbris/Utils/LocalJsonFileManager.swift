@@ -21,7 +21,9 @@ public class LocalJsonFileManager: ObservableObject {
         do {
             let tempdata = try NSData(contentsOf: parsedURL) as Data
             jsonData = tempdata
+            // swiftlint:disable force_try
             bookShelfBook = try! decodeData(data: jsonData)
+            // swiftlint:enable force_try
             state = LoadState.success
         } catch {
             print("failed")
@@ -31,11 +33,9 @@ public class LocalJsonFileManager: ObservableObject {
 
     }
     func findBookId(id: Int) -> Int {
-        for num in 0..<bookShelfBook.count {
-            if bookShelfBook[num].id == id {
+        for num in 0..<bookShelfBook.count where bookShelfBook[num].id == id {
                 print("found!\(num)")
                 return num
-            }
         }
         return -1
     }
@@ -43,11 +43,9 @@ public class LocalJsonFileManager: ObservableObject {
         for num in 0..<bookShelfBook.count {
             var tempDate = bookShelfBook[num].time
             var newTimeId = num
-            for secNum in num ..< bookShelfBook.count {
-                if bookShelfBook[secNum].time > tempDate {
+            for secNum in num ..< bookShelfBook.count where bookShelfBook[secNum].time > tempDate {
                     tempDate = bookShelfBook[secNum].time
                     newTimeId = secNum
-                }
             }
             bookShelfBook.swapAt(num, newTimeId)
         }
@@ -62,7 +60,9 @@ public class LocalJsonFileManager: ObservableObject {
     }
     func encodeData<T: Codable>(data: T) -> Data {
         let jsonEncoder = JSONEncoder()
+        // swiftlint:disable force_try
         let tempdata = try! jsonEncoder.encode(data)
+        // swiftlint:enable force_cast
         print(tempdata)
         return tempdata
     }

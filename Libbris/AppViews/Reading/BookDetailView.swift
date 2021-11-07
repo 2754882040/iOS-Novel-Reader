@@ -7,7 +7,7 @@
 
 import SwiftUI
 struct MyTextView: UIViewRepresentable {
-    var text: NSMutableAttributedString
+    var text: NSAttributedString
     func updateUIView(_ uiView: UILabel, context: UIViewRepresentableContext<MyTextView>) {
         uiView.attributedText = text
     }
@@ -57,11 +57,13 @@ struct BookDetailView: View {
                         pages = getContent(content: chapterContent)
                     }.resume()
                 })
+            // swiftlint:disable force_cast
             if pages.count > 0 {
                 MyTextView(text: pages[curPage] as! NSMutableAttributedString,
                            width: screenSize.width * 0.75)
                 .frame(width: screenSize.width * 0.75, height: screenSize.height * 0.75)
                 .accessibilityIdentifier("BookContent")}
+            // swiftlint:enable force_cast
             }
         HStack {
             Button(action: {curPage -= 1}, label: { Text("PREVIOUS PAGE")})

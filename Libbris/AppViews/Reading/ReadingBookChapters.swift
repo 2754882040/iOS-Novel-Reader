@@ -74,7 +74,7 @@ struct ReadingBookChapters: View {
                     loadingText.onAppear(perform: {loadContentData()})
                 } else {
                     if pages.count > 0 {
-                        MyTextView(text: pages[curPage].mutableCopy() as! NSMutableAttributedString,
+                        MyTextView(text: pages[curPage],
                                    width: screenSize.width * 0.75)
                         .frame(width: screenSize.width * 0.75, height: screenSize.height * 0.75)
                         .accessibilityIdentifier("BookContent")}
@@ -92,7 +92,9 @@ struct ReadingBookChapters: View {
             if datas.state == DownloadJson.LoadState.failure {
                 self.loadingState = BookDetailLoadingState.loadingChaptersFailed
             } else if datas.state == DownloadJson.LoadState.success {
+                // swiftlint:disable force_try
                 self.bookChapters = try! JSONDecoder().decode([BookChapter].self, from: datas.jsonData)
+                // swiftlint:enable force_try
                 print(self.bookChapters)
                 if bookChapters.count > 0 {
                     print("chapter id")

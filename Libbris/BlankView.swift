@@ -17,4 +17,3 @@ struct BlankView_Previews: PreviewProvider {
         BlankView()
     }
 }
-
