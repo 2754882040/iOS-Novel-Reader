@@ -63,4 +63,7 @@ struct BookChapter: Codable{
     var title:String
 }
 
-
+struct AlertInfo:Identifiable {
+    var id: String { name }
+    let name: String
+}

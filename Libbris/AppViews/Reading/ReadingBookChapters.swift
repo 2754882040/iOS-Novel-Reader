@@ -37,6 +37,9 @@ struct ReadingBookChapters: View {
     enum bookDetailLoadingState{
         case loadingChapters,loadingChaptersFailed, loadingContents,loadingConteentsFailed,Success
     }
+    enum ActiveAlert {
+        case first, second, third
+    }
     @State var loadingState = bookDetailLoadingState.loadingChapters
     @StateObject public var datas: DownloadJson
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -58,7 +61,9 @@ struct ReadingBookChapters: View {
     @State var starLocation: CGFloat = 0
     @State var endLocation: CGFloat = 0
     @State var Location = CGPoint(x: 0, y: 0)
-    @State private var isShowingBackButton = false
+    @State private var showAlert = false
+    @State private var activeAlert: ActiveAlert = .first
+    //@State private var selectedShow: AlertInfo?
     var reloadButton: some View{
         Button(action: {},label: {Text("Try again")})
         
@@ -98,7 +103,15 @@ struct ReadingBookChapters: View {
                             }
         })
          .simultaneousGesture(TapGesture().onEnded(TapToChangePage))
-            
+         .alert(isPresented: $showAlert) { switch activeAlert {
+         case .first:
+             return Alert(title: Text("This is the first page"),dismissButton: .default(Text("OK")))
+         case .second:
+             return Alert(title: Text("This is the last page"),dismissButton: .default(Text("OK")))
+         case .third:
+             return Alert(title: Text("Want to exist?"),primaryButton: .destructive(Text("Exist"), action: {self.presentationMode.wrappedValue.dismiss()}),secondaryButton: .default(Text("Cancel"), action: {}))
+         }
+                 }
     }
     
     
@@ -108,7 +121,9 @@ struct ReadingBookChapters: View {
             loadingState = bookDetailLoadingState.loadingChapters
             curPage = PreChapterId
         }else if curPage > 0 {curPage -= 1
-        }else {print("no previous page")}
+        }else {self.activeAlert = .first
+            self.showAlert = true
+        }
     }
     
     func TurnNextPages(){
@@ -118,7 +133,8 @@ struct ReadingBookChapters: View {
             loadingState = bookDetailLoadingState.loadingChapters
             curPage = 0
         }else if curPage < pages.count && ChapterId < bookChapters.count{curPage += 1
-        }else {print("no next chapter")}
+        }else {self.activeAlert = .second
+            self.showAlert = true}
     }
     
     func GetLocation(_ location: CGPoint){
@@ -132,7 +148,8 @@ struct ReadingBookChapters: View {
         }else if Location.x > 2*width/3 {
             TurnNextPages()
         }else {
-            self.presentationMode.wrappedValue.dismiss()
+            self.activeAlert = .third
+                self.showAlert = true
             print("back function")}
     
     }
