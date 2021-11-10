@@ -8,11 +8,20 @@
 import SwiftUI
 
 struct BookList: View {
-    init(url:String,cId:Int){
+    init(url:String, cId:Int) {
         _datas = StateObject(wrappedValue: DownloadJson(url:url))
         self.categoryId = cId
         self.url = url
+        self.searchOn = false
     }
+    
+    init(url:String) {
+        _datas = StateObject(wrappedValue: DownloadJson(url:url))
+        self.categoryId = 0
+        self.url = url
+        self.searchOn = true
+    }
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var books:[BookInfoBrief] = [BookInfoBrief]()
     @StateObject public var datas: DownloadJson
@@ -20,8 +29,9 @@ struct BookList: View {
     @State var noBooksText = localizedString(text: strNoMoreBook)
     @State var noMoreBook: Bool = false
     @State var curBookCount: Int = 0
-    let url:String
-    let categoryId:Int
+    @State var searchOn: Bool = false
+    let url: String
+    let categoryId: Int
     let screenSize: CGRect = UIScreen.main.bounds
     var loadMore: some View {
         Text("loading").accessibilityIdentifier("textLoading")
@@ -42,7 +52,9 @@ struct BookList: View {
                             Spacer(minLength: 20)
                         }
                         if noMoreBook {Text(noBooksText).accessibilityIdentifier("textNoMoreBooks")}
-                        else{loadMore.onAppear(perform: {loadBook()})}
+                        else if searchOn == false
+                        {loadMore.onAppear(perform: {loadBook()})}
+                        
                         Spacer(minLength: 10)
                     }
                 }
@@ -71,6 +83,7 @@ struct BookList: View {
         curBookCount = books.count
         datas.getData(URLString: getBookByCategoryAPI(categoryId: categoryId, start: curBookCount+1, size: 20))
         print("loading book")
+        
         DispatchQueue.global(qos: .background).async {
             while(datas.state == .loading){
                 sleep(1)
@@ -89,8 +102,8 @@ struct BookList: View {
     }
 }
 
-struct BookList_Previews: PreviewProvider {
-    static var previews: some View {
-        BookList(url:"http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/category/11?start=1&size=9", cId: 11)
-    }
-}
+//struct BookList_Previews: PreviewProvider {
+//    static var previews: some View {
+//        BookList(url:"http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/category/11?start=1&size=9", cId: 11)
+//    }
+//}
