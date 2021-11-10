@@ -129,9 +129,13 @@ struct ReadingBookChapters: View {
     func turnNextPages() {
         if curPage >= pages.count-1 {
             preChapterId = curPage
-            chapterId += 1
-            loadingState = BookDetailLoadingState.loadingChapters
-            curPage = 0
+            if chapterId < bookChapters.count - 1 {
+                chapterId += 1
+                loadingState = BookDetailLoadingState.loadingChapters
+                curPage = 0} else {
+                    self.activeAlert = .second
+                    self.showAlert = true
+                }
         } else if curPage < pages.count && chapterId < bookChapters.count { curPage += 1
         } else { self.activeAlert = .second
             self.showAlert = true }
