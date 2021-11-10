@@ -117,7 +117,9 @@ struct TouchLocater: ViewModifier {
 
 // A new method on View that makes it easier to apply our touch locater view.
 extension View {
-    func onTouch(type: TouchLocatingView.TouchType = .all, limitToBounds: Bool = true, perform: @escaping (CGPoint) -> Void) -> some View {
+    func onTouch(type: TouchLocatingView.TouchType = .all,
+                 limitToBounds: Bool = true,
+                 perform: @escaping (CGPoint) -> Void) -> some View {
         self.modifier(TouchLocater(type: type, limitToBounds: limitToBounds, perform: perform))
     }
 }

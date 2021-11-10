@@ -29,21 +29,18 @@ struct ReadingBookChapters: View {
         _datas = StateObject(wrappedValue: DownloadJson(url: getAllChaptersAPI(bookId: bookId)))
         self.bookId = bookId
 
-        //let parsedURL = URL(string: getChapterContentAPI(bookId:bookId,chapterId:1))
-        //let chaptersURL = URL(string: getAllChaptersAPI(bookId: bookId))
-        //bookContentURL = parsedURL!
-        //bookChaptersURL = chaptersURL!
-        
-
+        // let parsedURL = URL(string: getChapterContentAPI(bookId:bookId,chapterId:1))
+        // let chaptersURL = URL(string: getAllChaptersAPI(bookId: bookId))
+        // bookContentURL = parsedURL!
+        // bookChaptersURL = chaptersURL!
     }
-    
-    enum bookDetailLoadingState{
-        case loadingChapters,loadingChaptersFailed, loadingContents,loadingConteentsFailed,Success
+    enum BookDetailLoadingState {
+        case loadingChapters, loadingChaptersFailed, loadingContents, loadingConteentsFailed, successAllLoading
     }
     enum ActiveAlert {
         case first, second, third
     }
-    @State var loadingState = bookDetailLoadingState.loadingChapters
+    @State var loadingState = BookDetailLoadingState.loadingChapters
     @StateObject public var datas: DownloadJson
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var bookChapterId: Int=1
@@ -55,20 +52,19 @@ struct ReadingBookChapters: View {
     @State var curPage = 0
     @State var pages = [NSAttributedString]()
     @State var testInput = NSMutableAttributedString()
-    @State var currentPage:Int = 0
-    @State var ChapterContent:String = ""
-    @State var ChapterId:Int = 0
-    @State var PreChapterId:Int = 0
+    @State var currentPage: Int = 0
+    @State var chapterContent: String = ""
+    @State var chapterId: Int = 0
+    @State var preChapterId: Int = 0
     @State var width: CGFloat = UIScreen.main.bounds.width
     @State var starLocation: CGFloat = 0
     @State var endLocation: CGFloat = 0
-    @State var Location = CGPoint(x: 0, y: 0)
+    @State var location = CGPoint(x: 0, y: 0)
     @State private var showAlert = false
     @State private var activeAlert: ActiveAlert = .first
-    //@State private var selectedShow: AlertInfo?
-    var reloadButton: some View{
-        Button(action: {},label: {Text("Try again")})
-        
+    // @State private var selectedShow: AlertInfo?
+    var reloadButton: some View {
+        Button(action: {}, label: {Text("Try again")})
     }
     var loadingText: some View {
         Text("loading...")
@@ -95,71 +91,67 @@ struct ReadingBookChapters: View {
                         .frame(width: screenSize.width * 0.75, height: screenSize.height * 0.75)
                         .accessibilityIdentifier("BookContent")}
                 }
-        }.onTouch(type: .started, perform: GetLocation)
+        }.onTouch(type: .started, perform: getLocation)
          .gesture(DragGesture(minimumDistance: 20, coordinateSpace: .global)
                         .onEnded { value in
                             let horizontalAmount = value.translation.width as CGFloat
                             let verticalAmount = value.translation.height as CGFloat
-                            
             if abs(horizontalAmount) > abs(verticalAmount) {
-                horizontalAmount < 0 ? TurnNextPages() : TurnPreviousPages()
+                horizontalAmount < 0 ? turnNextPages() : turnPreviousPages()
                             } else {
                                 print(verticalAmount < 0 ? "up swipe" : "down swipe")
                             }
         })
-         .simultaneousGesture(TapGesture().onEnded(TapToChangePage))
-         .alert(isPresented: $showAlert) { switch activeAlert {
-         case .first:
-             return Alert(title: Text("This is the first page"),dismissButton: .default(Text("OK")))
-         case .second:
-             return Alert(title: Text("This is the last page"),dismissButton: .default(Text("OK")))
-         case .third:
-             return Alert(title: Text("Want to exist?"),primaryButton: .destructive(Text("Exist"), action: {self.presentationMode.wrappedValue.dismiss()}),secondaryButton: .default(Text("Cancel"), action: {}))
+         .simultaneousGesture(TapGesture().onEnded(tapToChangePage))
+         .alert(isPresented: $showAlert) {
+             switch activeAlert {
+             case .first:
+                 return Alert(title: Text("This is the first page"), dismissButton: .default(Text("OK")))
+             case .second:
+                 return Alert(title: Text("This is the last page"), dismissButton: .default(Text("OK")))
+             case .third:
+                 return Alert(title: Text("Want to exist?"), primaryButton: .destructive(Text("Exist"), action: {
+                     self.presentationMode.wrappedValue.dismiss()}),
+                              secondaryButton: .default(Text("Cancel"), action: {}))
          }
                  }
     }
-    
-    
-    func TurnPreviousPages(){
-        if curPage < 1 && ChapterId >= 1{
-            ChapterId -= 1
-            loadingState = bookDetailLoadingState.loadingChapters
-            curPage = PreChapterId
-        }else if curPage > 0 {curPage -= 1
-        }else {self.activeAlert = .first
+    func turnPreviousPages() {
+        if curPage < 1 && chapterId >= 1 {
+            chapterId -= 1
+            loadingState = BookDetailLoadingState.loadingChapters
+            curPage = preChapterId
+        } else if curPage > 0 {curPage -= 1
+        } else { self.activeAlert = .first
             self.showAlert = true
         }
     }
-    
-    func TurnNextPages(){
-        if curPage >= pages.count-1{
-            PreChapterId = curPage
-            ChapterId += 1
-            loadingState = bookDetailLoadingState.loadingChapters
+    func turnNextPages() {
+        if curPage >= pages.count-1 {
+            preChapterId = curPage
+            chapterId += 1
+            loadingState = BookDetailLoadingState.loadingChapters
             curPage = 0
-        }else if curPage < pages.count && ChapterId < bookChapters.count{curPage += 1
-        }else {self.activeAlert = .second
-            self.showAlert = true}
+        } else if curPage < pages.count && chapterId < bookChapters.count { curPage += 1
+        } else { self.activeAlert = .second
+            self.showAlert = true }
     }
-    
-    func GetLocation(_ location: CGPoint){
-        Location = location
+    func getLocation(_ location: CGPoint) {
+        self.location = location
     }
 
-    func TapToChangePage() {
+    func tapToChangePage() {
         print(width)
-        if Location.x < width/3 {
-            TurnPreviousPages()
-        }else if Location.x > 2*width/3 {
-            TurnNextPages()
-        }else {
+        if location.x < width/3 {
+            turnPreviousPages()
+        } else if location.x > 2*width/3 {
+            turnNextPages()
+        } else {
             self.activeAlert = .third
                 self.showAlert = true
             print("back function")}
-    
     }
-    
-    func getChapters(){
+    func getChapters() {
         DispatchQueue.global(qos: .background).async {
             print("callgetchapter")
             if datas.state == DownloadJson.LoadState.failure {
@@ -172,8 +164,8 @@ struct ReadingBookChapters: View {
                 if bookChapters.count > 0 {
                     print("chapter id")
                     print(bookChapterId)
-                    //bookChapterId += 1
-                    bookChapterId = bookChapters[ChapterId].id
+                    // bookChapterId += 1
+                    bookChapterId = bookChapters[chapterId].id
                     print(bookChapterId)
                 }
                 self.loadingState = BookDetailLoadingState.loadingContents
