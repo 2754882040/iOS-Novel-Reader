@@ -64,7 +64,8 @@
 		6EACE72326CEE9CB0063BAD5 /* DownloadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EACE72226CEE9CB0063BAD5 /* DownloadImage.swift */; };
 		6EB69CE026E1DA7800649332 /* strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E923B7B26E0326C000E56B4 /* strings.swift */; };
 		6ED7B49026B9AD92005DDB48 /* splashscreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED7B48F26B9AD92005DDB48 /* splashscreen.swift */; };
-		6EF6EF8026EACA6B00FE47CA /* BookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF6EF7F26EACA6B00FE47CA /* BookDetailView.swift */; };
+		6EF42FBB273C7F6200E21F7D /* DownloadImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF42FBA273C7F6200E21F7D /* DownloadImageTests.swift */; };
+		6EF42FBD273CA4BF00E21F7D /* FunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF42FBC273CA4BF00E21F7D /* FunctionsTest.swift */; };
 		866C1F2226B4E1E900D59699 /* gemfile in Resources */ = {isa = PBXBuildFile; fileRef = 866C1F2126B4E1E900D59699 /* gemfile */; };
 		8DCB989626EFD65D00C4E372 /* MoreBooksPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB989526EFD65D00C4E372 /* MoreBooksPage.swift */; };
 /* End PBXBuildFile section */
@@ -136,7 +137,8 @@
 		6E9975DB26E063AE00443057 /* HomeBookButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBookButton.swift; sourceTree = "<group>"; };
 		6EACE72226CEE9CB0063BAD5 /* DownloadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadImage.swift; sourceTree = "<group>"; };
 		6ED7B48F26B9AD92005DDB48 /* splashscreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = splashscreen.swift; sourceTree = "<group>"; };
-		6EF6EF7F26EACA6B00FE47CA /* BookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailView.swift; sourceTree = "<group>"; };
+		6EF42FBA273C7F6200E21F7D /* DownloadImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadImageTests.swift; sourceTree = "<group>"; };
+		6EF42FBC273CA4BF00E21F7D /* FunctionsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionsTest.swift; sourceTree = "<group>"; };
 		866C1F2026B46A9800D59699 /* Libbris.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Libbris.xctestplan; sourceTree = "<group>"; };
 		866C1F2126B4E1E900D59699 /* gemfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = gemfile; sourceTree = "<group>"; };
 		8DCB989526EFD65D00C4E372 /* MoreBooksPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreBooksPage.swift; sourceTree = "<group>"; };
@@ -210,6 +212,8 @@
 				6E0308B926A7D9360030753C /* LibbrisTests.swift */,
 				6E0308BB26A7D9360030753C /* Info.plist */,
 				866C1F2026B46A9800D59699 /* Libbris.xctestplan */,
+				6EF42FBA273C7F6200E21F7D /* DownloadImageTests.swift */,
+				6EF42FBC273CA4BF00E21F7D /* FunctionsTest.swift */,
 			);
 			path = LibbrisTests;
 			sourceTree = "<group>";
@@ -313,7 +317,6 @@
 		6E2AE9242724836B00081BA0 /* Reading */ = {
 			isa = PBXGroup;
 			children = (
-				6EF6EF7F26EACA6B00FE47CA /* BookDetailView.swift */,
 				6E0C45A52728EC2C002D3A4A /* ReadingBookChapters.swift */,
 				0132B803273330ED00E25915 /* TouchLocatingView.swift */,
 			);
@@ -513,7 +516,6 @@
 				6E0320B126F14A7A00981B15 /* LibraryBookRecommend.swift in Sources */,
 				6E0308AA26A7D9350030753C /* ContentView.swift in Sources */,
 				6E2AE9262724888000081BA0 /* TopBarBackGround.swift in Sources */,
-				6EF6EF8026EACA6B00FE47CA /* BookDetailView.swift in Sources */,
 				6E0308A826A7D9350030753C /* LibbrisApp.swift in Sources */,
 				6E0037E426FD66DD00DD8A2A /* LocalJsonFileManager.swift in Sources */,
 				6E2AE92927248B0100081BA0 /* HomePageTopBar.swift in Sources */,
@@ -527,7 +529,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EF42FBD273CA4BF00E21F7D /* FunctionsTest.swift in Sources */,
 				6EA5F4AD271908C90059DB4D /* BookInfo.swift in Sources */,
+				6EF42FBB273C7F6200E21F7D /* DownloadImageTests.swift in Sources */,
 				6E0308BA26A7D9360030753C /* LibbrisTests.swift in Sources */,
 				6E717FF8272A374300937E0C /* strings.swift in Sources */,
 				6EA5F4AA271908760059DB4D /* DownloadJson.swift in Sources */,

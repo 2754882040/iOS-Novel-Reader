@@ -262,4 +262,32 @@ class LibbrisUITests: XCTestCase {
         app.textFields["SearchField"].clearAndEnterText(text: "")
         XCTAssertEqual(app.textFields["SearchField"].value as? String, empty)
     }
+    func testReadingBookChapters() {
+        let app = XCUIApplication()
+        app.launch()
+        sleep(2)
+        // swiftlint:disable next line_length
+        app/*@START_MENU_TOKEN@*/.buttons["skipButton"]/*[[".buttons[\"Skip\"]",".buttons[\"skipButton\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.scrollViews["HomePageScrollView"].otherElements/*@START_MENU_TOKEN@*/.buttons["HomeBookButton76"]/*[[".buttons[\"blank_book_shadow\"]",".buttons[\"HomeBookButton76\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        let normalized = app.staticTexts["BookContent"].coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
+        let coordinate = normalized.withOffset(CGVector(dx: 300, dy: 10))
+        coordinate.tap()
+        coordinate.tap()
+        coordinate.tap()
+        coordinate.tap()
+        coordinate.tap()
+        coordinate.tap()
+        coordinate.tap()
+        coordinate.tap()
+        coordinate.tap()
+        coordinate.tap()
+        coordinate.tap()
+        coordinate.tap()
+        coordinate.tap()
+        let scrollViewsQuery = app.alerts["This is the last page"].scrollViews
+        let thisIsTheLastPageElement = scrollViewsQuery.otherElements.containing(.staticText, identifier:"This is the last page").element
+        thisIsTheLastPageElement.tap()
+        thisIsTheLastPageElement.tap()
+        scrollViewsQuery.otherElements.buttons["OK"].tap()
+    }
 }

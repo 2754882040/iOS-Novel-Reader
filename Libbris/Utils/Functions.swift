@@ -28,8 +28,8 @@ let name = UserDefaults.standard.string(forKey: "language")
 func showLanguage() {
     let name = UserDefaults.standard.string(forKey: "language")
     let language = Bundle.main.preferredLocalizations.first
-    print(name ?? "nil")
-    print(language ?? "nil")
+    print("\(#function) \(name ?? "nil")")
+    print("\(#function) \(language ?? "nil")")
 }
 
 func changeLanguage(language: String) {

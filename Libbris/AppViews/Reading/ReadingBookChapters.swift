@@ -6,6 +6,31 @@
 //
 
 import SwiftUI
+struct MyTextView: UIViewRepresentable {
+    var text: NSAttributedString
+    func updateUIView(_ uiView: UILabel, context: UIViewRepresentableContext<MyTextView>) {
+        uiView.attributedText = text
+    }
+    var width: CGFloat
+
+    func makeUIView(context: Context) -> UILabel {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.preferredMaxLayoutWidth = width
+        label.attributedText = text
+        return label
+    }
+}
+func attribute()->[NSAttributedString.Key: Any] {
+    let font = UIFont.systemFont(ofSize: 10)
+    let paragraphStyle = NSMutableParagraphStyle()
+    paragraphStyle.alignment = .left
+    paragraphStyle.firstLineHeadIndent = 5.0
+    paragraphStyle.lineSpacing = 5
+    paragraphStyle.paragraphSpacing = 10
+    paragraphStyle.lineBreakMode = .byWordWrapping
+    return [.font: font, .paragraphStyle: paragraphStyle]
+}
 
 extension String {
     var htmlToAttributedString: NSAttributedString? {

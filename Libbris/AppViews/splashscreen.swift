@@ -14,7 +14,7 @@ struct SplashScreen: View {
     @Binding var backgroundRuningTime: Date?
     @State var showAD: Bool = false
     @State var ADExist: Bool = false
-    let imageDir = "/Documents/123"
+    let imageDir = "/Documents/Ads"
     var body:some View {
         ZStack {
             Image("screens/Default-568h")

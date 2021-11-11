@@ -11,7 +11,7 @@ import SwiftUI
 struct LibbrisApp: App {
     init() {
         // swiftlint:disable line_length
-        _loader = StateObject(wrappedValue: Loader(url: "https://uc7d11632bec8f9c2152ea0b08b0.previews.dropboxusercontent.com/p/thumb/ABVpptBOCyhwPWDJsN0rkmZVUKraLHI7dhSH8a2C8KSVMp9TmbLU3zDtmSsv-WVx5v9bpmGUsB49wlsztrmkxm3iKQSNmXOVBJtu-t3G8SBtup8UMHb_O_Gzp7McI5R6xA2QG3Bodg2dtwHCaVzyK_M0V5hKSn36Jx0RW06LpcdRULhi4H7xQQ0bpd6KaOu9mb5lGfls77f_HAiwLBe3PvZblBRgbWHvSHf3K7gs-SREewDYPP85n8h7D4ACEF-nq3Qswo5QIdNvMfKmVNmi9vgkEsJ5ONvekv9mMCWcs-JqQDXS3isSZosq7f_XS6GQyWE4HJer0fVf3Q9kCvj-2X8qZ_ESdQY7V4AXv7DbIKObyQ/p.png?fv_content=true&size_mode=5"))
+        _loader = StateObject(wrappedValue: Loader(url: "https://ucb11545093654e5f8b5bda1402d.previews.dropboxusercontent.com/p/thumb/ABWs-4goiQs0WT4QZwfdZaC-So27PqwET60Ywe4_p-U_dxLv_qLWrG4ohEXkHKMDlyfWS3l3Ws9IJkbo-vC8xBr96eUFOfGGi2SBWFtmYBpXAOnCXZNxmR19TSrpOrU8WA7TdI6YtVSmljb9be780lCGlIUqCZHaqgLZTuYaonFJC4FvkIB016i52D2ntxAi0zIgGziycmJA43D5Oo3re_XLhm6euInFwcHG6fJXH5w3dG1IjiVW85DqFpGOB78pBWE4WEvLBxvNuM7Z0Hv2x5yDGTz432YXNyuh3EO5qH3c5UGF139aHmaEIxnv4cxjqw91GtKJmL5wihcb58ZOJpOJE2S-EQXj0u_QtpQAGZUGo2ZyQ2NL5RjwBrECs87hLwM/p.png", name: "Ads"))
         // swiftlint:enable line_length
     }
     @Environment(\.scenePhase) var scenePhase
