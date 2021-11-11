@@ -23,6 +23,14 @@ struct BookInfoBrief: Codable, Hashable {
     var summary: String
     var cover: String?
     var bookUrlName: String
+    init() {
+    id = 0
+    name = " "
+    authorName = " "
+    summary = " "
+    cover = " "
+    bookUrlName = " "
+    }
 }
 struct BookInfoBriefWithTime: Codable, Hashable, Comparable {
     static func < (lhs: BookInfoBriefWithTime, rhs: BookInfoBriefWithTime) -> Bool {
@@ -61,9 +69,13 @@ struct BookInfoBriefWithTime: Codable, Hashable, Comparable {
 struct BookChapter: Codable {
     var id: Int
     var title: String
+    init() {
+        id = 0
+        title = " "
+    }
 }
 
-struct AlertInfo:Identifiable {
+struct AlertInfo: Identifiable {
     var id: String { name }
     let name: String
 }

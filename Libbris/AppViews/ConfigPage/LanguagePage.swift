@@ -50,9 +50,10 @@ struct LanguagePage: View {
         })
     }
 }
-
+#if !TESTING
 struct LanguagePage_Previews: PreviewProvider {
     static var previews: some View {
         LanguagePage()
     }
 }
+#endif

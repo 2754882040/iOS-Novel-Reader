@@ -66,13 +66,7 @@ public class Loader: ObservableObject {
         imagefileStatus = .checkUpdate
         let fileTimeStamp = lastModifyDate(filePath: filePath)
         let tempTime = fileTimeStamp!.addingTimeInterval(interval)
-        if tempTime < Date() {
-            print("\(#function) File need update!")
-            return true
-        } else {
-            print("\(#function) File do not need update!")
-            return false
-        }
+        return tempTime < Date() ? true : false
     }
     func loadData(URLString: String,
                   completionHandler: @escaping (UIImage?, Error?) -> Void) {
@@ -104,9 +98,7 @@ public class Loader: ObservableObject {
         } else {
             imagefileStatus = .saveFail
             print("\(#function) image can not save")
-            return false
-        }
-    }
+            return false } }
     func loadAndSaveData(URLString: String, persent: CGFloat, imageName: String) {
         loadData(URLString: URLString, completionHandler: { (img, error) -> Void in
             if error == nil {
@@ -125,11 +117,9 @@ public class Loader: ObservableObject {
             if checkImageNeedUpdate(filePath: filePath, interval: interval) {
                 loadAndSaveData(URLString: URLString, persent: 10, imageName: name)
             }
-        } else {
-            loadAndSaveData(URLString: URLString, persent: 10, imageName: name)
-        }
-    }
+        } else { loadAndSaveData(URLString: URLString, persent: 10, imageName: name)}}
     func keepCheckInBackground(filePath: String, name: String, URLString: String, interval: TimeInterval) {
+        print("\(#function)!")
         DispatchQueue.global(qos: .background).async {
             self.keepCheck = .running
             while true {

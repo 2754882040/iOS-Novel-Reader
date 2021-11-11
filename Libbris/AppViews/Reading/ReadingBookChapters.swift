@@ -207,7 +207,7 @@ struct ReadingBookChapters: View {
         DispatchQueue.global(qos: .background).async {
         print("callloadContentData")
         self.bookContentURL = URL(string: getChapterContentAPI(bookId: bookId, chapterId: bookChapterId))!
-        URLSession.shared.dataTask(with: bookContentURL) { data, response, error in
+        URLSession.shared.dataTask(with: bookContentURL) { data, _, _ in
             guard let tempString = NSString(data: data ?? Data(), encoding: String.Encoding.utf8.rawValue) else {
                 self.loadingState = BookDetailLoadingState.loadingConteentsFailed
                 return}
@@ -248,10 +248,11 @@ struct ReadingBookChapters: View {
 
     }
 }
-/*
+
+#if !TESTING
 struct ReadingBookChapters_Previews: PreviewProvider {
     static var previews: some View {
-        ReadingBookChapters()
+        ReadingBookChapters(bookId: 77)
     }
 }
- */
+#endif

@@ -28,10 +28,11 @@ let name = UserDefaults.standard.string(forKey: "language")
 func showLanguage() {
     let name = UserDefaults.standard.string(forKey: "language")
     let language = Bundle.main.preferredLocalizations.first
+    #if !TESTING
     print("\(#function) \(name ?? "nil")")
     print("\(#function) \(language ?? "nil")")
+    #endif
 }
-
 func changeLanguage(language: String) {
     UserDefaults.standard.set(language, forKey: "language")
 }
@@ -50,9 +51,9 @@ func getLanguageNumber() -> Int {
     if name == nil {
         let language = Bundle.main.preferredLocalizations.first
         switch language {
-        case "en":return 0
-        case "zh-Hans":return 1
-        case "fr":return 2
+        case "en": return 0
+        case "zh-Hans": return 1
+        case "fr": return 2
         default: return 0
         }
     } else {
@@ -64,22 +65,31 @@ func getLanguageNumber() -> Int {
         }
     }
 }
-func getLanguageCode(language: String) {}
-
 extension  Notification.Name {
     static let switchLanguage = Notification.Name("switchLanguage")
     static let refreshBook = Notification.Name("refreshBook")
 }
 
-func decodeData<T: Codable>(data: Data) throws -> T {
+func decodeData<T: Codable>(data: Data) -> T? {
     let jsonDecoder = JSONDecoder()
     do {
         let parsedJSON = try jsonDecoder.decode(T.self, from: data)
-        print(parsedJSON)
+        print("\(#function): success!")
         return parsedJSON
     } catch {
-        print(error)
-        fatalError("\(error)")
+        print("\(#function): fail!")
+        return nil
+    }
+}
+func encodeData<T: Codable>(data: T) -> Data? {
+    let jsonEncoder = JSONEncoder()
+    do {
+        let tempdata = try jsonEncoder.encode(data)
+        print("\(#function): success!")
+        return tempdata
+    } catch {
+        print("\(#function): fail!")
+        return nil
     }
 }
 let fullPath = NSHomeDirectory().appending("/Documents/").appending("bookShelf")

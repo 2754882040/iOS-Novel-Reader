@@ -26,20 +26,20 @@ struct LibraryBookVertical: View {
                 let rows = [GridItem(), GridItem()]
                 LazyHGrid(rows: rows) {
                     ForEach(items, id: \.self) { item in
-                        LibraryBookRecommend(bookDetail: books[item])
+                        LibraryBook(bookDetail: books[item], recommend: true)
                             .accessibilityIdentifier("LibraryBookRecommend\(item)")
                     }
                 }.frame(height: 300)
             }
         }.onAppear(perform: {
             DispatchQueue.global(qos: .background).async {
-                while datas.state == .loading {
-                    sleep(1)
-                }
+                while datas.state == .loading {}
                 if datas.state == .success {
-                    // swiftlint:disable force_try
-                    books = try! datas.decodeData(data: datas.jsonData)
-                    // swiftlint:enable force_try
+                    var decodedBookData: [BookInfoBrief]?
+                    decodedBookData = decodeData(data: datas.jsonData)
+                    if decodedBookData != nil && !decodedBookData!.isEmpty {
+                        books = decodedBookData!
+                    }
                 }
             }
         }).onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
@@ -47,9 +47,10 @@ struct LibraryBookVertical: View {
         })
     }
 }
-
+#if !TESTING
 struct LibraryBookVertical_Previews: PreviewProvider {
     static var previews: some View {
         LibraryBookVertical()
     }
 }
+#endif

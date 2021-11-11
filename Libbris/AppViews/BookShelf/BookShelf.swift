@@ -44,9 +44,10 @@ struct BookShelf: View {
         }
     }
 }
-
+#if !TESTING
 struct BookShelf_Previews: PreviewProvider {
     static var previews: some View {
         BookShelf()
     }
 }
+#endif

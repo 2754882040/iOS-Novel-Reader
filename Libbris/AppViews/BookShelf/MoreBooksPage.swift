@@ -61,9 +61,10 @@ struct MoreBooksPage: View {
             .navigationViewStyle(StackNavigationViewStyle())
     }
 }
-
+#if !TESTING
 struct MoreBooksPage_Previews: PreviewProvider {
     static var previews: some View {
         MoreBooksPage()
     }
 }
+#endif
