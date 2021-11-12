@@ -12,6 +12,13 @@ struct BookList: View {
         _datas = StateObject(wrappedValue: DownloadJson(url: url))
         self.categoryId = cId
         self.url = url
+        self.searchOn = false
+    }
+    init(url: String) {
+        _datas = StateObject(wrappedValue: DownloadJson(url: url))
+        self.categoryId = 0
+        self.url = url
+        self.searchOn = true
     }
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var books: [BookInfoBrief] = [BookInfoBrief]()
@@ -20,6 +27,7 @@ struct BookList: View {
     @State var noBooksText = localizedString(text: strNoMoreBook)
     @State var noMoreBook: Bool = false
     @State var curBookCount: Int = 0
+    @State var searchOn: Bool = false
     let url: String
     let categoryId: Int
     let screenSize: CGRect = UIScreen.main.bounds
@@ -41,9 +49,9 @@ struct BookList: View {
                                 .accessibilityIdentifier("LibraryBook\(item)")
                             Spacer(minLength: 20)
                         }
-                        if noMoreBook {
-                            Text(noBooksText).accessibilityIdentifier("textNoMoreBooks")
-                        } else { loadMore.onAppear(perform: {loadBook()})}
+                        if noMoreBook {Text(noBooksText).accessibilityIdentifier("textNoMoreBooks")}
+                         else if searchOn == false {
+                            loadMore.onAppear(perform: {loadBook()})}
                         Spacer(minLength: 10)
                     }
                 }

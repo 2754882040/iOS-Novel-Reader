@@ -77,6 +77,35 @@ class LibbrisUITests: XCTestCase {
         XCTAssertEqual(frame1.origin.x, frame2.origin.x)
         XCTAssertEqual(frame1.origin.y, frame2.origin.y)
     }
+
+    func testBookDetailView() {
+        let app = XCUIApplication()
+        app.launch()
+        sleep(2)
+        app.buttons["skipButton"].tap()
+        app.tabBars["Tab Bar"].buttons["icon_home_nor_iOS_25@1"].tap()
+        app.buttons["LibraryBook0"].tap()
+        sleep(1)
+        app.buttons["NEXT PAGE"].tap()
+        sleep(1)
+        app.buttons["PREVIOUS PAGE"].tap()
+        sleep(1)
+        app.buttons["back"].tap()
+        XCTAssertTrue(app.staticTexts["BookContent"].exists)
+    }
+    func testSearchPage() {
+        let app = XCUIApplication()
+        app.launch()
+        sleep(1)
+        app.buttons["skipButton"].tap()
+        app.tabBars["Tab Bar"].buttons["icon_home_nor_iOS_25@1"].tap()
+        sleep(1)
+        let typeContent = app.textFields["SearchArea"]
+        typeContent.tap()
+        typeContent.typeText("Alice")
+        app.buttons["SearchButton"].tap()
+        XCTAssertTrue(app.scrollViews["SearchResultsPage"].exists)
+    }
     func testReadingBookChapters() {
         let app = XCUIApplication()
         app.launch()

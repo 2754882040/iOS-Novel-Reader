@@ -18,8 +18,10 @@ struct BookShelfTopBar: View {
                 Text(libraryText)
                 .foregroundColor(.white)
                     .font(.custom("Dosis-Bold", size: 20)).padding(.leading, 8.0)
-                searchArea
-                Button(action: {}, label: {Image(systemName: "magnifyingglass")})
+                searchArea.accessibilityIdentifier("SearchArea")
+                NavigationLink(destination: SearchResults(searchName: searchName)) {
+                    Image(systemName: "magnifyingglass").accessibilityIdentifier("SearchButton")
+                }
             }
         }.onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
             self.libraryText = localizedString(text: strLibrary)
