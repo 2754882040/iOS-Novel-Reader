@@ -6,18 +6,14 @@
 //
 import SwiftUI
 
-
-
 struct BlankView: View {
     var body: some View {
         Text("asd ")
     }
 }
-    
 
 struct BlankView_Previews: PreviewProvider {
     static var previews: some View {
         BlankView()
     }
 }
-

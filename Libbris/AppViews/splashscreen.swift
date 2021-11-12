@@ -8,47 +8,53 @@
 import Foundation
 import SwiftUI
 
-struct SplashScreen:View {
+struct SplashScreen: View {
     @Environment(\.presentationMode) var mode
-    @Binding var showSplashScreen:Bool
-    @Binding var backgroundRuningTime:Date?
-    @State var showAD:Bool = false
-    @State var ADExist:Bool = false
+    @Binding var showSplashScreen: Bool
+    @Binding var backgroundRuningTime: Date?
+    @State var showAD: Bool = false
+    @State var ADExist: Bool = false
     let imageDir = "/Documents/123"
-    var body:some View
-    {
-        ZStack{
-            Image("screens/Default-568h").resizable(resizingMode: .stretch).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-                .onAppear(perform: countTime).navigationBarBackButtonHidden(true).navigationBarHidden(true).onAppear(perform:countADTime)
-                .onAppear(perform:checkAdFile)
-            if(showAD){
-                if(ADExist){
-                    Image(uiImage:UIImage(contentsOfFile:NSHomeDirectory().appending(imageDir))!)
-                        .resizable(resizingMode: .stretch).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/).accessibilityIdentifier("ADImage")
-                    
+    var body:some View {
+        ZStack {
+            Image("screens/Default-568h")
+                .resizable(resizingMode: .stretch)
+                .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                .onAppear(perform: countTime)
+                .navigationBarBackButtonHidden(true)
+                .navigationBarHidden(true).onAppear(perform: countADTime)
+                .onAppear(perform: checkAdFile)
+            if showAD {
+                if ADExist {
+                    Image(uiImage: UIImage(contentsOfFile: NSHomeDirectory()
+                                            .appending(imageDir))!)
+                        .resizable(resizingMode: .stretch)
+                        .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                        .accessibilityIdentifier("ADImage")
                 }
-            Button(action: {goBackToPreviousView()}){
-                ZStack{
-                    Color.gray.frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, idealWidth: 70, maxWidth: 80, minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, idealHeight: 30, maxHeight: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    let skipmessage = localizedString(text: strSkip);
+            Button(action: {goBackToPreviousView()},
+                   label: {
+                ZStack {
+                    Color.gray
+                        .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, idealWidth: 70,
+                               maxWidth: 80, minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/,
+                               idealHeight: 30, maxHeight: 30,
+                               alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    let skipmessage = localizedString(text: strSkip)
                     Text(skipmessage).foregroundColor(.white)
-                    }
-                .cornerRadius(20)
-            }
-            .position(x: 330, y: 30.0).accessibilityIdentifier("skipButton");
+                    }.cornerRadius(20)
+            })
+            .position(x: 330, y: 30.0).accessibilityIdentifier("skipButton")
             }
         }
     }
-    func checkAdFile(){
-        do{
-            _ = try FileManager.default.attributesOfItem(atPath:  NSHomeDirectory().appending(imageDir))
+    func checkAdFile() {
+        do {
+            _ = try FileManager.default.attributesOfItem(atPath: NSHomeDirectory().appending(imageDir))
             ADExist = true
-        }
-        catch{ADExist = false}
+        } catch { ADExist = false }
     }
-    
-    func countTime()
-    {
+    func countTime() {
         var countDownNum = 5
         let countdownTimer = Timer(timeInterval: 1.0, repeats: true) { timer in
             if countDownNum == 0 {
@@ -66,8 +72,7 @@ struct SplashScreen:View {
         RunLoop.current.add(countdownTimer, forMode: .default)
         countdownTimer.fire()
     }
-    func countADTime()
-    {
+    func countADTime() {
         var countDownNum = 1
         let countdownTimer = Timer(timeInterval: 1.0, repeats: true) { timer in
             if countDownNum == 0 {
@@ -81,7 +86,7 @@ struct SplashScreen:View {
         RunLoop.current.add(countdownTimer, forMode: .default)
         countdownTimer.fire()
     }
-    func goBackToPreviousView(){
+    func goBackToPreviousView() {
         self.mode.wrappedValue.dismiss()
         showSplashScreen = false
         backgroundRuningTime = nil

@@ -11,7 +11,10 @@ extension String {
     var htmlToAttributedString: NSAttributedString? {
         guard let data = data(using: .utf8) else { return nil }
         do {
-            return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue], documentAttributes: nil)
+            return try NSAttributedString(data: data,
+                                          options: [.documentType: NSAttributedString.DocumentType.html,
+                                                        .characterEncoding: String.Encoding.utf8.rawValue],
+                                          documentAttributes: nil)
         } catch {
             return nil
         }
@@ -22,79 +25,76 @@ extension String {
 }
 
 struct ReadingBookChapters: View {
-    init(bookId:Int){
-        _datas = StateObject(wrappedValue: DownloadJson(url:getAllChaptersAPI(bookId: bookId)))
+    init(bookId: Int) {
+        _datas = StateObject(wrappedValue: DownloadJson(url: getAllChaptersAPI(bookId: bookId)))
         self.bookId = bookId
 
-        //let parsedURL = URL(string: getChapterContentAPI(bookId:bookId,chapterId:1))
-        //let chaptersURL = URL(string: getAllChaptersAPI(bookId: bookId))
-        //bookContentURL = parsedURL!
-        //bookChaptersURL = chaptersURL!
-        
-
+        // let parsedURL = URL(string: getChapterContentAPI(bookId:bookId,chapterId:1))
+        // let chaptersURL = URL(string: getAllChaptersAPI(bookId: bookId))
+        // bookContentURL = parsedURL!
+        // bookChaptersURL = chaptersURL!
     }
-    
-    enum bookDetailLoadingState{
-        case loadingChapters,loadingChaptersFailed, loadingContents,loadingConteentsFailed,Success
+    enum BookDetailLoadingState {
+        case loadingChapters, loadingChaptersFailed, loadingContents, loadingConteentsFailed, successAllLoading
     }
-    @State var loadingState = bookDetailLoadingState.loadingChapters
+    @State var loadingState = BookDetailLoadingState.loadingChapters
     @StateObject public var datas: DownloadJson
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
-    @State var bookChapterId:Int=1
-    var bookId:Int
-    @State var bookContentURL:URL = URL(string: getChapterContentAPI(bookId:1,chapterId:1))!
-    //var bookChaptersURL:URL
+    @State var bookChapterId: Int=1
+    var bookId: Int
+    @State var bookContentURL: URL = URL(string: getChapterContentAPI(bookId: 1, chapterId: 1))!
+    // var bookChaptersURL:URL
     let screenSize: CGRect = UIScreen.main.bounds
-    @State var bookChapters:[BookChapter] = [BookChapter]()
+    @State var bookChapters: [BookChapter] = [BookChapter]()
     @State var curPage = 0
     @State var pages = [NSAttributedString]()
     @State var testInput = NSMutableAttributedString()
-    @State var currentPage:Int = 0
-    @State var ChapterContent:String = ""
-    
-    var reloadButton: some View{
-        Button(action: {},label: {Text("Try again")})
-        
+    @State var currentPage: Int = 0
+    @State var chapterContent: String = ""
+    var reloadButton: some View {
+        Button(action: {}, label: {Text("Try again")})
     }
-    var loadingText: some View{
+    var loadingText: some View {
         Text("loading...")
     }
-    var bookContent: some View{
+    var bookContent: some View {
         Text("contents")
     }
     var body: some View {
-        ZStack{
+        ZStack {
             Color(white: 1, opacity: 1)
                 .navigationViewStyle(StackNavigationViewStyle())
                 .navigationBarHidden(true)
-                if ( loadingState == bookDetailLoadingState.loadingChapters){
+                if loadingState == BookDetailLoadingState.loadingChapters {
                     loadingText.onAppear(perform: {getChapters()})
-                }else if loadingState == bookDetailLoadingState.loadingChaptersFailed ||
-                            loadingState == bookDetailLoadingState.loadingConteentsFailed{
+                } else if loadingState == BookDetailLoadingState.loadingChaptersFailed ||
+                            loadingState == BookDetailLoadingState.loadingConteentsFailed {
                     reloadButton
-                }else if loadingState == bookDetailLoadingState.loadingContents{
+                } else if loadingState == BookDetailLoadingState.loadingContents {
                     loadingText.onAppear(perform: {loadContentData()})
-                }else{
-                    if pages.count > 0{
-                        MyTextView(text: pages[curPage].mutableCopy() as! NSMutableAttributedString, width: screenSize.width * 0.75).frame(width: screenSize.width * 0.75, height: screenSize.height * 0.75).accessibilityIdentifier("BookContent")}
+                } else {
+                    if pages.count > 0 {
+                        MyTextView(text: pages[curPage],
+                                   width: screenSize.width * 0.75)
+                        .frame(width: screenSize.width * 0.75, height: screenSize.height * 0.75)
+                        .accessibilityIdentifier("BookContent")}
                 }
             }
-        HStack{
-            Button(action: {curPage -= 1}) {Text("PREVIOUS PAGE")}.disabled(curPage < 1)
-            Button(action: {self.presentationMode.wrappedValue.dismiss()}) {Text("back")}
-            Button(action: {curPage += 1}) {Text("NEXT PAGE")}.disabled(curPage >= pages.count-1)
-            
+        HStack {
+            Button(action: {curPage -= 1}, label: {Text("PREVIOUS PAGE")}).disabled(curPage < 1)
+            Button(action: {self.presentationMode.wrappedValue.dismiss()}, label: {Text("back")})
+            Button(action: {curPage += 1}, label: {Text("NEXT PAGE")}).disabled(curPage >= pages.count-1)
         }
     }
-    func getChapters(){
+    func getChapters() {
         DispatchQueue.global(qos: .background).async {
             print("callgetchapter")
-            if datas.state == DownloadJson.LoadState.failure{
-                self.loadingState = bookDetailLoadingState.loadingChaptersFailed
-            }
-            else if datas.state == DownloadJson.LoadState.success{
+            if datas.state == DownloadJson.LoadState.failure {
+                self.loadingState = BookDetailLoadingState.loadingChaptersFailed
+            } else if datas.state == DownloadJson.LoadState.success {
+                // swiftlint:disable force_try
                 self.bookChapters = try! JSONDecoder().decode([BookChapter].self, from: datas.jsonData)
+                // swiftlint:enable force_try
                 print(self.bookChapters)
                 if bookChapters.count > 0 {
                     print("chapter id")
@@ -102,39 +102,40 @@ struct ReadingBookChapters: View {
                     bookChapterId = bookChapters[0].id
                     print(bookChapterId)
                 }
-                self.loadingState = bookDetailLoadingState.loadingContents
-            }
-            else {
+                self.loadingState = BookDetailLoadingState.loadingContents
+            } else {
                 getChapters()
             }
         }
     }
-    func loadContentData(){
+    func loadContentData() {
         DispatchQueue.global(qos: .background).async {
         print("callloadContentData")
-        self.bookContentURL = URL(string: getChapterContentAPI(bookId:bookId,chapterId:bookChapterId))!
+        self.bookContentURL = URL(string: getChapterContentAPI(bookId: bookId, chapterId: bookChapterId))!
         URLSession.shared.dataTask(with: bookContentURL) { data, response, error in
-            guard let tempString = NSString(data: data ?? Data(), encoding: String.Encoding.utf8.rawValue) else{
-                self.loadingState = bookDetailLoadingState.loadingConteentsFailed
+            guard let tempString = NSString(data: data ?? Data(), encoding: String.Encoding.utf8.rawValue) else {
+                self.loadingState = BookDetailLoadingState.loadingConteentsFailed
                 return}
             print("success")
-            ChapterContent = tempString as String
-            ChapterContent = ChapterContent.htmlToString
-            pages = getContent(content: ChapterContent)
-            self.loadingState = bookDetailLoadingState.Success
-            
+            chapterContent = tempString as String
+            chapterContent = chapterContent.htmlToString
+            pages = getContent(content: chapterContent)
+            self.loadingState = BookDetailLoadingState.successAllLoading
         }.resume()
         }
     }
-    
-    func getContent(content:String)->[NSAttributedString]{
-        self.testInput = NSMutableAttributedString(string: content,attributes: attribute())
+    func getContent(content: String) -> [NSAttributedString] {
+        self.testInput = NSMutableAttributedString(string: content, attributes: attribute())
         let framesetter = CTFramesetterCreateWithAttributedString(testInput as CFAttributedString)
-        let path = CGPath(rect:CGRect(origin: CGPoint.zero, size:CGRect(x: 0, y: 0, width: screenSize.width * 0.75, height: screenSize.height * 0.75).size), transform: nil)
+        let path = CGPath(rect:
+                            CGRect(origin: CGPoint.zero,
+                                   size: CGRect(x: 0, y: 0,
+                                               width: screenSize.width * 0.75,
+                                               height: screenSize.height * 0.75).size), transform: nil)
         var range = CFRangeMake(0, 0)
         var rangeOffset = 0
         var rangeArray = [NSRange]()
-        repeat{
+        repeat {
             let frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(rangeOffset, 0), path, nil)
             range = CTFrameGetVisibleStringRange(frame)
             rangeArray.append(NSMakeRange(rangeOffset, range.length))
@@ -144,8 +145,8 @@ struct ReadingBookChapters: View {
         let size = rangeArray.count
         var page = [NSAttributedString]()
        print(size)
-        for n in 0..<size {
-            let attributedString = testInput.attributedSubstring(from: rangeArray[n])
+        for num in 0..<size {
+            let attributedString = testInput.attributedSubstring(from: rangeArray[num])
             page.append(attributedString)
         }
         return page

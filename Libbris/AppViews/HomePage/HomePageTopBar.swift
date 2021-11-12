@@ -10,16 +10,12 @@ import SwiftUI
 struct HomePageTopBar: View {
     let screenSize: CGRect = UIScreen.main.bounds
     var body: some View {
-        ZStack(alignment: .leading){
+        ZStack(alignment: .leading) {
             TopBarBackGround()
-            VStack{
+            VStack {
                 Image("logo_libbris_white").padding(.leading, 5.0)
-                    
             }
         }
-    }
-    func add(a:Int,b:Int)->Int{
-        return a+b
     }
 }
 

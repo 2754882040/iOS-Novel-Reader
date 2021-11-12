@@ -12,25 +12,25 @@ struct InfoPage: View {
     @State var teamText = localizedString(text: strTeam)
     @State var versionText = localizedString(text: strVersion)
     @State var mailText = localizedString(text: strMail)
-    @State var infos = localizedString(text: strInfos);
+    @State var infos = localizedString(text: strInfos)
     var btnBack : some View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
-            }) {
+        }, label: {
                 HStack {
                     Image(systemName: "arrow.backward").foregroundColor(.white)
                     Text(infos).foregroundColor(.white).font(.custom("Dosis-Bold", size: 20))
                 }
-            }
+            })
         }
     var body: some View {
-        VStack(alignment: .center){
+        VStack(alignment: .center) {
             Image(uiImage: UIImage(imageLiteralResourceName: "AppIcon"))
                 .resizable(resizingMode: .stretch)
                 .frame(width: 100.0, height: 100.0)
                 .accessibilityIdentifier("iconImage")
                 .padding(/*@START_MENU_TOKEN@*/.all, 30.0/*@END_MENU_TOKEN@*/)
-            List{
+            List {
                 Text("\(versionText): \(Bundle.main.appVersionShort!)")
                 Text("""
                     \(teamText)
@@ -49,13 +49,10 @@ struct InfoPage: View {
             self.versionText = localizedString(text: strVersion)
             self.mailText = localizedString(text: strMail)
         })
-        
     }
 }
 
-
 extension Bundle {
-    
     public var appVersionShort: String? {
         if let result = infoDictionary?["CFBundleShortVersionString"] as? String {
             return result
@@ -63,5 +60,4 @@ extension Bundle {
             return "⚠️"
         }
     }
-    
 }

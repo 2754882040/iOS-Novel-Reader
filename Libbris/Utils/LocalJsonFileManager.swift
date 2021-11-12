@@ -7,85 +7,71 @@
 
 import Foundation
 
-
-
-public class localJsonFileManager: ObservableObject {
- 
-    static let shared = localJsonFileManager()
-    var jsonData = Data();
-    var bookShelfBook:[BookInfoBriefWithTime] = [BookInfoBriefWithTime]()
+public class LocalJsonFileManager: ObservableObject {
+    static let shared = LocalJsonFileManager()
+    var jsonData = Data()
+    var bookShelfBook: [BookInfoBriefWithTime] = [BookInfoBriefWithTime]()
     var state = LoadState.loading
-    private init(){
+    private init() {
         readData()
     }
-   
-    func readData(){
+    func readData() {
         let parsedURL = URL(fileURLWithPath: fullPath)
         state = LoadState.loading
-        do{
-            let tempdata = try NSData(contentsOf:parsedURL) as Data
+        do {
+            let tempdata = try NSData(contentsOf: parsedURL) as Data
             jsonData = tempdata
+            // swiftlint:disable force_try
             bookShelfBook = try! decodeData(data: jsonData)
+            // swiftlint:enable force_try
             state = LoadState.success
-        }
-        catch{
+        } catch {
             print("failed")
             state = LoadState.failure
-            
         }
         print("loading from local")
 
     }
-    func findBookId(id:Int)->Int{
-        for i in 0..<bookShelfBook.count{
-            if bookShelfBook[i].id == id{
-                print("found!\(i)")
-                return i
-            }
+    func findBookId(id: Int) -> Int {
+        for num in 0..<bookShelfBook.count where bookShelfBook[num].id == id {
+                print("found!\(num)")
+                return num
         }
         return -1
     }
-    
-    func sortArray(){
-        for i in 0..<bookShelfBook.count{
-            var tempDate = bookShelfBook[i].time
-            var newTimeId = i
-            for j in i..<bookShelfBook.count{
-                if bookShelfBook[j].time > tempDate{
-                    tempDate = bookShelfBook[j].time
-                    newTimeId = j
-                }
+    func sortArray() {
+        for num in 0..<bookShelfBook.count {
+            var tempDate = bookShelfBook[num].time
+            var newTimeId = num
+            for secNum in num ..< bookShelfBook.count where bookShelfBook[secNum].time > tempDate {
+                    tempDate = bookShelfBook[secNum].time
+                    newTimeId = secNum
             }
-            bookShelfBook.swapAt(i, newTimeId)
+            bookShelfBook.swapAt(num, newTimeId)
         }
     }
-    
-    func decodeData<T:Codable>(data:Data)throws->T{
-        
+    func decodeData<T: Codable>(data: Data) throws -> T {
         let jsonDecoder = JSONDecoder()
         do {
             let parsedJSON = try jsonDecoder.decode(T.self, from: data)
             print("decode:\(parsedJSON)")
             return parsedJSON
         } catch {fatalError("\(error)")}
-        
     }
-    
-    func encodeData<T:Codable>(data:T)->Data{
+    func encodeData<T: Codable>(data: T) -> Data {
         let jsonEncoder = JSONEncoder()
+        // swiftlint:disable force_try
         let tempdata = try! jsonEncoder.encode(data)
+        // swiftlint:enable force_cast
         print(tempdata)
         return tempdata
     }
-    
-    func saveData(data:Data){
+    func saveData(data: Data) {
         sortArray()
         print(fullPath)
         if let tempdata = data as NSData? {
             tempdata.write(toFile: NSHomeDirectory().appending("/Documents/").appending("bookShelf"), atomically: true)
             print("success")
             print(fullPath)}
-        
     }
-        
 }

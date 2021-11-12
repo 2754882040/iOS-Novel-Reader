@@ -12,50 +12,47 @@ public class Loader: ObservableObject {
     var data = Data()
     init(url: String) {
         downloadImage(URLString: url)
-        backgroundCheckImageUpdate(DATE: Date(),URLString: url)
+        backgroundCheckImageUpdate(DATE: Date(), URLString: url)
         }
-    func backgroundCheckImageUpdate(DATE:Date,URLString: String){
+    func backgroundCheckImageUpdate(DATE: Date, URLString: String) {
         var tempTimeVar = DATE
         DispatchQueue.global(qos: .background).async {
-            while (true){
+            while true {
                 print("background thread runing")
                 let tempTime = tempTimeVar.addingTimeInterval(3600)
-                if (tempTime < Date()){
+                if tempTime < Date() {
                     self.downloadImage(URLString: URLString)
                     tempTimeVar = Date()
-                }
-                else{
+                } else {
                     print("do not need download image,sleep for 3600s for next update")
                     sleep(3600)
                 }
             }
         }
     }
-    
-    func downloadImage(URLString:String){
+    func downloadImage(URLString: String) {
             guard let parsedURL = URL(string: URLString) else {
                 fatalError("Invalid URL: \(URLString)")
             }
             let lastModifyDate = lastModified()
-            if(lastModifyDate != nil){
+            if lastModifyDate != nil {
                 let lastModifyDateNotNil = lastModifyDate!.addingTimeInterval(86400)
-                if (lastModifyDateNotNil < Date()){
+                if lastModifyDateNotNil < Date() {
                     print("need update image")
-                    getDataFromInternet(parsedURL:parsedURL)
-                }
-                else{
+                    getDataFromInternet(parsedURL: parsedURL)
+                } else {
                     print("image is already updated")
                 }
-            }else{
+            } else {
                 print("need download image")
-                getDataFromInternet(parsedURL:parsedURL)
+                getDataFromInternet(parsedURL: parsedURL)
             }
     }
-    func getDataFromInternet(parsedURL:URL){
+    func getDataFromInternet(parsedURL: URL) {
         DispatchQueue.global(qos: .background).async {
             print("download in background")
             URLSession.shared.dataTask(with: parsedURL) { data, response, error in
-                guard let img = UIImage(data: data ?? Data()) else{
+                guard let img = UIImage(data: data ?? Data()) else {
                     print("failed")
                     print(error)
                     print(response)
@@ -64,7 +61,6 @@ public class Loader: ObservableObject {
                 }
                 self.saveImage(currentImage: img, persent: 10, imageName: "123")
                 print("success")
-                
                 DispatchQueue.main.async {
                     self.objectWillChange.send()
                 }
@@ -82,8 +78,7 @@ public class Loader: ObservableObject {
             return nil
         }
     }
-    
-    public func saveImage(currentImage: UIImage, persent: CGFloat, imageName: String){
+    public func saveImage(currentImage: UIImage, persent: CGFloat, imageName: String) {
         if let imageData = currentImage.jpegData(compressionQuality: persent) as NSData? {
                 let fullPath = NSHomeDirectory().appending("/Documents/").appending(imageName)
                 imageData.write(toFile: fullPath, atomically: true)
@@ -91,4 +86,3 @@ public class Loader: ObservableObject {
             }
     }
 }
-
