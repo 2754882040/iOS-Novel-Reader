@@ -83,9 +83,18 @@ class LibbrisUITests: XCTestCase {
         XCTAssertTrue(app.buttons["skipButton"].waitForExistence(timeout: 5))
         // swiftlint:disable line_length
         app/*@START_MENU_TOKEN@*/.buttons["skipButton"]/*[[".buttons[\"Skip\"]",".buttons[\"skipButton\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app.scrollViews["HomePageScrollView"].otherElements/*@START_MENU_TOKEN@*/.buttons["HomeBookButton76"]/*[[".buttons[\"blank_book_shadow\"]",".buttons[\"HomeBookButton76\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.scrollViews["HomePageScrollView"].otherElements.buttons["HomeBookButton76"].tap()
         let normalized = app.staticTexts["BookContent"].coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
-        let coordinate = normalized.withOffset(CGVector(dx: 300, dy: 10))
+        let coordinate = normalized.withOffset(CGVector(dx: 300, dy: 10)) // RIGHT
+        let coordinate2 = normalized.withOffset(CGVector(dx: 150, dy: 10)) // MID
+        let coordinate3 = normalized.withOffset(CGVector(dx: 0, dy: 10))  // LEFT
+        coordinate3.tap()
+        let okButton = app.alerts["This is the first page"].scrollViews.otherElements.buttons["OK"]
+        app.staticTexts["BookContent"].swipeLeft()
+        app.staticTexts["BookContent"].swipeRight()
+        coordinate2.tap()
+        app.alerts["Want to exist?"].scrollViews.otherElements.buttons["Exist"].tap()
+        app.scrollViews["HomePageScrollView"].otherElements.buttons["HomeBookButton76"].tap()
         for _ in 0 ..< 13 {
             coordinate.tap()
         }
