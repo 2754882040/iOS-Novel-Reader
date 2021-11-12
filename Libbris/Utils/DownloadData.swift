@@ -21,10 +21,9 @@ public class DownloadData {
         let request = URLRequest(url: URL(string: urlString)!)
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 guard let responseData = data, error == nil else {
-                    completion(.failure(error ?? NetworkRequestError.unknow(data, response)))
-                    return
+                    return completion(.failure(error ?? NetworkRequestError.unknow(data, response)))
                 }
-                completion(.success(responseData))
+                return completion(.success(responseData))
             }
             task.resume()
     }

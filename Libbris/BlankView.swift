@@ -11,9 +11,10 @@ struct BlankView: View {
         Text("asd ")
     }
 }
-
+#if !TESTING
 struct BlankView_Previews: PreviewProvider {
     static var previews: some View {
         BlankView()
     }
 }
+#endif

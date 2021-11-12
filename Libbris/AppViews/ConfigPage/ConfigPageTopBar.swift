@@ -23,9 +23,10 @@ struct ConfigPageTopBar: View {
         })
     }
 }
-
+#if !TESTING
 struct ConfigPageTopBar_Previews: PreviewProvider {
     static var previews: some View {
         ConfigPageTopBar()
     }
 }
+#endif
