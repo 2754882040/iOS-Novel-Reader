@@ -105,6 +105,7 @@ class LibbrisUITests: XCTestCase {
         typeContent.typeText("Alice")
         app.buttons["SearchButton"].tap()
         XCTAssertTrue(app.scrollViews["SearchResultsPage"].exists)
+    }
     func testReadingBookChapters() {
         let app = XCUIApplication()
         app.launch()
@@ -124,5 +125,4 @@ class LibbrisUITests: XCTestCase {
         scrollViewsQuery.otherElements.buttons["OK"].tap()
         // swiftlint:enable line_length
     }
-
 }
