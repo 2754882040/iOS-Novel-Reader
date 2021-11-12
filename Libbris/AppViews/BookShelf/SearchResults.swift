@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct SearchResults: View {
-    init(searchName: String){
+    init(searchName: String) {
         self.search = searchName
     }
-    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var libraryText = localizedString(text: strLibrary)
     @State var noMoreBookText = localizedString(text: strNoMoreBook)
     let search: String
 
     var body: some View {
-            ZStack{
-                Image("wall").resizable(resizingMode: .stretch).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-                VStack{
+            ZStack {
+                Image("wall").resizable(resizingMode:
+                .stretch).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                VStack {
                     BookList(url: searchAPI(name: search)).accessibilityIdentifier("SearchResultsPage")
                     }
             }
@@ -28,7 +28,8 @@ struct SearchResults: View {
                 self.noMoreBookText = localizedString(text: strNoMoreBook)
                 self.libraryText = localizedString(text: strLibrary)
             })
-            .navigationBarTitleDisplayMode(.inline).navigationBarBackButtonHidden(true).navigationBarItems(leading:Button(action: {
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true).navigationBarItems(leading: Button(action: {
                 self.presentationMode.wrappedValue.dismiss()
                 }) {
                     HStack {
@@ -39,5 +40,3 @@ struct SearchResults: View {
             .navigationViewStyle(StackNavigationViewStyle())
     }
 }
-
-

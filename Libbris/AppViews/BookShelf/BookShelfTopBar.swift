@@ -19,7 +19,7 @@ struct BookShelfTopBar: View {
                 .foregroundColor(.white)
                     .font(.custom("Dosis-Bold", size: 20)).padding(.leading, 8.0)
                 searchArea.accessibilityIdentifier("SearchArea")
-                NavigationLink(destination: SearchResults(searchName: searchName)){
+                NavigationLink(destination: SearchResults(searchName: searchName)) {
                     Image(systemName: "magnifyingglass").accessibilityIdentifier("SearchButton")
                 }
             }
