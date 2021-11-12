@@ -39,9 +39,7 @@ class SplashScreenTests: XCTestCase {
     func testFirstTimeSplashScreenNoImageAvaliable() throws {
         let app = XCUIApplication()
         app.launch()
-        XCTAssertTrue(app.buttons["skipButton"].waitForExistence(timeout: 5))
-        
-        app.terminate()
+        XCTAssertTrue(app.buttons["skipButton"].waitForExistence(timeout: 1))
         let imageAD = app.images["ADImage"]
         XCTAssert(imageAD.exists)
     }

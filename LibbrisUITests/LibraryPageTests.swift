@@ -6,12 +6,26 @@
 //
 
 import XCTest
-
+@testable import Libbris
 class LibraryPageTests: XCTestCase {
-    func testScrollForRecommend() throws {
-        
+    func testLibraryBook() {
+        let app = XCUIApplication()
+        app.launch()
+        XCTAssertTrue(app.buttons["skipButton"].waitForExistence(timeout: 5))
+        app.buttons["skipButton"].tap()
+        app.tabBars["Tab Bar"].buttons["icon_home_nor_iOS_25@1"].tap()
+        // app.buttons["LibraryBook0"].tap()
+        sleep(2)
+        XCTAssertTrue(app.buttons["LibraryBook1"].exists)
     }
-    func testScrollForHot() throws {
-        
+    func testRecommendBook() {
+        let app = XCUIApplication()
+        app.launch()
+        XCTAssertTrue(app.buttons["skipButton"].waitForExistence(timeout: 5))
+        app.buttons["skipButton"].tap()
+        app.tabBars["Tab Bar"].buttons["icon_home_nor_iOS_25@1"].tap()
+        // app.buttons["LibraryBook0"].tap()
+        sleep(2)
+        XCTAssertTrue(app.buttons["LibraryBookRecommend1"].exists)
     }
 }

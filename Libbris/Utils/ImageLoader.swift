@@ -17,6 +17,7 @@ class ImageLoader: ObservableObject {
     func refresh(url: String) {
         state = LoadState.loading
         let urlWithoutSpace: String = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "badlink"
+        print(urlWithoutSpace)
         guard let parsedURL = URL(string: urlWithoutSpace)
         else {
             self.state = .failure

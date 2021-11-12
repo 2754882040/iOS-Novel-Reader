@@ -40,64 +40,6 @@ class LibbrisUITests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-    func testConfigPage() throws {
-        let app = XCUIApplication()
-        app.launch()
-        XCTAssertTrue(app.buttons["skipButton"].waitForExistence(timeout: 5))
-        app.buttons["skipButton"].tap()
-        let settingButton = app.tabBars["Tab Bar"].buttons["icon_settings_nor_iOS_25@1"]
-        XCTAssertTrue(settingButton.exists)
-        settingButton.tap()
-        let languageButton = app.buttons["languageSetting"]
-        let infoButton = app.buttons["AppInfo"]
-        XCTAssertTrue(languageButton.exists)
-        XCTAssertTrue(infoButton.exists)
-    }
-    func testConfigurationPage() throws {
-        let app = XCUIApplication()
-        app.launch()
-        XCTAssertTrue(app.buttons["skipButton"].waitForExistence(timeout: 5))
-        app.buttons["skipButton"].tap()
-        XCUIApplication().tabBars["Tab Bar"].buttons["icon_settings_nor_iOS_25@1"].tap()
-        let languageButton = app.buttons["languageSetting"]
-        XCTAssert(languageButton.exists)
-    }
-    func testInfoPage() throws {
-        let app = XCUIApplication()
-        app.launch()
-        XCTAssertTrue(app.buttons["skipButton"].waitForExistence(timeout: 5))
-        app.buttons["skipButton"].tap()
-        let settingButton = app.tabBars["Tab Bar"].buttons["icon_settings_nor_iOS_25@1"]
-        XCTAssertTrue(settingButton.exists)
-        settingButton.tap()
-        let infoButton = app.buttons["AppInfo"]
-        XCTAssertTrue(infoButton.exists)
-        infoButton.tap()
-        let textsInfo = app.staticTexts["teamInfo"]
-        XCTAssertTrue(textsInfo.exists)
-        let icon = app.images["iconImage"]
-        XCTAssertTrue(icon.exists)
-    }
-    func testLibraryBook() {
-        let app = XCUIApplication()
-        app.launch()
-        XCTAssertTrue(app.buttons["skipButton"].waitForExistence(timeout: 5))
-        app.buttons["skipButton"].tap()
-        app.tabBars["Tab Bar"].buttons["icon_home_nor_iOS_25@1"].tap()
-        // app.buttons["LibraryBook0"].tap()
-        sleep(2)
-        XCTAssertTrue(app.buttons["LibraryBook1"].exists)
-    }
-    func testRecommendBook() {
-        let app = XCUIApplication()
-        app.launch()
-        XCTAssertTrue(app.buttons["skipButton"].waitForExistence(timeout: 5))
-        app.buttons["skipButton"].tap()
-        app.tabBars["Tab Bar"].buttons["icon_home_nor_iOS_25@1"].tap()
-        // app.buttons["LibraryBook0"].tap()
-        sleep(2)
-        XCTAssertTrue(app.buttons["LibraryBookRecommend1"].exists)
-    }
     func testHomeBook() {
         let app = XCUIApplication()
         app.launch()

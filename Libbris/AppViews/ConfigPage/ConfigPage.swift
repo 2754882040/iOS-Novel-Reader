@@ -41,7 +41,8 @@ struct ConfigPage: View {
                             .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
                             .font(.custom("Dosis-Bold", size: 20))) {
                     NavigationLink(destination: BlankView()) {
-                        Text(privacyAndSafety).font(.custom("Dosis-Regular", size: 15))
+                        Text(privacyAndSafety).accessibilityIdentifier("privacyBtn")
+                            .font(.custom("Dosis-Regular", size: 15))
                     }
                 }
                 Section(header: Text(textOthers)
