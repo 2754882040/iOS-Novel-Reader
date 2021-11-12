@@ -14,7 +14,7 @@ struct SplashScreen: View {
     @Binding var backgroundRuningTime: Date?
     @State var showAD: Bool = false
     @State var ADExist: Bool = false
-    let imageDir = "/Documents/123"
+    let imageDir = "/Documents/Ads"
     var body:some View {
         ZStack {
             Image("screens/Default-568h")
@@ -26,8 +26,7 @@ struct SplashScreen: View {
                 .onAppear(perform: checkAdFile)
             if showAD {
                 if ADExist {
-                    Image(uiImage: UIImage(contentsOfFile: NSHomeDirectory()
-                                            .appending(imageDir))!)
+                    Image(uiImage: UIImage(contentsOfFile: NSHomeDirectory().appending(imageDir))!)
                         .resizable(resizingMode: .stretch)
                         .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
                         .accessibilityIdentifier("ADImage")
@@ -49,15 +48,26 @@ struct SplashScreen: View {
         }
     }
     func checkAdFile() {
-        do {
-            _ = try FileManager.default.attributesOfItem(atPath: NSHomeDirectory().appending(imageDir))
-            ADExist = true
-        } catch { ADExist = false }
+        ADExist = false
+        DispatchQueue.global(qos: .background).async {
+            while ADExist != true {
+                do {
+                    _ = try FileManager.default.attributesOfItem(atPath: NSHomeDirectory().appending(imageDir))
+                    ADExist = true
+                    showAD = true
+                } catch { ADExist = false }
+            }
+        }
     }
     func countTime() {
+        #if !TESTING
         var countDownNum = 5
+        #endif
+        #if TESTING
+        var countDownNum = 3
+        #endif
         let countdownTimer = Timer(timeInterval: 1.0, repeats: true) { timer in
-            if countDownNum == 0 {
+            if countDownNum <= 0 {
                 timer.invalidate()
                 self.mode.wrappedValue.dismiss()
                 showSplashScreen = false
@@ -92,9 +102,10 @@ struct SplashScreen: View {
         backgroundRuningTime = nil
     }
 }
-
+#if !TESTING
 struct SplashScreen_Previews: PreviewProvider {
     static var previews: some View {
         SplashScreen(showSplashScreen: .constant(true), backgroundRuningTime: .constant(Date()))
     }
 }
+#endif

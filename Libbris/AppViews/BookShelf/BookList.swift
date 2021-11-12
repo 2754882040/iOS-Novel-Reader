@@ -45,7 +45,7 @@ struct BookList: View {
                     let items = 0...(books.count-1)
                     LazyVStack {
                         ForEach(items, id: \.self) { item in
-                            LibraryBook(bookDetail: books[item])
+                            LibraryBook(bookDetail: books[item], recommend: false)
                                 .accessibilityIdentifier("LibraryBook\(item)")
                             Spacer(minLength: 20)
                         }
@@ -58,15 +58,12 @@ struct BookList: View {
             }.frame(width: screenSize.width)
         }.onAppear(perform: {
             DispatchQueue.global(qos: .background).async {
-            while datas.state == .loading {
-                sleep(1)
-            }
+            while datas.state == .loading {}
             if datas.state == .success {
-                // swiftlint:disable force_try
-                let temp: [BookInfoBrief] = try! datas.decodeData(data: datas.jsonData)
-                // swiftlint:enable force_try
-                if !temp.isEmpty {
-                    books += temp
+                var decodedBookData: [BookInfoBrief]?
+                decodedBookData = decodeData(data: datas.jsonData)
+                if decodedBookData != nil && !decodedBookData!.isEmpty {
+                    books += decodedBookData!
                 }
                 curBookCount = books.count
             }
@@ -87,9 +84,11 @@ struct BookList: View {
                 print("sleep")
             }
             if datas.state == .success {
-                // swiftlint:disable force_try
-                books += try! datas.decodeData(data: datas.jsonData)
-                // swiftlint:enable force_try
+                var decodedBookData: [BookInfoBrief]?
+                decodedBookData = decodeData(data: datas.jsonData)
+                if decodedBookData != nil && !decodedBookData!.isEmpty {
+                    books += decodedBookData!
+                }
                 if curBookCount != books.count {
                     curBookCount = books.count
                 } else {
@@ -100,3 +99,10 @@ struct BookList: View {
         }
     }
 }
+#if !TESTING
+struct BookList_Previews: PreviewProvider {
+    static var previews: some View {
+        BookList(url: "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/category/11?start=1&size=9", cId: 11)
+    }
+}
+#endif

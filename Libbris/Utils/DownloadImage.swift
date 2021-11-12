@@ -8,81 +8,125 @@
 import Foundation
 import SwiftUI
 
+enum NetworkErrorHandle: Error {
+    case networkIssues
+    case imageFormatIssues
+    case urlIssues
+}
+enum ImageStatus {
+    case checkFileExist, checkUpdate, downloadSuccess, downloadFail, saveSuccess, saveFail, notStart
+}
+enum BackgroundCheck {
+    case running, notRunning
+}
 public class Loader: ObservableObject {
+    var filePath: String = NSHomeDirectory().appending("/Documents/")
+    var imageName: String
     var data = Data()
-    init(url: String) {
-        downloadImage(URLString: url)
-        backgroundCheckImageUpdate(DATE: Date(), URLString: url)
+    var downloadError: Error?
+    var imagefileStatus: ImageStatus = .notStart
+    var keepCheck: BackgroundCheck = .notRunning
+    init(url: String, name: String) {
+        imageName = name
+        imageLoadingController(filePath: NSHomeDirectory().appending("/Documents/\(imageName)"),
+                               name: imageName,
+                                    URLString: url, interval: 3600)
+        keepCheckInBackground(filePath: NSHomeDirectory().appending("/Documents/\(imageName)"),
+                              name: imageName, URLString: url, interval: 3600)
+        // imageFileManagment(URLString: url)
+        // imageNeedUpdate(DATE: Date(), URLString: url)
         }
-    func backgroundCheckImageUpdate(DATE: Date, URLString: String) {
-        var tempTimeVar = DATE
-        DispatchQueue.global(qos: .background).async {
-            while true {
-                print("background thread runing")
-                let tempTime = tempTimeVar.addingTimeInterval(3600)
-                if tempTime < Date() {
-                    self.downloadImage(URLString: URLString)
-                    tempTimeVar = Date()
-                } else {
-                    print("do not need download image,sleep for 3600s for next update")
-                    sleep(3600)
-                }
-            }
-        }
-    }
-    func downloadImage(URLString: String) {
-            guard let parsedURL = URL(string: URLString) else {
-                fatalError("Invalid URL: \(URLString)")
-            }
-            let lastModifyDate = lastModified()
-            if lastModifyDate != nil {
-                let lastModifyDateNotNil = lastModifyDate!.addingTimeInterval(86400)
-                if lastModifyDateNotNil < Date() {
-                    print("need update image")
-                    getDataFromInternet(parsedURL: parsedURL)
-                } else {
-                    print("image is already updated")
-                }
-            } else {
-                print("need download image")
-                getDataFromInternet(parsedURL: parsedURL)
-            }
-    }
-    func getDataFromInternet(parsedURL: URL) {
-        DispatchQueue.global(qos: .background).async {
-            print("download in background")
-            URLSession.shared.dataTask(with: parsedURL) { data, response, error in
-                guard let img = UIImage(data: data ?? Data()) else {
-                    print("failed")
-                    print(error)
-                    print(response)
-                    return
-                   // print(data)
-                }
-                self.saveImage(currentImage: img, persent: 10, imageName: "123")
-                print("success")
-                DispatchQueue.main.async {
-                    self.objectWillChange.send()
-                }
-            }.resume()
-        }
-    }
-
-    func lastModified() -> Date? {
-        let fileDir =  NSHomeDirectory().appending("/Documents/123")
+    init() {
+        imageName = "testFile"
+    } // for test init
+    func checkFileExist(filePath: String) -> Bool {
+        imagefileStatus = .checkFileExist
         do {
-            let attr = try FileManager.default.attributesOfItem(atPath: fileDir)
+            _ = try FileManager.default.attributesOfItem(atPath: filePath)
+            print("\(#function) File exist!")
+        } catch let error as NSError {
+            print("\(#function) Error: \(error)")
+            return false
+        }
+        return true
+    }
+    func lastModifyDate(filePath: String) -> Date? {
+        do {
+            let attr = try FileManager.default.attributesOfItem(atPath: filePath)
+            // swiftlint:disable line_length
+            print("\(#function) last modify date: \(String(describing: attr[FileAttributeKey.modificationDate] as? Date))")
+            // swiftlint:enable line_length
             return attr[FileAttributeKey.modificationDate] as? Date
         } catch let error as NSError {
             print("\(#function) Error: \(error)")
             return nil
         }
     }
-    public func saveImage(currentImage: UIImage, persent: CGFloat, imageName: String) {
+    func checkImageNeedUpdate(filePath: String, interval: TimeInterval) -> Bool {
+        imagefileStatus = .checkUpdate
+        let fileTimeStamp = lastModifyDate(filePath: filePath)
+        let tempTime = fileTimeStamp!.addingTimeInterval(interval)
+        return tempTime < Date() ? true : false
+    }
+    func loadData(URLString: String,
+                  completionHandler: @escaping (UIImage?, Error?) -> Void) {
+        guard let parsedURL = URL(string: URLString) else {
+            self.imagefileStatus = .downloadFail
+            print("\(#function) please provide valid URL!")
+            return completionHandler(nil, NetworkErrorHandle.urlIssues)
+        }
+        DispatchQueue.global(qos: .background).async {
+            URLSession.shared.dataTask(with: parsedURL) { data, _, _ in
+                    guard let img = UIImage(data: data ?? Data()) else {
+                        print("\(#function) image data can not change to UIImage!")
+                        self.imagefileStatus = .downloadFail
+                        return completionHandler(nil, NetworkErrorHandle.imageFormatIssues)
+                    }
+                    print("\(#function) image download successfully!")
+                    self.imagefileStatus = .downloadSuccess
+                    completionHandler(img, nil)
+            }.resume()
+        }
+    }
+    func saveData(currentImage: UIImage, persent: CGFloat, imageName: String) -> Bool {
         if let imageData = currentImage.jpegData(compressionQuality: persent) as NSData? {
-                let fullPath = NSHomeDirectory().appending("/Documents/").appending(imageName)
-                imageData.write(toFile: fullPath, atomically: true)
-                print("fullPath=\(fullPath)")
+            let fullPath = NSHomeDirectory().appending("/Documents/").appending(imageName)
+            imageData.write(toFile: fullPath, atomically: true)
+            print("\(#function)  save success! fullPath=\(fullPath)")
+            imagefileStatus = .saveSuccess
+            return true
+        } else {
+            imagefileStatus = .saveFail
+            print("\(#function) image can not save")
+            return false } }
+    func loadAndSaveData(URLString: String, persent: CGFloat, imageName: String) {
+        loadData(URLString: URLString, completionHandler: { (img, error) -> Void in
+            if error == nil {
+                _ = self.saveData(currentImage: img!, persent: persent, imageName: imageName)
+                DispatchQueue.main.async {
+                    self.objectWillChange.send()
+                }
+            } else {
+                self.downloadError = error
             }
+        })
+    }
+    func imageLoadingController(filePath: String, name: String,
+                                URLString: String, interval: TimeInterval) {
+        if checkFileExist(filePath: filePath) {
+            if checkImageNeedUpdate(filePath: filePath, interval: interval) {
+                loadAndSaveData(URLString: URLString, persent: 10, imageName: name)
+            }
+        } else { loadAndSaveData(URLString: URLString, persent: 10, imageName: name)}}
+    func keepCheckInBackground(filePath: String, name: String, URLString: String, interval: TimeInterval) {
+        print("\(#function)!")
+        DispatchQueue.global(qos: .background).async {
+            self.keepCheck = .running
+            while true {
+                print("\(#function) background: check for update!")
+                self.imageLoadingController(filePath: filePath, name: name, URLString: URLString, interval: interval)
+                sleep(UInt32(interval))
+            }
+        }
     }
 }

@@ -11,7 +11,7 @@ import SwiftUI
 struct LibbrisApp: App {
     init() {
         // swiftlint:disable line_length
-        _loader = StateObject(wrappedValue: Loader(url: "https://uc7d11632bec8f9c2152ea0b08b0.previews.dropboxusercontent.com/p/thumb/ABVpptBOCyhwPWDJsN0rkmZVUKraLHI7dhSH8a2C8KSVMp9TmbLU3zDtmSsv-WVx5v9bpmGUsB49wlsztrmkxm3iKQSNmXOVBJtu-t3G8SBtup8UMHb_O_Gzp7McI5R6xA2QG3Bodg2dtwHCaVzyK_M0V5hKSn36Jx0RW06LpcdRULhi4H7xQQ0bpd6KaOu9mb5lGfls77f_HAiwLBe3PvZblBRgbWHvSHf3K7gs-SREewDYPP85n8h7D4ACEF-nq3Qswo5QIdNvMfKmVNmi9vgkEsJ5ONvekv9mMCWcs-JqQDXS3isSZosq7f_XS6GQyWE4HJer0fVf3Q9kCvj-2X8qZ_ESdQY7V4AXv7DbIKObyQ/p.png?fv_content=true&size_mode=5"))
+        _loader = StateObject(wrappedValue: Loader(url: "https://ucdfaaa4b96c503becd236be5959.previews.dropboxusercontent.com/p/thumb/ABUZ5AbrIjWT8zllvOwDNxXTrI43Fcw_ocSx-kvIpOWeMSRHOtQOlqw_nQBGAXfxfWByWssBHtLffhsszqw2zaZsZcUCEgYEZQN6OGs8CAZGpZ9UDiCaTil_qEX2BtrW3uqulqpCD-Wy2j_gc3RVWi3_365QhNsd_YANm98cGwmbhpJwhcovsmZfiZS3qcgte_2Je7mRuOcOuNUFLNyD4_bylqq3WC5vI9AKm1PqQJSMPAjWW4lzeLpu-rwHdg8rurSmyiV2OS2Pg-vey-73HFUphIKMsPX3sS5SoUJm0qzj1-e7kzTkTJqbeTa6yrGVHFA4Ow6w5SSxZU3QUcIie6sjQl_0WQoxabKJkz_icjoL9NrocO68k88vGC36ZwTJycQ/p.png", name: "Ads"))
         // swiftlint:enable line_length
     }
     @Environment(\.scenePhase) var scenePhase
@@ -50,6 +50,12 @@ struct LibbrisApp: App {
         guard let background = backgroundTime else {return}
         if abs(now.timeIntervalSinceReferenceDate - background.timeIntervalSinceReferenceDate) > 5 {
             showSplashScreen = true
+            let fullPath = NSHomeDirectory().appending("/Documents/").appending("Ads")
+            // swiftlint:disable line_length
+            loader.imageLoadingController(filePath: fullPath,
+                                          name: "Ads", URLString:
+                                            "https://ucdfaaa4b96c503becd236be5959.previews.dropboxusercontent.com/p/thumb/ABUZ5AbrIjWT8zllvOwDNxXTrI43Fcw_ocSx-kvIpOWeMSRHOtQOlqw_nQBGAXfxfWByWssBHtLffhsszqw2zaZsZcUCEgYEZQN6OGs8CAZGpZ9UDiCaTil_qEX2BtrW3uqulqpCD-Wy2j_gc3RVWi3_365QhNsd_YANm98cGwmbhpJwhcovsmZfiZS3qcgte_2Je7mRuOcOuNUFLNyD4_bylqq3WC5vI9AKm1PqQJSMPAjWW4lzeLpu-rwHdg8rurSmyiV2OS2Pg-vey-73HFUphIKMsPX3sS5SoUJm0qzj1-e7kzTkTJqbeTa6yrGVHFA4Ow6w5SSxZU3QUcIie6sjQl_0WQoxabKJkz_icjoL9NrocO68k88vGC36ZwTJycQ/p.png", interval: 5)
+            // swiftlint:enable line_length
             print("need to show splash screen")
             backgroundTime = Date()
         }

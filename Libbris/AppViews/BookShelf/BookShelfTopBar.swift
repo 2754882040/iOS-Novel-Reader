@@ -34,9 +34,10 @@ struct BookShelfTopBar: View {
             .accessibilityIdentifier("SearchField")
     }
 }
-
+#if !TESTING
 struct BookShelfTopBar_Previews: PreviewProvider {
     static var previews: some View {
         BookShelfTopBar()
     }
 }
+#endif

@@ -19,8 +19,10 @@ struct HomePageTopBar: View {
     }
 }
 
+#if !TESTING
 struct HomePageTopBar_Previews: PreviewProvider {
     static var previews: some View {
         HomePageTopBar()
     }
 }
+#endif

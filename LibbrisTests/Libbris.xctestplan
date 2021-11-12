@@ -14,6 +14,7 @@
     }
   ],
   "defaultOptions" : {
+    "language" : "en",
     "targetForVariableExpansion" : {
       "containerPath" : "container:Libbris.xcodeproj",
       "identifier" : "6E0308A326A7D9350030753C",

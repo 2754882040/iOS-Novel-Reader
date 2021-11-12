@@ -21,10 +21,13 @@ public class LocalJsonFileManager: ObservableObject {
         do {
             let tempdata = try NSData(contentsOf: parsedURL) as Data
             jsonData = tempdata
-            // swiftlint:disable force_try
-            bookShelfBook = try! decodeData(data: jsonData)
-            // swiftlint:enable force_try
-            state = LoadState.success
+            let tempData: [BookInfoBriefWithTime]? = decodeData(data: jsonData)
+            if tempData == nil {
+                state = LoadState.failure
+            } else {
+                bookShelfBook = tempData!
+                state = LoadState.success
+            }
         } catch {
             print("failed")
             state = LoadState.failure
@@ -50,28 +53,18 @@ public class LocalJsonFileManager: ObservableObject {
             bookShelfBook.swapAt(num, newTimeId)
         }
     }
-    func decodeData<T: Codable>(data: Data) throws -> T {
-        let jsonDecoder = JSONDecoder()
-        do {
-            let parsedJSON = try jsonDecoder.decode(T.self, from: data)
-            print("decode:\(parsedJSON)")
-            return parsedJSON
-        } catch {fatalError("\(error)")}
-    }
-    func encodeData<T: Codable>(data: T) -> Data {
-        let jsonEncoder = JSONEncoder()
-        // swiftlint:disable force_try
-        let tempdata = try! jsonEncoder.encode(data)
-        // swiftlint:enable force_cast
-        print(tempdata)
-        return tempdata
-    }
-    func saveData(data: Data) {
-        sortArray()
-        print(fullPath)
-        if let tempdata = data as NSData? {
-            tempdata.write(toFile: NSHomeDirectory().appending("/Documents/").appending("bookShelf"), atomically: true)
-            print("success")
-            print(fullPath)}
+    func saveData(data: Data?) -> Bool {
+        if data == nil {
+            print("LocalJsonFileManagaer: \(#function) : empty data")
+            return false
+        } else {
+            sortArray()
+            if let tempdata = data as NSData? {
+                tempdata.write(toFile: NSHomeDirectory()
+                                .appending("/Documents/").appending("bookShelf"), atomically: true)
+                print("LocalJsonFileManagaer: \(#function) : \(fullPath)")
+                return true
+            } else {return false}
+        }
     }
 }

@@ -16,8 +16,13 @@ struct MainView: View {
             #colorLiteral(red: 0.1607843137, green: 0.2745098039, blue: 0.5529411765, alpha: 1)
     }
     @State var books: [BookInfoBriefWithTime] = [BookInfoBriefWithTime]()
-    // @StateObject public var datas: DownloadJson
     @StateObject public var localJsonFile: LocalJsonFileManager = LocalJsonFileManager.shared
+    fileprivate func refreshBook() {
+        DispatchQueue.global(qos: .background).async {
+            localJsonFile.sortArray()
+            books = localJsonFile.bookShelfBook
+        }
+    }
     var body: some View {
         ZStack {
             Image("wall")
@@ -33,13 +38,10 @@ struct MainView: View {
                             print("test main view loading books")
                             books = localJsonFile.bookShelfBook
                             print(books.count)
-                        }
+                        } else {books = [BookInfoBriefWithTime]() }
                     }
             }).onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("refreshBook")), perform: { _ in
-                DispatchQueue.global(qos: .background).async {
-                    localJsonFile.sortArray()
-                    books = localJsonFile.bookShelfBook
-                }})
+                refreshBook()})
             VStack(alignment: .leading, spacing: 10) {
                 HomePageTopBar()
                 ScrollView(.vertical) {
@@ -64,9 +66,10 @@ struct MainView: View {
         }
     }
 }
-
+#if !TESTING
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
     }
 }
+#endif

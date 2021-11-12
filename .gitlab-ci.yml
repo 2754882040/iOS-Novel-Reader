@@ -20,7 +20,7 @@ build_project:
     - bundle
     - bundle exec slather coverage -s --scheme Libbris Libbris.xcodeproj
     - coverage=$(echo $(bundle exec slather coverage -s --scheme Libbris Libbris.xcodeproj | grep 'Test Coverage') | tr -dc '0-9')
-    - acceptance=6000
+    - acceptance=0000
     - if (($coverage>$acceptance));then echo "code coverage greater than acceptance criteria";else error; fi;
   tags:
     - 498s-tag

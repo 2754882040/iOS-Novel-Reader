@@ -7,33 +7,6 @@
 
 import SwiftUI
 
-class ImageLoader: ObservableObject {
-    init(url: String) {
-        refresh(url: url)
-    }
-    var data = Data()
-    var state = LoadState.loading
-    func refresh(url: String) {
-        state = LoadState.loading
-        let urlWithoutSpace: String = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "badlink"
-        guard let parsedURL = URL(string: urlWithoutSpace)
-        else {
-           fatalError("Invalid URL: \(url)")
-        }
-        URLSession.shared.dataTask(with: parsedURL) { data, _, _ in
-           if let data = data, data.count > 0 {
-               self.data = data
-               self.state = .success
-           } else {
-               self.state = .failure
-           }
-           DispatchQueue.main.async {
-               self.objectWillChange.send()
-           }
-        }.resume()
-   }
-}
-
 struct HomeBookButton: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject private var loader: ImageLoader
@@ -81,9 +54,10 @@ struct HomeBookButton: View {
     }
 }
 
-/*
+#if !TESTING
 struct BookButton_Previews: PreviewProvider {
     static var previews: some View {
-        HomeBookButton(bookDetail: <#BookInfoBriefWithTime#>)
+        HomeBookButton(bookDetail: BookInfoBriefWithTime())
     }
-}*/
+}
+#endif

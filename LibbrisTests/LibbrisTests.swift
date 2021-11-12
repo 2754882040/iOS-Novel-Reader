@@ -29,22 +29,22 @@ class LibbrisTests: XCTestCase {
         XCTAssertFalse(testObj.jsonData == Data())
     }
 
-    func testDownloadJsonDecodeData() throws {
-        let testObj: DownloadJson =
-        DownloadJson(url: "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/1/chapters")
-        sleep(3)
-        XCTAssertFalse(testObj.jsonData == Data())
-        let jsonResponse: [BookChapter] = try testObj.decodeData(data: testObj.jsonData)
-        sleep(1)
-        XCTAssertEqual(jsonResponse[0].id, 1)
-    }
-    func testDownloadJsonGetLocalFileDir() throws {
-        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-        let testDir = documentDirectory!.appendingPathComponent("test")
-        let testObj: DownloadJson =
-        DownloadJson(url: "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/1/chapters")
-        XCTAssertEqual(testObj.getLocalFileDir(fileName: "test"), testDir)
-    }
+//    func testDownloadJsonDecodeData() throws {
+//        let testObj: DownloadJson =
+//        DownloadJson(url: "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/1/chapters")
+//        sleep(3)
+//        XCTAssertFalse(testObj.jsonData == Data())
+//        let jsonResponse: [BookChapter] = try testObj.decodeData(data: testObj.jsonData)
+//        sleep(1)
+//        XCTAssertEqual(jsonResponse[0].id, 1)
+//    }
+//    func testDownloadJsonGetLocalFileDir() throws {
+//        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+//        let testDir = documentDirectory!.appendingPathComponent("test")
+//        let testObj: DownloadJson =
+//        DownloadJson(url: "http://libbris2021.us-west-2.elasticbeanstalk.com/ws/book/1/chapters")
+//        XCTAssertEqual(testObj.getLocalFileDir(fileName: "test"), testDir)
+//    }
     func testLocalJsonFileManagerReadData() {
         let  testObj: LocalJsonFileManager = LocalJsonFileManager.shared
         testObj.state = LoadState.loading

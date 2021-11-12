@@ -13,6 +13,7 @@ struct ConfigPage: View {
     @State var languageSetting = localizedString(text: strLanguageSetting)
     @State var infos = localizedString(text: strInfos)
     @State var applicationSetting = localizedString(text: strApplicationSetting)
+    @State var clearData = localizedString(text: strClearData)
     @State var privacyAndSafety = localizedString(text: strPrivacyAndSafety)
     @State var textOthers = localizedString(text: strOthers)
     var body: some View {
@@ -22,21 +23,26 @@ struct ConfigPage: View {
                 Section(header: Text(applicationSetting)
                             .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
                             .font(.custom("Dosis-Bold", size: 20))) {
-                    NavigationLink(destination: BlankView()) {
-                        Text("\(applicationSetting) 1").font(.custom("Dosis-Regular", size: 15))
-                    }
-                    NavigationLink(destination: BlankView()) {
-                        Text("\(applicationSetting) 2").font(.custom("Dosis-Regular", size: 15))
-                    }
-                    NavigationLink(destination: BlankView()) {
-                        Text("\(applicationSetting) 3").font(.custom("Dosis-Regular", size: 15))
-                    }
+                    Button(action: {
+                        let cachePath = NSHomeDirectory().appending("/Documents")
+                        do {
+                            try FileManager.default.removeItem(atPath: cachePath)
+                        } catch {print("\(#function) not found dir")}
+                        do {
+                            try FileManager.default
+                                .createDirectory(atPath: cachePath,
+                                                 withIntermediateDirectories: true)
+                        } catch {print("\(#function) not found dir")}
+                    }, label: {
+                        Text(clearData)
+                    }).accessibilityIdentifier("clearData")
                 }
                 Section(header: Text(privacyAndSafety)
                             .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
                             .font(.custom("Dosis-Bold", size: 20))) {
                     NavigationLink(destination: BlankView()) {
-                        Text(privacyAndSafety).font(.custom("Dosis-Regular", size: 15))
+                        Text(privacyAndSafety).accessibilityIdentifier("privacyBtn")
+                            .font(.custom("Dosis-Regular", size: 15))
                     }
                 }
                 Section(header: Text(textOthers)
@@ -58,15 +64,17 @@ struct ConfigPage: View {
                 self.infos = localizedString(text: strInfos)
                 self.settingsText = localizedString(text: strSettings)
                 self.applicationSetting = localizedString(text: strApplicationSetting)
+                self.clearData = localizedString(text: strClearData)
                 self.privacyAndSafety = localizedString(text: strPrivacyAndSafety)
                 self.textOthers = localizedString(text: strOthers)
             })
         }
     }
 }
-
+#if !TESTING
 struct ConfigPage_Previews: PreviewProvider {
     static var previews: some View {
         ConfigPage()
     }
 }
+#endif
