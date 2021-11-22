@@ -5,6 +5,7 @@
 //  Created by 郝育宽 on 2021-10-26.
 //
 
+import UIKit
 import SwiftUI
 struct MyTextView: UIViewRepresentable {
     var text: NSAttributedString
@@ -49,6 +50,8 @@ extension String {
     }
 }
 
+
+
 struct ReadingBookChapters: View {
     init(bookId: Int) {
         _datas = StateObject(wrappedValue: DownloadJson(url: getAllChaptersAPI(bookId: bookId)))
@@ -87,6 +90,8 @@ struct ReadingBookChapters: View {
     @State var location = CGPoint(x: 0, y: 0)
     @State private var showAlert = false
     @State private var activeAlert: ActiveAlert = .first
+    @State private var showSetting = false
+    @State private var navBarHidden = true
     // @State private var selectedShow: AlertInfo?
     var reloadButton: some View {
         Button(action: {}, label: {Text("Try again")})
@@ -98,48 +103,80 @@ struct ReadingBookChapters: View {
         Text("contents")
     }
     var body: some View {
-        ZStack {
-            Color(white: 1, opacity: 1)
-                .navigationViewStyle(StackNavigationViewStyle())
-                .navigationBarHidden(true)
-                if loadingState == BookDetailLoadingState.loadingChapters {
-                    loadingText.onAppear(perform: {getChapters()})
-                } else if loadingState == BookDetailLoadingState.loadingChaptersFailed ||
-                            loadingState == BookDetailLoadingState.loadingConteentsFailed {
-                    reloadButton
-                } else if loadingState == BookDetailLoadingState.loadingContents {
-                    loadingText.onAppear(perform: {loadContentData()})
-                } else {
-                    if pages.count > 0 {
-                        MyTextView(text: pages[curPage],
-                                   width: screenSize.width * 0.75)
-                        .frame(width: screenSize.width * 0.75, height: screenSize.height * 0.75)
-                        .accessibilityIdentifier("BookContent")}
-                }
-        }.onTouch(type: .started, perform: getLocation)
-         .gesture(DragGesture(minimumDistance: 20, coordinateSpace: .global)
-                        .onEnded { value in
-                            let horizontalAmount = value.translation.width as CGFloat
-                            let verticalAmount = value.translation.height as CGFloat
-            if abs(horizontalAmount) > abs(verticalAmount) {
-                horizontalAmount < 0 ? turnNextPages() : turnPreviousPages()
-                            } else {
-                                print(verticalAmount < 0 ? "up swipe" : "down swipe")
-                            }
-        })
-         .simultaneousGesture(TapGesture().onEnded(tapToChangePage))
-         .alert(isPresented: $showAlert) {
-             switch activeAlert {
-             case .first:
-                 return Alert(title: Text("This is the first page"), dismissButton: .default(Text("OK")))
-             case .second:
-                 return Alert(title: Text("This is the last page"), dismissButton: .default(Text("OK")))
-             case .third:
-                 return Alert(title: Text("Want to exist?"), primaryButton: .destructive(Text("Exist"), action: {
-                     self.presentationMode.wrappedValue.dismiss()}),
-                              secondaryButton: .default(Text("Cancel"), action: {}))
-         }
+        NavigationView{
+            ZStack{
+                ZStack {
+                    Color(white: 1, opacity: 1)
+                        .navigationViewStyle(StackNavigationViewStyle())
+                        .navigationBarHidden(true)
+                        if loadingState == BookDetailLoadingState.loadingChapters {
+                            loadingText.onAppear(perform: {getChapters()})
+                        } else if loadingState == BookDetailLoadingState.loadingChaptersFailed ||
+                                    loadingState == BookDetailLoadingState.loadingConteentsFailed {
+                            reloadButton
+                        } else if loadingState == BookDetailLoadingState.loadingContents {
+                            loadingText.onAppear(perform: {loadContentData()})
+                        } else {
+                            if pages.count > 0 {
+                                MyTextView(text: pages[curPage],
+                                           width: screenSize.width * 0.75)
+                                .frame(width: screenSize.width * 0.75, height: screenSize.height * 0.75)
+                                .accessibilityIdentifier("BookContent")}
+                        }
+                    
+                    
+                    
+                }.onTouch(type: .started, perform: getLocation)
+                 .gesture(DragGesture(minimumDistance: 20, coordinateSpace: .global)
+                                .onEnded { value in
+                                    let horizontalAmount = value.translation.width as CGFloat
+                                    let verticalAmount = value.translation.height as CGFloat
+                    if abs(horizontalAmount) > abs(verticalAmount) {
+                        horizontalAmount < 0 ? turnNextPages() : turnPreviousPages()
+                                    } else {
+                                        print(verticalAmount < 0 ? "up swipe" : "down swipe")
+                                    }
+                })
+                 .simultaneousGesture(TapGesture().onEnded(tapToChangePage))
+                 .alert(isPresented: $showAlert) {
+                     switch activeAlert {
+                     case .first:
+                         return Alert(title: Text("This is the first page"), dismissButton: .default(Text("OK")))
+                     case .second:
+                         return Alert(title: Text("This is the last page"), dismissButton: .default(Text("OK")))
+                     case .third:
+                         return Alert(title: Text("Want to exist?"), primaryButton: .destructive(Text("Exist"), action: {
+                             self.presentationMode.wrappedValue.dismiss()}),
+                                      secondaryButton: .default(Text("Cancel"), action: {}))
+                     }
                  }
+                if showSetting == true{
+                    VStack{
+                        Text(" ")
+                            .toolbar {
+                                ToolbarItem(placement: .navigationBarLeading) {
+                                    Button("Back") {
+                                        self.activeAlert = .third
+                                        self.showAlert = true
+                                    }
+                                }
+                            }
+                        Text(" ")
+                            .toolbar {
+                                ToolbarItemGroup(placement: .bottomBar) {
+                                    Button("Font") {
+                                    }
+                                    Spacer()
+                                    Button("Color") {
+                                    }
+                                }
+                            }
+                    }
+                }
+            }.navigationBarTitle("")
+             .navigationBarHidden(navBarHidden)
+             .navigationBarTitleDisplayMode(.inline)
+        }.navigationBarHidden(navBarHidden)
     }
     func turnPreviousPages() {
         if curPage < 1 && chapterId >= 1 {
@@ -176,9 +213,14 @@ struct ReadingBookChapters: View {
         } else if location.x > 2*width/3 {
             turnNextPages()
         } else {
-            self.activeAlert = .third
-                self.showAlert = true
-            print("back function")}
+            showSetting.toggle()
+            navBarHidden.toggle()
+            print(navBarHidden)
+//            self.activeAlert = .third
+//                self.showAlert = true
+//            print("back function")
+            
+        }
     }
     func getChapters() {
         DispatchQueue.global(qos: .background).async {
