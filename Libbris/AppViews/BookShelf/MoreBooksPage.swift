@@ -59,11 +59,9 @@ struct MoreBooksPage: View {
                     }
                 }))
                 .navigationViewStyle(StackNavigationViewStyle())
-        } else {
-            // Fallback on earlier versions
-        }
     }
-}
+    }
+
 #if !TESTING
 struct MoreBooksPage_Previews: PreviewProvider {
     static var previews: some View {
