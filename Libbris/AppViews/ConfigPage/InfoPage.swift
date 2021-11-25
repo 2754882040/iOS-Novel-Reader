@@ -42,6 +42,7 @@ struct InfoPage: View {
                 Text("\(mailText): info.libbris.com")
             }
         }.navigationBarBackButtonHidden(true)
+        .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(leading: btnBack)
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
             self.infos = localizedString(text: strInfos)

@@ -21,6 +21,7 @@ struct SplashScreen: View {
                 .resizable(resizingMode: .stretch)
                 .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
                 .onAppear(perform: countTime)
+                .navigationBarTitleDisplayMode(.inline)
                 .navigationBarBackButtonHidden(true)
                 .navigationBarHidden(true).onAppear(perform: countADTime)
                 .onAppear(perform: checkAdFile)

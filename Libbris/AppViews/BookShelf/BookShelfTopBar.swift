@@ -12,21 +12,26 @@ struct BookShelfTopBar: View {
     @State var searchAreaText = localizedString(text: strSearchArea)
     @State private var searchName: String = ""
     var body: some View {
-        ZStack(alignment: .leading) {
-            TopBarBackGround()
-            HStack {
-                Text(libraryText)
-                .foregroundColor(.white)
-                    .font(.custom("Dosis-Bold", size: 20)).padding(.leading, 8.0)
-                searchArea.accessibilityIdentifier("SearchArea")
-                NavigationLink(destination: SearchResults(searchName: searchName)) {
-                    Image(systemName: "magnifyingglass").accessibilityIdentifier("SearchButton")
+        if #available(iOS 15.0, *) {
+            ZStack(alignment: .leading) {
+                TopBarBackGround()
+                HStack {
+                    Text(libraryText)
+                        .foregroundColor(.white)
+                        .font(.custom("Dosis-Bold", size: 20)).padding(.leading, 8.0)
+                    searchArea.accessibilityIdentifier("SearchArea")
+                    NavigationLink(destination: SearchResults(searchName: searchName)) {
+                        Image(systemName: "magnifyingglass").accessibilityIdentifier("SearchButton")
+                    }
                 }
             }
-        }.onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
-            self.libraryText = localizedString(text: strLibrary)
-            self.searchAreaText = localizedString(text: strSearchArea)
-        })
+            .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
+                self.libraryText = localizedString(text: strLibrary)
+                self.searchAreaText = localizedString(text: strSearchArea)
+            })
+        } else {
+            // Fallback on earlier versions
+        }
     }
     var searchArea: some View {
         TextField(searchAreaText, text: $searchName)

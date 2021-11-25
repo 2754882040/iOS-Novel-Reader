@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01053543274EC8A600307D58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01053542274EC8A600307D58 /* AppDelegate.swift */; };
 		0132B804273330ED00E25915 /* TouchLocatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0132B803273330ED00E25915 /* TouchLocatingView.swift */; };
-		0132B809274C438E00E25915 /* Appdelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0132B808274C438D00E25915 /* Appdelegate.swift */; };
 		6E0037E426FD66DD00DD8A2A /* LocalJsonFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0037E326FD66DD00DD8A2A /* LocalJsonFileManager.swift */; };
 		6E0308A826A7D9350030753C /* LibbrisApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0308A726A7D9350030753C /* LibbrisApp.swift */; };
 		6E0308AA26A7D9350030753C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0308A926A7D9350030753C /* ContentView.swift */; };
@@ -97,8 +97,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		01053542274EC8A600307D58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0132B803273330ED00E25915 /* TouchLocatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchLocatingView.swift; sourceTree = "<group>"; };
-		0132B808274C438D00E25915 /* Appdelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appdelegate.swift; sourceTree = "<group>"; };
 		6E0037E326FD66DD00DD8A2A /* LocalJsonFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalJsonFileManager.swift; sourceTree = "<group>"; };
 		6E0308A426A7D9350030753C /* Libbris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Libbris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E0308A726A7D9350030753C /* LibbrisApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibbrisApp.swift; sourceTree = "<group>"; };
@@ -268,7 +268,6 @@
 			isa = PBXGroup;
 			children = (
 				6E03209126F1318000981B15 /* fonts */,
-				0132B808274C438D00E25915 /* Appdelegate.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -362,6 +361,7 @@
 			children = (
 				6E0C45A52728EC2C002D3A4A /* ReadingBookChapters.swift */,
 				0132B803273330ED00E25915 /* TouchLocatingView.swift */,
+				01053542274EC8A600307D58 /* AppDelegate.swift */,
 			);
 			path = Reading;
 			sourceTree = "<group>";
@@ -538,7 +538,6 @@
 			files = (
 				6E535F8D26C472F2003A1A8F /* BookInfo.swift in Sources */,
 				6E4492EF26D4554F00313F8E /* DownloadJson.swift in Sources */,
-				0132B809274C438E00E25915 /* Appdelegate.swift in Sources */,
 				6EF42FC9273CDCB400E21F7D /* ImageLoader.swift in Sources */,
 				6E0320B426F1552800981B15 /* TabBarView.swift in Sources */,
 				6E25E76126EB299E008B26AF /* LibraryBook.swift in Sources */,
@@ -548,6 +547,7 @@
 				6E4492DB26D40E3E00313F8E /* ConfigPage.swift in Sources */,
 				6E9975DC26E063AE00443057 /* HomeBookButton.swift in Sources */,
 				6E923B7C26E0326C000E56B4 /* strings.swift in Sources */,
+				01053543274EC8A600307D58 /* AppDelegate.swift in Sources */,
 				6EACE72326CEE9CB0063BAD5 /* DownloadImage.swift in Sources */,
 				6E2AE9302724E31C00081BA0 /* DownloadData.swift in Sources */,
 				6E4492E626D443DE00313F8E /* LanguagePage.swift in Sources */,
@@ -759,6 +759,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Libbris/Preview Content\"";
 				DEVELOPMENT_TEAM = TJ6JN796CP;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = Libbris/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -781,6 +783,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Libbris/Preview Content\"";
 				DEVELOPMENT_TEAM = TJ6JN796CP;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = Libbris/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -949,6 +953,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Libbris/Preview Content\"";
 				DEVELOPMENT_TEAM = TJ6JN796CP;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = Libbris/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
