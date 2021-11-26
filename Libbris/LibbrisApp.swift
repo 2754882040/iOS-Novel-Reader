@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct LibbrisApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     init() {
         // swiftlint:disable line_length
         _loader = StateObject(wrappedValue: Loader(url: "https://ucdfaaa4b96c503becd236be5959.previews.dropboxusercontent.com/p/thumb/ABUZ5AbrIjWT8zllvOwDNxXTrI43Fcw_ocSx-kvIpOWeMSRHOtQOlqw_nQBGAXfxfWByWssBHtLffhsszqw2zaZsZcUCEgYEZQN6OGs8CAZGpZ9UDiCaTil_qEX2BtrW3uqulqpCD-Wy2j_gc3RVWi3_365QhNsd_YANm98cGwmbhpJwhcovsmZfiZS3qcgte_2Je7mRuOcOuNUFLNyD4_bylqq3WC5vI9AKm1PqQJSMPAjWW4lzeLpu-rwHdg8rurSmyiV2OS2Pg-vey-73HFUphIKMsPX3sS5SoUJm0qzj1-e7kzTkTJqbeTa6yrGVHFA4Ow6w5SSxZU3QUcIie6sjQl_0WQoxabKJkz_icjoL9NrocO68k88vGC36ZwTJycQ/p.png", name: "Ads"))

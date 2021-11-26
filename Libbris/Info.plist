@@ -68,5 +68,17 @@
 	</dict>
 	<key>CFBundleDisplayName</key>
 	<string></string>
+    <key>UISceneConfigurations</key>
+    <dict>
+      <key>UIWindowSceneSessionRoleApplication</key>
+      <array>
+        <dict>
+          <key>UISceneDelegateClassName</key>
+          <string>$(PRODUCT_MODULE_NAME).FSSceneDelegate</string>
+        </dict>
+      </array>
+    </dict>
+    <key>UIApplicationSupportsMultipleScenes</key>
+    <true/>
 </dict>
 </plist>
