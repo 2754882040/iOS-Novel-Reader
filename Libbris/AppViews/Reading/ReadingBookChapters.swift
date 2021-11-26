@@ -58,13 +58,7 @@ struct ReadingBookChapters: View {
     init(bookId: Int) {
         _datas = StateObject(wrappedValue: DownloadJson(url: getAllChaptersAPI(bookId: bookId)))
         self.bookId = bookId
-
-        // let parsedURL = URL(string: getChapterContentAPI(bookId:bookId,chapterId:1))
-        // let chaptersURL = URL(string: getAllChaptersAPI(bookId: bookId))
-        // bookContentURL = parsedURL!
-        // bookChaptersURL = chaptersURL!
     }
-
     enum ActiveAlert {
         case first, second, third
     }
@@ -94,13 +88,11 @@ struct ReadingBookChapters: View {
     @State var loadingState = BookDetailLoadingState.loadingChapters
     @StateObject public var datas: DownloadJson
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    // var bookChaptersURL:URL
     @State var testInput = NSMutableAttributedString()
     @State private var activeAlert: ActiveAlert = .first
     @State private var showSetting = false
     @State private var navBarHidden = true
     @State var nightMode: Bool = false
-    // @State private var selectedShow: AlertInfo?
     var reloadButton: some View {
         Button(action: {}, label: {Text("Try again")})
     }
@@ -271,7 +263,8 @@ struct ReadingBookChapters: View {
             } else {
                 self.bookContentURL = URL(string: getChapterContentAPI(bookId: bookId, chapterId: bookChapterId))!
                 URLSession.shared.dataTask(with: bookContentURL) { data, _, _ in
-                    guard let tempString = NSString(data: data ?? Data(), encoding: String.Encoding.utf8.rawValue) else {
+                    guard let tempString = NSString(data: data ?? Data(),
+                                                    encoding: String.Encoding.utf8.rawValue) else {
                         self.loadingState = BookDetailLoadingState.loadingConteentsFailed
                         return}
                     print("success")
@@ -289,7 +282,9 @@ struct ReadingBookChapters: View {
         }
     }
     func getContent(content: String) -> [NSAttributedString] {
-        self.chapterContentNSMutable = NSMutableAttributedString(string: content, attributes: attribute(fontSize: textFontSize, textColor: textColor))
+        self.chapterContentNSMutable = NSMutableAttributedString(string: content,
+                                                                 attributes: attribute(fontSize: textFontSize,
+                                                                                       textColor: textColor))
         let framesetter = CTFramesetterCreateWithAttributedString(chapterContentNSMutable as CFAttributedString)
         let path = CGPath(rect:
                             CGRect(origin: CGPoint.zero,

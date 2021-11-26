@@ -56,7 +56,7 @@ struct ReadingBottomBar: View {
                        .frame(width: screenSize.width * percent,
                               height: screenSize.width * percent,
                               alignment: .center).foregroundColor(.yellow)
-               }})
+               }}).accessibilityIdentifier("nightModeController")
     }
     func nightModeChangeColor() {
         if nightMode {
@@ -75,19 +75,19 @@ struct ReadingBottomBar: View {
         Button(action: {textFontSize = 15.0
             loadState = .loadingContents
         },
-               label: { Text("A").font(.system(size: 15.0))})
+               label: { Text("A").font(.system(size: 15.0))}).accessibilityIdentifier("fontSmall")
     }
     var fontControlBtnMid: some View {
         Button(action: {textFontSize = 25.0
             loadState = .loadingContents
         },
-               label: { Text("A").font(.system(size: 25.0))})
+               label: { Text("A").font(.system(size: 25.0))}).accessibilityIdentifier("fontMid")
     }
     var fontControlBtnBig: some View {
         Button(action: {textFontSize = 35.0
             loadState = .loadingContents
         },
-               label: { Text("A").font(.system(size: 35.0))})
+               label: { Text("A").font(.system(size: 35.0))}).accessibilityIdentifier("fontLarge")
     }
     var fontControl: some View {
         HStack {
@@ -133,11 +133,11 @@ struct ReadingBottomBar: View {
     var bgControl: some View {
             HStack {
                 Spacer()
-                bgColorOne.disabled(nightMode)
+                bgColorOne.disabled(nightMode).accessibilityIdentifier("color1")
                 Spacer()
-                bgColorTwo.disabled(nightMode)
+                bgColorTwo.disabled(nightMode).accessibilityIdentifier("color2")
                 Spacer()
-                bgColorThree.disabled(nightMode)
+                bgColorThree.disabled(nightMode).accessibilityIdentifier("color3")
                 Spacer()
             }
     }

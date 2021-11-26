@@ -44,7 +44,8 @@ struct MoreBooksPage: View {
                     }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never)).animation(.easeIn)
                 }
             }
-                .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
+                .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")),
+                           perform: { _ in
                     self.noMoreBookText = localizedString(text: strNoMoreBook)
                     self.libraryText = localizedString(text: strLibrary)
                 })

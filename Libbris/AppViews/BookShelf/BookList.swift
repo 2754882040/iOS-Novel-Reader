@@ -49,7 +49,9 @@ struct BookList: View {
                                 .accessibilityIdentifier("LibraryBook\(item)")
                             Spacer(minLength: 20)
                         }
-                        if noMoreBook {Text(noBooksText).accessibilityIdentifier("textNoMoreBooks")}
+                        if noMoreBook {
+                            Text(noBooksText)
+                            .accessibilityIdentifier("textNoMoreBooks")}
                          else if searchOn == false {
                             loadMore.onAppear(perform: {loadBook()})}
                         Spacer(minLength: 10)

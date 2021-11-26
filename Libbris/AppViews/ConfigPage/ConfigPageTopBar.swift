@@ -28,7 +28,8 @@ struct ConfigPageTopBar: View {
                     .frame(height: 0)
                 // This will constrain the overlay to only go above the top safe area and not under.
             })
-                .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
+                .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")),
+                           perform: { _ in
                     self.settingsText = localizedString(text: strSettings)
                 })
         } else {
