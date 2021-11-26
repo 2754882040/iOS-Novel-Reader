@@ -66,7 +66,7 @@ struct BookInfoBriefWithTime: Codable, Hashable, Comparable {
     var bookUrlName: String
     var time: Date
 }
-struct BookChapter: Codable {
+struct BookChapter: Codable, Identifiable {
     var id: Int
     var title: String
     init() {

@@ -14,17 +14,24 @@ struct LibraryBook: View {
     }
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject var localJsonFile: LocalJsonFileManager = LocalJsonFileManager.shared
+    @State private var showCatalog = false
+    @State var addBookText = localizedString(text: strAddBook)
+    @State var showCatalogText = localizedString(text: strShowCatalogs)
     var bookDetail: BookInfoBrief
     let recommend: Bool
     var body: some View {
-        NavigationLink(destination: ReadingBookChapters(bookId: bookDetail.id)) {
-            if recommend {
-                coverWithIntro
-            } else { coverWithIntro2 }
+        ZStack {
+            NavigationLink(destination: ReadingBookChapters(bookId: bookDetail.id)) {
+                if recommend {
+                    coverWithIntro
+                } else { coverWithIntro2 }
+            }
+            .contextMenu(menuItems: {
+                menuAfterLongPressed
+            })
+            NavigationLink(destination: BookCatalog(bookId: bookDetail.id), isActive: $showCatalog) {
+            }
         }
-        .contextMenu(menuItems: {
-            menuAfterLongPressed
-        })
     }
     var coverWithIntro: some View {
         HStack(alignment: .top) {
@@ -61,9 +68,18 @@ struct LibraryBook: View {
         NotificationCenter.default.post(name: .refreshBook, object: nil)
     }
     var menuAfterLongPressed:some View {
-        Button("add to bookshelf") {
-            addBook()
-        }.accessibilityIdentifier("LongPressMenu")
+        VStack {
+            Button(addBookText) {
+                addBook()
+            }.accessibilityIdentifier("LongPressMenu")
+            Button(showCatalogText) {
+                self.showCatalog = true
+            }.accessibilityIdentifier("CatalogButton")
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
+            self.addBookText = localizedString(text: strAddBook)
+            self.showCatalogText = localizedString(text: strShowCatalogs)
+        })
     }
 }
 

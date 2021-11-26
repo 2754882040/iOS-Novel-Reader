@@ -68,7 +68,7 @@ struct ReadingBookChapters: View {
     @State var loadingState = BookDetailLoadingState.loadingChapters
     @StateObject public var datas: DownloadJson
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State var bookChapterId: Int=1
+    @State var bookChapterId: Int = 1
     var bookId: Int
     @State var bookContentURL: URL = URL(string: getChapterContentAPI(bookId: 1, chapterId: 1))!
     // var bookChaptersURL:URL

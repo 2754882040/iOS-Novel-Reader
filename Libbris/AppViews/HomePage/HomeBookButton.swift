@@ -11,6 +11,8 @@ struct HomeBookButton: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject private var loader: ImageLoader
     @State var bookCover = Image("default_cover")
+    @State var showCatalogText = localizedString(text: strShowCatalogs)
+    @State private var showCatalog = false
     var loading: Image
     var failure: Image
     init(bookDetail: BookInfoBriefWithTime,
@@ -26,6 +28,13 @@ struct HomeBookButton: View {
         NavigationLink(destination: ReadingBookChapters(bookId: bookDetail.id)) {
             bookCover.resizable().padding(.top, 13.0).padding(.bottom, 22.0)
                 .background(Image("blank_book_shadow")).frame(width: 90, height: 160, alignment: .bottom)
+        }
+        .contextMenu(menuItems: {
+            Button(showCatalogText) {
+                self.showCatalog = true
+            }.accessibilityIdentifier("CatalogButton")
+        })
+        NavigationLink(destination: BookCatalog(bookId: bookDetail.id), isActive: $showCatalog) {
         }
         .onAppear(perform: {
             DispatchQueue.global(qos: .background).async {

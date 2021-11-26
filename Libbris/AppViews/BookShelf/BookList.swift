@@ -68,8 +68,7 @@ struct BookList: View {
                 curBookCount = books.count
             }
             }
-        })
-            .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
+        }).onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
             self.loadingText = localizedString(text: strLoading)
             self.noBooksText = localizedString(text: strNoMoreBook)
         })

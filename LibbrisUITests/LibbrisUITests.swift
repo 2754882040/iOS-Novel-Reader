@@ -7,6 +7,7 @@
 
 import XCTest
 @testable import Libbris
+import SwiftUI
 extension XCUIElement {
     /**
      Removes any current text in the field before typing in the new value
@@ -61,7 +62,8 @@ class LibbrisUITests: XCTestCase {
         XCTAssertTrue(app.buttons["skipButton"].waitForExistence(timeout: 5))
         app.buttons["skipButton"].tap()
         app.tabBars["Tab Bar"].buttons["icon_home_nor_iOS_25@1"].tap()
-        app.scrollViews.otherElements.buttons["LibraryBook0"].press(forDuration: 1.4)
+        sleep(1)
+        app.scrollViews.otherElements.buttons["LibraryBook1"].press(forDuration: 1.4)
         XCTAssertTrue(app.buttons["LongPressMenu"].exists)
         app.buttons["LongPressMenu"].tap()
         app.tabBars["Tab Bar"].buttons["icon_home_20210913_nor@25"].tap()
@@ -117,5 +119,25 @@ class LibbrisUITests: XCTestCase {
         thisIsTheLastPageElement.tap()
         scrollViewsQuery.otherElements.buttons["OK"].tap()
         // swiftlint:enable line_length
+    }
+    func testDispalyCatalog() {
+        let app = XCUIApplication()
+        app.launch()
+        sleep(1)
+        app.buttons["skipButton"].tap()
+        app.tabBars["Tab Bar"].buttons["icon_home_nor_iOS_25@1"].tap()
+        sleep(1)
+        app.buttons["LibraryBook0"].press(forDuration: 1.4)
+        XCTAssertTrue(app.buttons["CatalogButton"].exists)
+        app.buttons["CatalogButton"].tap()
+        sleep(1)
+        XCTAssertTrue(app.staticTexts["ChapterButton1"].exists)
+        app.buttons["LongPressMenu"].tap()
+        app.tabBars["Tab Bar"].buttons["icon_home_20210913_sel@25"].tap()
+        app.scrollViews.otherElements.buttons["HomeBookButton&&"].press(forDuration: 1.4)
+        XCTAssertTrue(app.buttons["CatalogButton"].exists)
+        app.buttons["CatalogButton"].tap()
+        sleep(1)
+        XCTAssertTrue(app.staticTexts["ChapterButton1"].exists)
     }
 }
