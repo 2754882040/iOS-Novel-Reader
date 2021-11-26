@@ -42,7 +42,7 @@ struct BookCatalog: View {
             } else {
                 let index: Int = chapters.count
                 List(0..<index) {idx in
-                    Text(chapters[idx].title).accessibilityIdentifier("ChapterButton\(chapters[idx])")
+                    Text(chapters[idx].title).accessibilityIdentifier("ChapterButton\(idx)")
                 }
             }
         }.navigationBarTitle("")

@@ -131,13 +131,6 @@ class LibbrisUITests: XCTestCase {
         XCTAssertTrue(app.buttons["CatalogButton"].exists)
         app.buttons["CatalogButton"].tap()
         sleep(1)
-        XCTAssertTrue(app.staticTexts["ChapterButton1"].exists)
-        app.buttons["LongPressMenu"].tap()
-        app.tabBars["Tab Bar"].buttons["icon_home_20210913_sel@25"].tap()
-        app.scrollViews.otherElements.buttons["HomeBookButton&&"].press(forDuration: 1.4)
-        XCTAssertTrue(app.buttons["CatalogButton"].exists)
-        app.buttons["CatalogButton"].tap()
-        sleep(1)
-        XCTAssertTrue(app.staticTexts["ChapterButton1"].exists)
+        XCTAssertTrue(app.staticTexts["ChapterButton0"].exists)
     }
 }

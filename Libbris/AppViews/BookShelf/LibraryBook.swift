@@ -25,12 +25,11 @@ struct LibraryBook: View {
                 if recommend {
                     coverWithIntro
                 } else { coverWithIntro2 }
+                NavigationLink("", destination: BookCatalog(bookId: bookDetail.id), isActive: $showCatalog)
             }
             .contextMenu(menuItems: {
                 menuAfterLongPressed
             })
-            NavigationLink(destination: BookCatalog(bookId: bookDetail.id), isActive: $showCatalog) {
-            }
         }
     }
     var coverWithIntro: some View {
