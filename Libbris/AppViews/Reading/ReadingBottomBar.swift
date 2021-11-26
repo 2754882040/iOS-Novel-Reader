@@ -56,7 +56,7 @@ struct ReadingBottomBar: View {
                        .frame(width: screenSize.width * percent,
                               height: screenSize.width * percent,
                               alignment: .center).foregroundColor(.yellow)
-               }})
+               }}).accessibilityIdentifier("l2d")
     }
     func nightModeChangeColor() {
         if nightMode {
@@ -75,19 +75,19 @@ struct ReadingBottomBar: View {
         Button(action: {textFontSize = 15.0
             loadState = .loadingContents
         },
-               label: { Text("A").font(.system(size: 15.0))})
+               label: { Text("A").font(.system(size: 15.0))}).accessibilityIdentifier("15size")
     }
     var fontControlBtnMid: some View {
         Button(action: {textFontSize = 25.0
             loadState = .loadingContents
         },
-               label: { Text("A").font(.system(size: 25.0))})
+               label: { Text("A").font(.system(size: 25.0))}).accessibilityIdentifier("25size")
     }
     var fontControlBtnBig: some View {
         Button(action: {textFontSize = 35.0
             loadState = .loadingContents
         },
-               label: { Text("A").font(.system(size: 35.0))})
+               label: { Text("A").font(.system(size: 35.0))}).accessibilityIdentifier("35size")
     }
     var fontControl: some View {
         HStack {
@@ -108,7 +108,7 @@ struct ReadingBottomBar: View {
                        height: screenSize.width * percent,
                        alignment: .center)
                 .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-        })
+        }).accessibilityIdentifier("lightGray")
     }
     var bgColorTwo: some View {
         Button(action: {bgColor = UIColor.systemYellow},
@@ -118,7 +118,7 @@ struct ReadingBottomBar: View {
                        height: screenSize.width * percent,
                        alignment: .center)
                 .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-        })
+        }).accessibilityIdentifier("Yellow")
     }
     var bgColorThree: some View {
         Button(action: {bgColor = UIColor.cyan},
@@ -128,7 +128,7 @@ struct ReadingBottomBar: View {
                        height: screenSize.width * percent,
                        alignment: .center)
                 .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-        })
+        }).accessibilityIdentifier("cyan")
     }
     var bgControl: some View {
             HStack {
