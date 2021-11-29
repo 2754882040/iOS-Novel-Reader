@@ -51,18 +51,19 @@ extension String {
 }
 
 enum BookDetailLoadingState {
-    case loadingChapters, loadingChaptersFailed, loadingContents, loadingConteentsFailed, successAllLoading
+    case loadingChapters, loadingChaptersFailed, loadingContents, loadingConteentsFailed, successAllLoading, changeFont
 }
 
 struct ReadingBookChapters: View {
     init(bookId: Int) {
         _datas = StateObject(wrappedValue: DownloadJson(url: getAllChaptersAPI(bookId: bookId)))
         self.bookId = bookId
+        _chapterId = State(initialValue: 0)
     }
     init(bookId: Int, bookChapterId: Int) {
         _datas = StateObject(wrappedValue: DownloadJson(url: getAllChaptersAPI(bookId: bookId)))
         self.bookId = bookId
-        self.bookChapterId = bookChapterId
+        _chapterId = State(initialValue: bookChapterId)
     }
     enum ActiveAlert {
         case first, second, third
@@ -77,7 +78,7 @@ struct ReadingBookChapters: View {
     @State var chapterContentNSMutable = NSMutableAttributedString()
     @State var currentPage: Int = 0
     @State var chapterContent: String = ""
-    @State var chapterId: Int = 0
+    @State var chapterId: Int
     @State var preChapterId: Int = 0
     @State var width: CGFloat = UIScreen.main.bounds.width
     @State var starLocation: CGFloat = 0
@@ -117,7 +118,8 @@ struct ReadingBookChapters: View {
                         } else if loadingState == BookDetailLoadingState.loadingChaptersFailed ||
                                     loadingState == BookDetailLoadingState.loadingConteentsFailed {
                             reloadButton
-                        } else if loadingState == BookDetailLoadingState.loadingContents {
+                        } else if loadingState == BookDetailLoadingState.loadingContents ||
+                                    loadingState == BookDetailLoadingState.changeFont {
                             loadingText.onAppear(perform: {loadContentData()})
                         } else {
                             if pages.count > 0 {
@@ -238,11 +240,7 @@ struct ReadingBookChapters: View {
                 // swiftlint:enable force_try
                 print(self.bookChapters)
                 if bookChapters.count > 0 {
-                    print("chapter id")
-                    print(bookChapterId)
-                    // bookChapterId += 1
                     bookChapterId = bookChapters[chapterId].id
-                    print(bookChapterId)
                 }
                 self.loadingState = BookDetailLoadingState.loadingContents
             } else {
@@ -252,13 +250,10 @@ struct ReadingBookChapters: View {
     }
     func loadContentData() {
         DispatchQueue.global(qos: .background).async {
-            if !pages.isEmpty {
-                if pages.count != 0 {
+            if self.loadingState == .changeFont {
                     let percent = Double(curPage) / Double(pages.count)
                     pages = getContent(content: chapterContent)
-                    curPage = Int(Double(pages.count) * percent)} else {
-                        pages = getContent(content: chapterContent)
-                    }
+                    curPage = Int(Double(pages.count) * percent)
                 self.loadingState = BookDetailLoadingState.successAllLoading
                 return
             } else {

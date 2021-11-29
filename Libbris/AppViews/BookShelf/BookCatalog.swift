@@ -16,7 +16,7 @@ struct BookCatalog: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var chapters: [BookChapter] = [BookChapter]()
     @StateObject public var datas: DownloadJson
-    @State var bookId: Int = 1
+    var bookId: Int
     var body: some View {
         VStack {
             HStack(alignment: .center) {
@@ -42,7 +42,8 @@ struct BookCatalog: View {
             } else {
                 let index: Int = chapters.count
                 List(0..<index) {idx in
-                    Text(chapters[idx].title).accessibilityIdentifier("ChapterButton\(idx)")
+                    NavigationLink(destination: ReadingBookChapters(bookId: bookId, bookChapterId: idx),
+                                   label: {Text(chapters[idx].title).accessibilityIdentifier("ChapterButton\(idx)")})
                 }
             }
         }.navigationBarTitle("")

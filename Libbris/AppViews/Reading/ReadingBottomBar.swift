@@ -73,19 +73,19 @@ struct ReadingBottomBar: View {
     }
     var fontControlBtnSmall: some View {
         Button(action: {textFontSize = 15.0
-            loadState = .loadingContents
+            loadState = .changeFont
         },
                label: { Text("A").font(.system(size: 15.0))}).accessibilityIdentifier("fontSmall")
     }
     var fontControlBtnMid: some View {
         Button(action: {textFontSize = 25.0
-            loadState = .loadingContents
+            loadState = .changeFont
         },
                label: { Text("A").font(.system(size: 25.0))}).accessibilityIdentifier("fontMid")
     }
     var fontControlBtnBig: some View {
         Button(action: {textFontSize = 35.0
-            loadState = .loadingContents
+            loadState = .changeFont
         },
                label: { Text("A").font(.system(size: 35.0))}).accessibilityIdentifier("fontLarge")
     }
