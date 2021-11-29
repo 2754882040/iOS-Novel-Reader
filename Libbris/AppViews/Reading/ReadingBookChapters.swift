@@ -59,12 +59,16 @@ struct ReadingBookChapters: View {
         _datas = StateObject(wrappedValue: DownloadJson(url: getAllChaptersAPI(bookId: bookId)))
         self.bookId = bookId
     }
+    init(bookId: Int, bookChapterId: Int) {
+        _datas = StateObject(wrappedValue: DownloadJson(url: getAllChaptersAPI(bookId: bookId)))
+        self.bookId = bookId
+        self.bookChapterId = bookChapterId
+    }
     enum ActiveAlert {
         case first, second, third
     }
-    @State var bookChapterId: Int=1
+    @State var bookChapterId: Int = 1
     var bookId: Int
-    var prevFontSize: CGFloat = 0
     @State var bookContentURL: URL = URL(string: getChapterContentAPI(bookId: 1, chapterId: 1))!
     let screenSize: CGRect = UIScreen.main.bounds
     @State var bookChapters: [BookChapter] = [BookChapter]()
@@ -127,6 +131,7 @@ struct ReadingBookChapters: View {
                                                height: screenSize.height * 0.75)
                                     Spacer()
                                 }
+                                    Text("\(curPage+1) / \(pages.count)")
                                     Spacer()
                                 }
                                 .accessibilityIdentifier("BookContent").onTouch(type: .started, perform: getLocation)
