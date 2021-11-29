@@ -62,8 +62,10 @@ struct MainView: View {
                         }
                     }
                 }.accessibilityIdentifier("HomePageScrollView")
+                Spacer(minLength: 0)
+                TopBarBackGround()
             }
-        }
+        }.ignoresSafeArea(.all)
     }
 }
 #if !TESTING

@@ -68,7 +68,9 @@ struct ConfigPage: View {
                 self.privacyAndSafety = localizedString(text: strPrivacyAndSafety)
                 self.textOthers = localizedString(text: strOthers)
             })
-        }
+            Spacer()
+            TopBarBackGround()
+        }.ignoresSafeArea(.all)
     }
 }
 #if !TESTING

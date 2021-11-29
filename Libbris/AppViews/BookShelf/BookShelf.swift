@@ -34,7 +34,6 @@ struct BookShelf: View {
                     .padding(.trailing, 10.0)
                 }
                 BookList(url: getBookByCategoryAPI(categoryId: 11, start: 1, size: 5), cId: 11)
-                Spacer(minLength: 20)
             }.padding(.leading, 10)
                 .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")),
                            perform: { _ in
@@ -42,7 +41,9 @@ struct BookShelf: View {
                     self.hotText = localizedString(text: strHot)
                     self.moreText = localizedString(text: strMore)
                 })
-        }
+            Spacer(minLength: 0)
+            TopBarBackGround()
+        }.ignoresSafeArea(.all)
     }
 }
 #if !TESTING

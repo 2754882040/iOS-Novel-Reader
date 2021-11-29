@@ -18,7 +18,6 @@ struct ContentView: View {
         NavigationView {
             TabView(selection: $selection) {
                 MainView().navigationBarTitle("")
-                    .navigationBarTitleDisplayMode(.inline)
                     .navigationBarHidden(true).tabItem {
                     if selection == Tabs.home {
                         Image("icon_home_20210913_sel@25")
@@ -27,7 +26,6 @@ struct ContentView: View {
                     }
                 }.tag(Tabs.home)
                 BookShelf().navigationBarTitle("")
-                    .navigationBarTitleDisplayMode(.inline)
                     .navigationBarHidden(true).tabItem {
                     if selection == Tabs.library {
                         Image("icon_home_sel_iOS_25@1")
@@ -36,7 +34,6 @@ struct ContentView: View {
                     }
                 }.tag(Tabs.library)
                 ConfigPage().navigationBarTitle("")
-                    .navigationBarTitleDisplayMode(.inline)
                     .navigationBarHidden(true).tabItem {
                     if selection == Tabs.setting {
                         Image("icon_settings_sel_iOS_25@1")
@@ -44,9 +41,7 @@ struct ContentView: View {
                         Image("icon_settings_nor_iOS_25@1")
                     }
                 }.tag(Tabs.setting)
-            }.navigationBarTitle("")
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationBarHidden(true)
+            }
         }
     }
 }
