@@ -66,7 +66,6 @@ struct ReadingBookChapters: View {
     var bookId: Int
     var prevFontSize: CGFloat = 0
     @State var bookContentURL: URL = URL(string: getChapterContentAPI(bookId: 1, chapterId: 1))!
-    // var bookChaptersURL:URL
     let screenSize: CGRect = UIScreen.main.bounds
     @State var bookChapters: [BookChapter] = [BookChapter]()
     @State var curPage = 0
@@ -221,9 +220,6 @@ struct ReadingBookChapters: View {
             showSetting.toggle()
             navBarHidden.toggle()
             print(navBarHidden)
-//            self.activeAlert = .third
-//                self.showAlert = true
-//            print("back function")
         }
     }
     func getChapters() {

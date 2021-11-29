@@ -36,7 +36,6 @@ struct ContentView: View {
                     }
                 }.tag(Tabs.library)
                 ConfigPage().navigationBarTitle("")
-                    .navigationBarTitle("")
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarHidden(true).tabItem {
                     if selection == Tabs.setting {

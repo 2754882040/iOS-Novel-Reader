@@ -16,15 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = col1
-
         let attrs: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.white,
             .font: UIFont.monospacedSystemFont(ofSize: 36, weight: .black)
         ]
-
         appearance.largeTitleTextAttributes = attrs
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
         return true
     }
-
 }
