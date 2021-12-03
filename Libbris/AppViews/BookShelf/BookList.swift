@@ -49,7 +49,9 @@ struct BookList: View {
                                 .accessibilityIdentifier("LibraryBook\(item)")
                             Spacer(minLength: 20)
                         }
-                        if noMoreBook {Text(noBooksText).accessibilityIdentifier("textNoMoreBooks")}
+                        if noMoreBook {
+                            Text(noBooksText)
+                            .accessibilityIdentifier("textNoMoreBooks")}
                          else if searchOn == false {
                             loadMore.onAppear(perform: {loadBook()})}
                         Spacer(minLength: 10)
@@ -68,8 +70,7 @@ struct BookList: View {
                 curBookCount = books.count
             }
             }
-        })
-            .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
+        }).onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
             self.loadingText = localizedString(text: strLoading)
             self.noBooksText = localizedString(text: strNoMoreBook)
         })

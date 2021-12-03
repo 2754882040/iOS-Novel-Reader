@@ -13,8 +13,12 @@ struct HomePageTopBar: View {
         ZStack(alignment: .leading) {
             TopBarBackGround()
             VStack {
-                Image("logo_libbris_white").padding(.leading, 5.0)
-            }
+                Spacer()
+                HStack {
+                    Image("logo_libbris_white").padding([.leading, .bottom], 10.0)
+                    Spacer()
+                }
+            }.frame(width: screenSize.width, height: screenSize.height * 0.1)
         }
     }
 }

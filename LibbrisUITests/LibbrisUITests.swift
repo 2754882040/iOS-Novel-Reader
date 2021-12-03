@@ -7,6 +7,7 @@
 
 import XCTest
 @testable import Libbris
+import SwiftUI
 extension XCUIElement {
     /**
      Removes any current text in the field before typing in the new value
@@ -61,7 +62,8 @@ class LibbrisUITests: XCTestCase {
         XCTAssertTrue(app.buttons["skipButton"].waitForExistence(timeout: 5))
         app.buttons["skipButton"].tap()
         app.tabBars["Tab Bar"].buttons["icon_home_nor_iOS_25@1"].tap()
-        app.scrollViews.otherElements.buttons["LibraryBook0"].press(forDuration: 1.4)
+        sleep(1)
+        app.scrollViews.otherElements.buttons["LibraryBook1"].press(forDuration: 1.4)
         XCTAssertTrue(app.buttons["LongPressMenu"].exists)
         app.buttons["LongPressMenu"].tap()
         app.tabBars["Tab Bar"].buttons["icon_home_20210913_nor@25"].tap()
@@ -102,7 +104,7 @@ class LibbrisUITests: XCTestCase {
         let coordinate2 = normalized.withOffset(CGVector(dx: 150, dy: 10)) // MID
         let coordinate3 = normalized.withOffset(CGVector(dx: 0, dy: 10))  // LEFT
         coordinate3.tap()
-        let okButton = app.alerts["This is the first page"].scrollViews.otherElements.buttons["OK"]
+        _ = app.alerts["This is the first page"].scrollViews.otherElements.buttons["OK"]
         app.staticTexts["BookContent"].swipeLeft()
         app.staticTexts["BookContent"].swipeRight()
         coordinate2.tap()
@@ -117,5 +119,40 @@ class LibbrisUITests: XCTestCase {
         thisIsTheLastPageElement.tap()
         scrollViewsQuery.otherElements.buttons["OK"].tap()
         // swiftlint:enable line_length
+    }
+    func testDispalyCatalog() {
+        let app = XCUIApplication()
+        app.launch()
+        sleep(1)
+        app.buttons["skipButton"].tap()
+        app.tabBars["Tab Bar"].buttons["icon_home_nor_iOS_25@1"].tap()
+        sleep(1)
+        app.buttons["LibraryBook0"].press(forDuration: 1.4)
+        XCTAssertTrue(app.buttons["CatalogButton"].exists)
+        app.buttons["CatalogButton"].tap()
+        sleep(1)
+        XCTAssertTrue(app.staticTexts["ChapterButton0"].exists)
+    }
+    func testReadingBotBar() {
+        let app = XCUIApplication()
+        app.launch()
+        XCTAssertTrue(app.buttons["skipButton"].waitForExistence(timeout: 5))
+        app.buttons["skipButton"].tap()
+        app.tabBars["Tab Bar"].buttons["icon_home_nor_iOS_25@1"].tap()
+        app.buttons["LibraryBook0"].tap()
+        XCTAssertFalse(app.buttons["fontSmall"].exists)
+        let normalized = app.staticTexts["BookContent"].coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
+        let coordinate2 = normalized.withOffset(CGVector(dx: 150, dy: 10)) // MID
+        coordinate2.tap()
+        XCTAssertTrue(app.buttons["fontSmall"].exists)
+        app.buttons["fontSmall"].tap()
+        app.buttons["fontMid"].tap()
+        app.buttons["fontLarge"].tap()
+        app.buttons["color1"].tap()
+        app.buttons["color2"].tap()
+        app.buttons["color3"].tap()
+        app.buttons["nightModeController"].tap()
+        coordinate2.tap()
+        XCTAssertTrue(app.staticTexts["pageNumber"].exists)
     }
 }

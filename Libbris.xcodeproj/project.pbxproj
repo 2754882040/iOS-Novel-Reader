@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01053543274EC8A600307D58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01053542274EC8A600307D58 /* AppDelegate.swift */; };
 		0132B804273330ED00E25915 /* TouchLocatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0132B803273330ED00E25915 /* TouchLocatingView.swift */; };
 		6E0037E426FD66DD00DD8A2A /* LocalJsonFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0037E326FD66DD00DD8A2A /* LocalJsonFileManager.swift */; };
 		6E0308A826A7D9350030753C /* LibbrisApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0308A726A7D9350030753C /* LibbrisApp.swift */; };
@@ -67,6 +68,7 @@
 		6E923B7C26E0326C000E56B4 /* strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E923B7B26E0326C000E56B4 /* strings.swift */; };
 		6E9975DC26E063AE00443057 /* HomeBookButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9975DB26E063AE00443057 /* HomeBookButton.swift */; };
 		6EACE72326CEE9CB0063BAD5 /* DownloadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EACE72226CEE9CB0063BAD5 /* DownloadImage.swift */; };
+		6EB498B9274F26450019A843 /* ReadingBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB498B8274F26450019A843 /* ReadingBottomBar.swift */; };
 		6ED7B49026B9AD92005DDB48 /* splashscreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED7B48F26B9AD92005DDB48 /* splashscreen.swift */; };
 		6EF42FBB273C7F6200E21F7D /* DownloadImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF42FBA273C7F6200E21F7D /* DownloadImageTests.swift */; };
 		6EF42FBD273CA4BF00E21F7D /* FunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF42FBC273CA4BF00E21F7D /* FunctionsTest.swift */; };
@@ -76,6 +78,7 @@
 		866C1F2226B4E1E900D59699 /* gemfile in Resources */ = {isa = PBXBuildFile; fileRef = 866C1F2126B4E1E900D59699 /* gemfile */; };
 		8D462A752739E3EE0016C74E /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D462A742739E3EE0016C74E /* SearchResults.swift */; };
 		8DCB989626EFD65D00C4E372 /* MoreBooksPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB989526EFD65D00C4E372 /* MoreBooksPage.swift */; };
+		8DF56EE12745A1FF002ECDFA /* BookCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF56EE02745A1FF002ECDFA /* BookCatalog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +99,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		01053542274EC8A600307D58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0132B803273330ED00E25915 /* TouchLocatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchLocatingView.swift; sourceTree = "<group>"; };
 		6E0037E326FD66DD00DD8A2A /* LocalJsonFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalJsonFileManager.swift; sourceTree = "<group>"; };
 		6E0308A426A7D9350030753C /* Libbris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Libbris.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,6 +160,7 @@
 		6E923B7B26E0326C000E56B4 /* strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = strings.swift; sourceTree = "<group>"; };
 		6E9975DB26E063AE00443057 /* HomeBookButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBookButton.swift; sourceTree = "<group>"; };
 		6EACE72226CEE9CB0063BAD5 /* DownloadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadImage.swift; sourceTree = "<group>"; };
+		6EB498B8274F26450019A843 /* ReadingBottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingBottomBar.swift; sourceTree = "<group>"; };
 		6ED7B48F26B9AD92005DDB48 /* splashscreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = splashscreen.swift; sourceTree = "<group>"; };
 		6EF42FBA273C7F6200E21F7D /* DownloadImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadImageTests.swift; sourceTree = "<group>"; };
 		6EF42FBC273CA4BF00E21F7D /* FunctionsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionsTest.swift; sourceTree = "<group>"; };
@@ -166,6 +171,7 @@
 		866C1F2126B4E1E900D59699 /* gemfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = gemfile; sourceTree = "<group>"; };
 		8D462A742739E3EE0016C74E /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
 		8DCB989526EFD65D00C4E372 /* MoreBooksPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreBooksPage.swift; sourceTree = "<group>"; };
+		8DF56EE02745A1FF002ECDFA /* BookCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCatalog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -314,6 +320,7 @@
 				6E4EF5D0273DB856000E5198 /* BookTitle.swift */,
 				6E4EF5D2273DB864000E5198 /* BookAuthor.swift */,
 				6E4EF5D4273DB871000E5198 /* BookSummary.swift */,
+				8DF56EE02745A1FF002ECDFA /* BookCatalog.swift */,
 			);
 			path = BookShelf;
 			sourceTree = "<group>";
@@ -357,8 +364,10 @@
 		6E2AE9242724836B00081BA0 /* Reading */ = {
 			isa = PBXGroup;
 			children = (
+				6EB498B8274F26450019A843 /* ReadingBottomBar.swift */,
 				6E0C45A52728EC2C002D3A4A /* ReadingBookChapters.swift */,
 				0132B803273330ED00E25915 /* TouchLocatingView.swift */,
+				01053542274EC8A600307D58 /* AppDelegate.swift */,
 			);
 			path = Reading;
 			sourceTree = "<group>";
@@ -534,6 +543,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E535F8D26C472F2003A1A8F /* BookInfo.swift in Sources */,
+				6EB498B9274F26450019A843 /* ReadingBottomBar.swift in Sources */,
 				6E4492EF26D4554F00313F8E /* DownloadJson.swift in Sources */,
 				6EF42FC9273CDCB400E21F7D /* ImageLoader.swift in Sources */,
 				6E0320B426F1552800981B15 /* TabBarView.swift in Sources */,
@@ -544,6 +554,7 @@
 				6E4492DB26D40E3E00313F8E /* ConfigPage.swift in Sources */,
 				6E9975DC26E063AE00443057 /* HomeBookButton.swift in Sources */,
 				6E923B7C26E0326C000E56B4 /* strings.swift in Sources */,
+				01053543274EC8A600307D58 /* AppDelegate.swift in Sources */,
 				6EACE72326CEE9CB0063BAD5 /* DownloadImage.swift in Sources */,
 				6E2AE9302724E31C00081BA0 /* DownloadData.swift in Sources */,
 				6E4492E626D443DE00313F8E /* LanguagePage.swift in Sources */,
@@ -554,6 +565,7 @@
 				6E4492DD26D40E8300313F8E /* InfoPage.swift in Sources */,
 				6E4EF5D3273DB864000E5198 /* BookAuthor.swift in Sources */,
 				6E4EF5CF273DABE6000E5198 /* BookCoverImg.swift in Sources */,
+				8DF56EE12745A1FF002ECDFA /* BookCatalog.swift in Sources */,
 				6E4EF5D5273DB871000E5198 /* BookSummary.swift in Sources */,
 				6E0C45A62728EC2C002D3A4A /* ReadingBookChapters.swift in Sources */,
 				6E31CD5726F278F000956223 /* BookList.swift in Sources */,
@@ -561,7 +573,6 @@
 				6E0308AA26A7D9350030753C /* ContentView.swift in Sources */,
 				6E2AE9262724888000081BA0 /* TopBarBackGround.swift in Sources */,
 				8D462A752739E3EE0016C74E /* SearchResults.swift in Sources */,
-				6EF6EF8026EACA6B00FE47CA /* BookDetailView.swift in Sources */,
 				6E0308A826A7D9350030753C /* LibbrisApp.swift in Sources */,
 				6E0037E426FD66DD00DD8A2A /* LocalJsonFileManager.swift in Sources */,
 				6E2AE92927248B0100081BA0 /* HomePageTopBar.swift in Sources */,
@@ -756,6 +767,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Libbris/Preview Content\"";
 				DEVELOPMENT_TEAM = TJ6JN796CP;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = Libbris/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -778,6 +791,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Libbris/Preview Content\"";
 				DEVELOPMENT_TEAM = TJ6JN796CP;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = Libbris/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -946,6 +961,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Libbris/Preview Content\"";
 				DEVELOPMENT_TEAM = TJ6JN796CP;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = Libbris/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (

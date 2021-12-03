@@ -44,23 +44,25 @@ struct MoreBooksPage: View {
                     }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never)).animation(.easeIn)
                 }
             }
-            .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
-                self.noMoreBookText = localizedString(text: strNoMoreBook)
-                self.libraryText = localizedString(text: strLibrary)
-            })
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarBackButtonHidden(true)
-            .navigationBarItems(leading: Button(action: {
-                self.presentationMode.wrappedValue.dismiss()
-            }, label: {
+                .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")),
+                           perform: { _ in
+                    self.noMoreBookText = localizedString(text: strNoMoreBook)
+                    self.libraryText = localizedString(text: strLibrary)
+                })
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarBackButtonHidden(true)
+                .navigationBarItems(leading: Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                }, label: {
                     HStack {
                         Image(systemName: "arrow.backward").foregroundColor(.white)
                         Text(libraryText).foregroundColor(.white).font(.custom("Dosis-Bold", size: 20))
                     }
                 }))
-            .navigationViewStyle(StackNavigationViewStyle())
+                .navigationViewStyle(StackNavigationViewStyle())
     }
-}
+    }
+
 #if !TESTING
 struct MoreBooksPage_Previews: PreviewProvider {
     static var previews: some View {

@@ -41,6 +41,7 @@ struct LanguagePage: View {
             changeLanguage(languageCode: selectedLanguage)
             NotificationCenter.default.post(name: .switchLanguage, object: nil)
         }).navigationBarBackButtonHidden(true)
+            .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: btnBack.accessibilityIdentifier("LanguagePageBack"))
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
             self.englishText = localizedString(text: strEnglish)

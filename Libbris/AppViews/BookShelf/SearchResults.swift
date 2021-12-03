@@ -31,12 +31,12 @@ struct SearchResults: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true).navigationBarItems(leading: Button(action: {
                 self.presentationMode.wrappedValue.dismiss()
-                }) {
+                }, label: {
                     HStack {
                         Image(systemName: "arrow.backward").foregroundColor(.white)
                         Text(libraryText).foregroundColor(.white).font(.custom("Dosis-Bold", size: 20))
                     }
-                })
+                }))
             .navigationViewStyle(StackNavigationViewStyle())
     }
 }

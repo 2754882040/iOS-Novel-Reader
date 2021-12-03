@@ -59,7 +59,5 @@ class ConfigPageTests: XCTestCase {
         app.staticTexts["privacyBtn"].tap()
         app.buttons["Back"].tap()
     }
-    func testLanguage() throws {
-        
-    }
+
 }
