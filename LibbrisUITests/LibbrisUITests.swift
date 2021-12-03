@@ -152,5 +152,7 @@ class LibbrisUITests: XCTestCase {
         app.buttons["color2"].tap()
         app.buttons["color3"].tap()
         app.buttons["nightModeController"].tap()
+        coordinate2.tap()
+        XCTAssertTrue(app.staticTexts["pageNumber"].exists)
     }
 }

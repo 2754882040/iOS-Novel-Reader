@@ -106,6 +106,9 @@ struct ReadingBookChapters: View {
     var bookContent: some View {
         Text("contents")
     }
+    var pageNumber: some View {
+        Text("\(curPage+1) / \(pages.count)")
+    }
     var body: some View {
         NavigationView {
             ZStack {
@@ -131,12 +134,13 @@ struct ReadingBookChapters: View {
                                        width: screenSize.width * 0.75)
                                         .frame(width: screenSize.width * 0.75,
                                                height: screenSize.height * 0.75)
+                                        .accessibilityIdentifier("BookContent")
                                     Spacer()
                                 }
-                                    Text("\(curPage+1) / \(pages.count)")
+                                    pageNumber.accessibilityIdentifier("pageNumber")
                                     Spacer()
                                 }
-                                .accessibilityIdentifier("BookContent").onTouch(type: .started, perform: getLocation)
+                                .onTouch(type: .started, perform: getLocation)
                                 .gesture(DragGesture(minimumDistance: 20, coordinateSpace: .global)
                                                .onEnded { value in
                                                    let horizontalAmount = value.translation.width as CGFloat
