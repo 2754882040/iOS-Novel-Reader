@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 struct BookInfo: Codable {
     var id: Int
     var name: String
@@ -79,3 +80,17 @@ struct AlertInfo: Identifiable {
     var id: String { name }
     let name: String
 }
+
+struct LastRead: Codable {
+    var percent: Double
+    var chapterId: Int
+    init() {
+        percent = 0.0
+        chapterId = 0
+    }
+    init(val: Double, Id: Int) {
+        percent = val
+        chapterId = Id
+    }
+}
+

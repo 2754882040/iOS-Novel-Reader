@@ -57,13 +57,25 @@ enum BookDetailLoadingState {
 struct ReadingBookChapters: View {
     init(bookId: Int) {
         _datas = StateObject(wrappedValue: DownloadJson(url: getAllChaptersAPI(bookId: bookId)))
+        _lastReadManager = StateObject(wrappedValue: ReadingSettingsManager(bookId))
         self.bookId = bookId
         _chapterId = State(initialValue: 0)
+        _bgColor = State(initialValue: colorDict[UserDefaults.standard.integer(forKey: "bgColor")] ?? .white)
+        _textFontSize = State(initialValue: fontDict[UserDefaults.standard.integer(forKey: "fontSize")] ?? 15.0)
+        _textColor = State(initialValue: textColorDict[UserDefaults.standard.integer(forKey: "fontColor")] ?? UIColor.darkText)
+        _nightMode =  State(initialValue: UserDefaults.standard.bool(forKey: "nightMode"))
+        _loadLastReadPosition = State(initialValue: true)
     }
     init(bookId: Int, bookChapterId: Int) {
         _datas = StateObject(wrappedValue: DownloadJson(url: getAllChaptersAPI(bookId: bookId)))
+        _lastReadManager = StateObject(wrappedValue: ReadingSettingsManager(bookId))
         self.bookId = bookId
         _chapterId = State(initialValue: bookChapterId)
+        _bgColor = State(initialValue: colorDict[UserDefaults.standard.integer(forKey: "bgColor")] ?? .white)
+        _textFontSize = State(initialValue: fontDict[UserDefaults.standard.integer(forKey: "fontSize")] ?? 15.0)
+        _textColor = State(initialValue: textColorDict[UserDefaults.standard.integer(forKey: "fontColor")] ?? UIColor.darkText)
+        _nightMode =  State(initialValue: UserDefaults.standard.bool(forKey: "nightMode"))
+        _loadLastReadPosition = State(initialValue: false)
     }
     enum ActiveAlert {
         case first, second, third
@@ -73,30 +85,32 @@ struct ReadingBookChapters: View {
     @State var bookContentURL: URL = URL(string: getChapterContentAPI(bookId: 1, chapterId: 1))!
     let screenSize: CGRect = UIScreen.main.bounds
     @State var bookChapters: [BookChapter] = [BookChapter]()
+    @State var loadLastReadPosition: Bool
     @State var curPage = 0
     @State var pages = [NSAttributedString]()
     @State var chapterContentNSMutable = NSMutableAttributedString()
-    @State var currentPage: Int = 0
     @State var chapterContent: String = ""
     @State var chapterId: Int
-    @State var preChapterId: Int = 0
+    //    @State var preChapterId: Int = 0
     @State var width: CGFloat = UIScreen.main.bounds.width
     @State var starLocation: CGFloat = 0
     @State var endLocation: CGFloat = 0
     @State var location = CGPoint(x: 0, y: 0)
-    @State var textColor: UIColor = .darkText
-    @State var bgColor: UIColor = .white
-    @State var textFontSize: CGFloat = 15.0
+    @State var textColor: UIColor
+    @State var bgColor: UIColor
+    @State var textFontSize: CGFloat
     @State var showMenu: Bool = false
     @State private var showAlert = false
     @State var loadingState = BookDetailLoadingState.loadingChapters
     @StateObject public var datas: DownloadJson
+    @StateObject public var lastReadManager: ReadingSettingsManager
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var testInput = NSMutableAttributedString()
     @State private var activeAlert: ActiveAlert = .first
     @State private var showSetting = false
     @State private var navBarHidden = true
-    @State var nightMode: Bool = false
+    @State var nightMode: Bool
+    @State var preChapter: Bool = false
     var reloadButton: some View {
         Button(action: {}, label: {Text("Try again")})
     }
@@ -196,24 +210,36 @@ struct ReadingBookChapters: View {
     func turnPreviousPages() {
         if curPage < 1 && chapterId >= 1 {
             chapterId -= 1
+            preChapter = true
             loadingState = BookDetailLoadingState.loadingChapters
-            curPage = preChapterId
-        } else if curPage > 0 {curPage -= 1
+        } else if curPage > 0 {
+            curPage -= 1
+            lastReadManager.percent.percent = Double(curPage) / Double(pages.count)
+            lastReadManager.percent.chapterId = chapterId
+            _ = lastReadManager.saveData()
         } else { self.activeAlert = .first
             self.showAlert = true
         }
     }
     func turnNextPages() {
         if curPage >= pages.count-1 {
-            preChapterId = curPage
+            preChapter = false
             if chapterId < bookChapters.count - 1 {
                 chapterId += 1
                 loadingState = BookDetailLoadingState.loadingChapters
-                curPage = 0} else {
+                curPage = 0
+                lastReadManager.percent.percent = Double(curPage) / Double(pages.count)
+                lastReadManager.percent.chapterId = chapterId
+                _ = lastReadManager.saveData()
+            } else {
                     self.activeAlert = .second
                     self.showAlert = true
                 }
-        } else if curPage < pages.count && chapterId < bookChapters.count { curPage += 1
+        } else if curPage < pages.count && chapterId < bookChapters.count {
+            curPage += 1
+            lastReadManager.percent.percent = Double(curPage) / Double(pages.count)
+            lastReadManager.percent.chapterId = chapterId
+            _ = lastReadManager.saveData()
         } else { self.activeAlert = .second
             self.showAlert = true }
     }
@@ -235,7 +261,6 @@ struct ReadingBookChapters: View {
     }
     func getChapters() {
         DispatchQueue.global(qos: .background).async {
-            print("callgetchapter")
             if datas.state == DownloadJson.LoadState.failure {
                 self.loadingState = BookDetailLoadingState.loadingChaptersFailed
             } else if datas.state == DownloadJson.LoadState.success {
@@ -254,6 +279,10 @@ struct ReadingBookChapters: View {
     }
     func loadContentData() {
         DispatchQueue.global(qos: .background).async {
+            if loadLastReadPosition {
+                while lastReadManager.state == .loading {}
+                chapterId = lastReadManager.percent.chapterId
+            }
             if self.loadingState == .changeFont {
                     let percent = Double(curPage) / Double(pages.count)
                     pages = getContent(content: chapterContent)
@@ -271,10 +300,25 @@ struct ReadingBookChapters: View {
                     chapterContent = tempString as String
                     chapterContent = chapterContent.htmlToString
                     if pages.count != 0 {
-                        let percent = Double(curPage) / Double(pages.count)
-                        pages = getContent(content: chapterContent)
-                        curPage = Int(Double(pages.count) * percent)} else {
+                        if preChapter {
+                            preChapter = false
                             pages = getContent(content: chapterContent)
+                            curPage = pages.count - 1
+                            lastReadManager.percent.percent = Double(curPage) / Double(pages.count)
+                            lastReadManager.percent.chapterId = chapterId
+                            _ = lastReadManager.saveData()
+                        } else {
+                            let percent = Double(curPage) / Double(pages.count)
+                            pages = getContent(content: chapterContent)
+                            curPage = Int(Double(pages.count) * percent)
+                        }
+                    } else {
+                        pages = getContent(content: chapterContent)
+                            if loadLastReadPosition {
+                                while lastReadManager.state == .loading {}
+                                curPage = Int(Double(pages.count) * lastReadManager.percent.percent)
+                                loadLastReadPosition = false
+                            }
                         }
                     self.loadingState = BookDetailLoadingState.successAllLoading
                 }.resume()

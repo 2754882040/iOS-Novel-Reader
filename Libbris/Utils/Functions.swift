@@ -6,11 +6,14 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum LoadState {
 case loading, success, failure
 }
-
+let colorDict = [0: UIColor.white, 1: UIColor.lightGray, 2: UIColor.systemYellow, 3: UIColor.cyan, 4: UIColor.darkGray]
+let fontDict:[Int: CGFloat] = [0: 15.0, 1: 25.0, 2: 35.0]
+let textColorDict = [0: UIColor.darkText, 1: UIColor.lightText]
 func localizedString(text: String) -> String {
 let name = UserDefaults.standard.string(forKey: "language")
     if name == nil {
@@ -93,7 +96,7 @@ func encodeData<T: Codable>(data: T) -> Data? {
     }
 }
 let fullPath = NSHomeDirectory().appending("/Documents/").appending("bookShelf")
-
+let generalSettingsPath = NSHomeDirectory().appending("/Documents/").appending("readingSettings")
 func getBookByCategoryAPI(categoryId: Int, start: Int, size: Int) -> String {
     return "\(apiWebsite)book/category/\(categoryId)?start=\(start)&size=\(size)"
 }

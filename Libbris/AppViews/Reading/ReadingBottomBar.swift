@@ -63,28 +63,37 @@ struct ReadingBottomBar: View {
             bgColor = UIColor.darkGray
             textColor = UIColor.lightText
             textFontSize = textFontSize
+            UserDefaults.standard.set(4, forKey: "bgColor")
+            UserDefaults.standard.set(true, forKey: "nightMode")
+            UserDefaults.standard.set(1, forKey: "fontColor")
             loadState = .loadingContents
         } else {
             textColor = UIColor.darkText
             bgColor = UIColor.white
+            UserDefaults.standard.set(0, forKey: "bgColor")
+            UserDefaults.standard.set(false, forKey: "nightMode")
+            UserDefaults.standard.set(0, forKey: "fontColor")
             textFontSize = textFontSize
             loadState = .loadingContents
         }
     }
     var fontControlBtnSmall: some View {
         Button(action: {textFontSize = 15.0
+            UserDefaults.standard.set(0, forKey: "fontSize")
             loadState = .changeFont
         },
                label: { Text("A").font(.system(size: 15.0))}).accessibilityIdentifier("fontSmall")
     }
     var fontControlBtnMid: some View {
         Button(action: {textFontSize = 25.0
+            UserDefaults.standard.set(1, forKey: "fontSize")
             loadState = .changeFont
         },
                label: { Text("A").font(.system(size: 25.0))}).accessibilityIdentifier("fontMid")
     }
     var fontControlBtnBig: some View {
         Button(action: {textFontSize = 35.0
+            UserDefaults.standard.set(2, forKey: "fontSize")
             loadState = .changeFont
         },
                label: { Text("A").font(.system(size: 35.0))}).accessibilityIdentifier("fontLarge")
@@ -101,7 +110,9 @@ struct ReadingBottomBar: View {
         }
     }
     var bgColorOne: some View {
-        Button(action: {bgColor = UIColor.lightGray},
+        Button(action: {bgColor = UIColor.lightGray
+            UserDefaults.standard.set(1, forKey: "bgColor")
+        },
                label: {
             Color(UIColor.lightGray)
                 .frame(width: screenSize.width * percent,
@@ -111,7 +122,9 @@ struct ReadingBottomBar: View {
         })
     }
     var bgColorTwo: some View {
-        Button(action: {bgColor = UIColor.systemYellow},
+        Button(action: {bgColor = UIColor.systemYellow
+            UserDefaults.standard.set(2, forKey: "bgColor")
+        },
                label: {
             Color(UIColor.systemYellow)
                 .frame(width: screenSize.width * percent,
@@ -121,7 +134,9 @@ struct ReadingBottomBar: View {
         })
     }
     var bgColorThree: some View {
-        Button(action: {bgColor = UIColor.cyan},
+        Button(action: {bgColor = UIColor.cyan
+            UserDefaults.standard.set(3, forKey: "bgColor")
+        },
                label: {
             Color(UIColor.cyan)
                 .frame(width: screenSize.width * percent,
