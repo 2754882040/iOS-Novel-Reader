@@ -21,7 +21,7 @@ struct SearchResults: View {
                 Image("wall").resizable(resizingMode:
                 .stretch).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
                 VStack {
-                    BookList(url: searchAPI(name: search)).accessibilityIdentifier("SearchResultsPage")
+                    BookList(url: searchAPI(name: search).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "badlink").accessibilityIdentifier("SearchResultsPage")
                     }
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
