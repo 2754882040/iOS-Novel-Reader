@@ -57,6 +57,7 @@ struct SplashScreen: View {
                     ADExist = true
                     showAD = true
                 } catch { ADExist = false }
+                sleep(1)
             }
         }
     }
