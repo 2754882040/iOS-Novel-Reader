@@ -20,17 +20,23 @@ public class DownloadJson: ObservableObject {
     init() {}
     func getData(URLString: String) {
         state = LoadState.loading
-        DownloadData.request(urlString: URLString, completion: { result in
+        DownloadData.request(urlString: URLString, completion: { [self] result in
             switch result {
             case .failure(let error):
                 // do something with `error`
                 print(error)
                 self.state = .failure
+                DispatchQueue.main.async {
+                    self.objectWillChange.send()
+                }
             case .success(let data):
                 // do something with `data`
                 print("success")
                 self.jsonData = data
                 self.state = .success
+                DispatchQueue.main.async {
+                    self.objectWillChange.send()
+                }
                 }
         })
     }

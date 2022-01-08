@@ -38,9 +38,16 @@ struct BookList: View {
         VStack(alignment: .leading, spacing: 10) {
             ScrollView(.vertical) {
                 if books.count == 0 {
-                    VStack {
-                        Text(loadingText).font(.custom("Dosis-Regular", size: 12))
-                    }.frame(height: 240, alignment: .center)
+                    if datas.state == .loading {
+                        VStack {
+                            Text(loadingText).font(.custom("Dosis-Regular", size: 12))
+                        }.frame(height: 240, alignment: .center)
+                    } else {
+                        VStack {
+                            Text(noBooksText).font(.custom("Dosis-Regular", size: 12))
+                        }.frame(height: 240, alignment: .center)
+                    }
+                    
                 } else {
                     let items = 0...(books.count-1)
                     LazyVStack {
