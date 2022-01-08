@@ -15,7 +15,9 @@ struct MainView: View {
         UINavigationBar.appearance().barTintColor =
             #colorLiteral(red: 0.1607843137, green: 0.2745098039, blue: 0.5529411765, alpha: 1)
     }
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var books: [BookInfoBriefWithTime] = [BookInfoBriefWithTime]()
+    @State var emptyText = localizedString(text: strEmpty)
     @StateObject public var localJsonFile: LocalJsonFileManager = LocalJsonFileManager.shared
     fileprivate func refreshBook() {
         DispatchQueue.global(qos: .background).async {
@@ -45,7 +47,9 @@ struct MainView: View {
             VStack(alignment: .leading, spacing: 10) {
                 HomePageTopBar()
                 ScrollView(.vertical) {
-                    if books.count == 0 {} else {
+                    if books.count == 0 {
+                        Text(emptyText).frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center).padding()
+                    } else {
                         let items = 0...(books.count-1)
                         let columns = [GridItem(), GridItem(), GridItem()]
                         LazyVGrid(columns: columns) {
@@ -64,7 +68,9 @@ struct MainView: View {
                 }.accessibilityIdentifier("HomePageScrollView")
                 Spacer(minLength: 0)
                 TopBarBackGround()
-            }
+            }.onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("switchLanguage")), perform: { _ in
+                self.emptyText = localizedString(text: strEmpty)
+            })
         }.ignoresSafeArea(.all)
     }
 }
